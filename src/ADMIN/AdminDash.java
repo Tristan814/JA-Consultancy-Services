@@ -27,6 +27,7 @@ public class AdminDash extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
 
+        jButton1.setBackground(new java.awt.Color(255, 153, 153));
         jButton1.setFont(new java.awt.Font("STZhongsong", 1, 24)); // NOI18N
         jButton1.setText("Add Employee");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -37,6 +38,7 @@ public class AdminDash extends javax.swing.JFrame {
         jPanel1.add(jButton1);
         jButton1.setBounds(40, 270, 299, 120);
 
+        jButton2.setBackground(new java.awt.Color(204, 153, 255));
         jButton2.setFont(new java.awt.Font("STZhongsong", 1, 24)); // NOI18N
         jButton2.setText("File Maintenance");
         jButton2.addActionListener(new java.awt.event.ActionListener() {

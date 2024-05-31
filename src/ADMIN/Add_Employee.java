@@ -68,6 +68,10 @@ public class Add_Employee extends javax.swing.JFrame {
         year = new javax.swing.JComboBox<>();
         day = new javax.swing.JComboBox<>();
         month = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -78,17 +82,17 @@ public class Add_Employee extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Last Name");
         jPanel2.add(jLabel2);
-        jLabel2.setBounds(58, 117, 100, 20);
+        jLabel2.setBounds(30, 110, 100, 20);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setText("Age");
         jPanel2.add(jLabel7);
-        jLabel7.setBounds(60, 300, 90, 20);
+        jLabel7.setBounds(30, 290, 90, 20);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("First Name");
         jPanel2.add(jLabel3);
-        jLabel3.setBounds(58, 209, 120, 20);
+        jLabel3.setBounds(30, 200, 120, 20);
 
         Add.setBackground(new java.awt.Color(153, 0, 0));
         Add.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -100,93 +104,102 @@ public class Add_Employee extends javax.swing.JFrame {
             }
         });
         jPanel2.add(Add);
-        Add.setBounds(570, 610, 138, 47);
+        Add.setBounds(530, 580, 138, 47);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setText("Date of Birth");
         jPanel2.add(jLabel8);
-        jLabel8.setBounds(420, 120, 140, 20);
+        jLabel8.setBounds(390, 110, 140, 20);
         jPanel2.add(jLabel10);
         jLabel10.setBounds(575, 167, 0, 0);
 
-        jButton1.setText("Clear");
+        jButton1.setBackground(new java.awt.Color(204, 204, 204));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setText("CLEAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         jPanel2.add(jButton1);
-        jButton1.setBounds(420, 610, 126, 47);
+        jButton1.setBounds(230, 580, 126, 47);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Employee ID");
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(420, 360, 130, 20);
+        jLabel4.setBounds(390, 350, 130, 20);
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel9.setText("Address");
         jPanel2.add(jLabel9);
-        jLabel9.setBounds(60, 480, 110, 20);
+        jLabel9.setBounds(30, 470, 110, 20);
 
+        address.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         address.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addressActionPerformed(evt);
             }
         });
         jPanel2.add(address);
-        address.setBounds(60, 500, 220, 37);
+        address.setBounds(30, 490, 220, 37);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Email");
         jPanel2.add(jLabel5);
-        jLabel5.setBounds(420, 270, 100, 20);
+        jLabel5.setBounds(390, 260, 100, 20);
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setText("Cell No.");
         jPanel2.add(jLabel11);
-        jLabel11.setBounds(60, 390, 100, 20);
+        jLabel11.setBounds(30, 380, 100, 20);
 
+        firstname.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         firstname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 firstnameActionPerformed(evt);
             }
         });
         jPanel2.add(firstname);
-        firstname.setBounds(58, 231, 220, 37);
+        firstname.setBounds(30, 220, 220, 37);
 
+        cellno.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cellno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cellnoActionPerformed(evt);
             }
         });
         jPanel2.add(cellno);
-        cellno.setBounds(60, 410, 221, 37);
+        cellno.setBounds(30, 400, 221, 37);
 
+        empID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         empID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 empIDActionPerformed(evt);
             }
         });
         jPanel2.add(empID);
-        empID.setBounds(420, 380, 220, 37);
+        empID.setBounds(390, 370, 220, 37);
 
         dateofb.setEditable(false);
+        dateofb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         dateofb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dateofbActionPerformed(evt);
             }
         });
         jPanel2.add(dateofb);
-        dateofb.setBounds(420, 190, 290, 37);
+        dateofb.setBounds(390, 180, 290, 37);
 
+        email.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailActionPerformed(evt);
             }
         });
         jPanel2.add(email);
-        email.setBounds(420, 290, 220, 37);
+        email.setBounds(390, 280, 220, 37);
 
+        age.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         age.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ageActionPerformed(evt);
@@ -198,28 +211,30 @@ public class Add_Employee extends javax.swing.JFrame {
             }
         });
         jPanel2.add(age);
-        age.setBounds(60, 320, 220, 37);
+        age.setBounds(30, 310, 220, 37);
 
+        lastname.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lastname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lastnameActionPerformed(evt);
             }
         });
         jPanel2.add(lastname);
-        lastname.setBounds(58, 139, 220, 37);
+        lastname.setBounds(30, 130, 220, 37);
 
+        emppass.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         emppass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emppassActionPerformed(evt);
             }
         });
         jPanel2.add(emppass);
-        emppass.setBounds(420, 470, 220, 37);
+        emppass.setBounds(390, 460, 220, 37);
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel12.setText("Password");
         jPanel2.add(jLabel12);
-        jLabel12.setBounds(420, 450, 130, 20);
+        jLabel12.setBounds(390, 440, 130, 20);
 
         year.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Year", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024" }));
         year.addActionListener(new java.awt.event.ActionListener() {
@@ -228,7 +243,7 @@ public class Add_Employee extends javax.swing.JFrame {
             }
         });
         jPanel2.add(year);
-        year.setBounds(620, 140, 90, 40);
+        year.setBounds(590, 130, 90, 40);
 
         day.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Day", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
         day.addActionListener(new java.awt.event.ActionListener() {
@@ -237,7 +252,7 @@ public class Add_Employee extends javax.swing.JFrame {
             }
         });
         jPanel2.add(day);
-        day.setBounds(540, 140, 72, 40);
+        day.setBounds(510, 130, 72, 40);
 
         month.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Month", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
         month.addActionListener(new java.awt.event.ActionListener() {
@@ -246,17 +261,54 @@ public class Add_Employee extends javax.swing.JFrame {
             }
         });
         jPanel2.add(month);
-        month.setBounds(420, 140, 110, 40);
+        month.setBounds(390, 130, 110, 40);
+
+        jButton2.setText("Back");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton2);
+        jButton2.setBounds(20, 640, 72, 23);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Employee ID", "Password", "Last Name", "First Name", "Age", "Address", "Birthdate", "No.", "Email"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jPanel2.add(jScrollPane1);
+        jScrollPane1.setBounds(710, 120, 870, 510);
+
+        jButton3.setBackground(new java.awt.Color(255, 204, 102));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(51, 51, 0));
+        jButton3.setText("UPDATE");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton3);
+        jButton3.setBounds(380, 580, 126, 47);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ADMIN/add emp bg.png"))); // NOI18N
         jPanel2.add(jLabel1);
-        jLabel1.setBounds(0, 0, 760, 680);
+        jLabel1.setBounds(0, 0, 1600, 680);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1600, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -458,6 +510,15 @@ try{
        dateofb.setText(tot);
     }//GEN-LAST:event_yearActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        new AdminDash().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -508,6 +569,8 @@ try{
     private javax.swing.JTextField emppass;
     private javax.swing.JTextField firstname;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -520,6 +583,8 @@ try{
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField lastname;
     private javax.swing.JComboBox<String> month;
     private javax.swing.JComboBox<String> year;

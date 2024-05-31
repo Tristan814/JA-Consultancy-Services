@@ -12,42 +12,24 @@ public class FileMaintenance extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
         ipmbtn = new javax.swing.JButton();
         reportbtn = new javax.swing.JButton();
         paymentbtn = new javax.swing.JButton();
         consultantsbtn = new javax.swing.JButton();
-        employeebtn = new javax.swing.JButton();
         transactionbtn = new javax.swing.JButton();
         schedulingbtn = new javax.swing.JButton();
         standardsbtn = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(null);
-
         jPanel3.setBackground(new java.awt.Color(210, 210, 210));
+        jPanel3.setLayout(null);
 
-        jPanel2.setBackground(new java.awt.Color(153, 0, 0));
-        jPanel2.setForeground(new java.awt.Color(153, 0, 0));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 122, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
-        );
-
+        ipmbtn.setBackground(new java.awt.Color(153, 255, 153));
         ipmbtn.setFont(new java.awt.Font("STZhongsong", 1, 24)); // NOI18N
         ipmbtn.setText("Inquiries and Proposals");
         ipmbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -55,7 +37,10 @@ public class FileMaintenance extends javax.swing.JFrame {
                 ipmbtnActionPerformed(evt);
             }
         });
+        jPanel3.add(ipmbtn);
+        ipmbtn.setBounds(60, 585, 343, 93);
 
+        reportbtn.setBackground(new java.awt.Color(255, 153, 153));
         reportbtn.setFont(new java.awt.Font("STZhongsong", 1, 24)); // NOI18N
         reportbtn.setText("Reports");
         reportbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -63,7 +48,10 @@ public class FileMaintenance extends javax.swing.JFrame {
                 reportbtnActionPerformed(evt);
             }
         });
+        jPanel3.add(reportbtn);
+        reportbtn.setBounds(60, 140, 343, 93);
 
+        paymentbtn.setBackground(new java.awt.Color(153, 153, 255));
         paymentbtn.setFont(new java.awt.Font("STZhongsong", 1, 24)); // NOI18N
         paymentbtn.setText("Payment");
         paymentbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -71,7 +59,10 @@ public class FileMaintenance extends javax.swing.JFrame {
                 paymentbtnActionPerformed(evt);
             }
         });
+        jPanel3.add(paymentbtn);
+        paymentbtn.setBounds(60, 290, 343, 93);
 
+        consultantsbtn.setBackground(new java.awt.Color(255, 153, 255));
         consultantsbtn.setFont(new java.awt.Font("STZhongsong", 1, 24)); // NOI18N
         consultantsbtn.setText("Consultants");
         consultantsbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -79,15 +70,10 @@ public class FileMaintenance extends javax.swing.JFrame {
                 consultantsbtnActionPerformed(evt);
             }
         });
+        jPanel3.add(consultantsbtn);
+        consultantsbtn.setBounds(60, 440, 343, 93);
 
-        employeebtn.setFont(new java.awt.Font("STZhongsong", 1, 24)); // NOI18N
-        employeebtn.setText("Sales Employees");
-        employeebtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                employeebtnActionPerformed(evt);
-            }
-        });
-
+        transactionbtn.setBackground(new java.awt.Color(153, 255, 204));
         transactionbtn.setFont(new java.awt.Font("STZhongsong", 1, 24)); // NOI18N
         transactionbtn.setText("Transactions");
         transactionbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -95,7 +81,10 @@ public class FileMaintenance extends javax.swing.JFrame {
                 transactionbtnActionPerformed(evt);
             }
         });
+        jPanel3.add(transactionbtn);
+        transactionbtn.setBounds(520, 140, 343, 93);
 
+        schedulingbtn.setBackground(new java.awt.Color(255, 255, 153));
         schedulingbtn.setFont(new java.awt.Font("STZhongsong", 1, 24)); // NOI18N
         schedulingbtn.setText("Scheduling");
         schedulingbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -103,7 +92,10 @@ public class FileMaintenance extends javax.swing.JFrame {
                 schedulingbtnActionPerformed(evt);
             }
         });
+        jPanel3.add(schedulingbtn);
+        schedulingbtn.setBounds(520, 290, 343, 93);
 
+        standardsbtn.setBackground(new java.awt.Color(153, 204, 255));
         standardsbtn.setFont(new java.awt.Font("STZhongsong", 1, 24)); // NOI18N
         standardsbtn.setText("System Standards");
         standardsbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -111,148 +103,76 @@ public class FileMaintenance extends javax.swing.JFrame {
                 standardsbtnActionPerformed(evt);
             }
         });
+        jPanel3.add(standardsbtn);
+        standardsbtn.setBounds(520, 440, 343, 93);
 
-        jLabel1.setFont(new java.awt.Font("STZhongsong", 1, 30)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("File Maintenance");
-
-        jLabel2.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        jLabel2.setText("<-- Back");
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
+        jPanel3.add(jButton1);
+        jButton1.setBounds(20, 720, 72, 23);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(166, 166, 166)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(paymentbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
-                                .addComponent(schedulingbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(consultantsbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(employeebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(ipmbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(standardsbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(reportbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(transactionbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(218, 218, 218))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(241, 241, 241)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(27, 27, 27))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(reportbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(transactionbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(74, 74, 74)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(paymentbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(schedulingbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(74, 74, 74)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ipmbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(standardsbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(68, 68, 68)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(consultantsbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(employeebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(81, 81, 81))
-        );
-
-        jPanel1.add(jPanel3);
-        jPanel3.setBounds(0, 0, 1300, 800);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ADMIN/FileMaintenance bg.png"))); // NOI18N
+        jPanel3.add(jLabel5);
+        jLabel5.setBounds(0, 0, 940, 760);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1300, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 937, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 754, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ipmbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ipmbtnActionPerformed
-    new Inquiries_and_Proposal().setVisible(true);
-    dispose();
-    }//GEN-LAST:event_ipmbtnActionPerformed
-
-    private void reportbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportbtnActionPerformed
-    new Reports().setVisible(true);
-    dispose();
-    }//GEN-LAST:event_reportbtnActionPerformed
-
-    private void paymentbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymentbtnActionPerformed
-    new Payments().setVisible(true);
-    dispose();
-    }//GEN-LAST:event_paymentbtnActionPerformed
-
-    private void consultantsbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultantsbtnActionPerformed
-    new Consultants().setVisible(true);
-    dispose();
-    }//GEN-LAST:event_consultantsbtnActionPerformed
-
-    private void employeebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeebtnActionPerformed
-    new Sales_Employee().setVisible(true);
-    dispose();
-    }//GEN-LAST:event_employeebtnActionPerformed
-
-    private void transactionbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transactionbtnActionPerformed
-    new Transaction().setVisible(true);
-    dispose();
-    }//GEN-LAST:event_transactionbtnActionPerformed
-
-    private void schedulingbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_schedulingbtnActionPerformed
-    new Scheduling().setVisible(true);
-    dispose();
-    }//GEN-LAST:event_schedulingbtnActionPerformed
-
     private void standardsbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_standardsbtnActionPerformed
-    new System_Standards().setVisible(true);
-    dispose();
+        new System_Standards().setVisible(true);
+        dispose();
     }//GEN-LAST:event_standardsbtnActionPerformed
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-    new AdminDash().setVisible(true);
-    dispose();
-    }//GEN-LAST:event_jLabel2MouseClicked
+    private void transactionbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transactionbtnActionPerformed
+        new Transaction().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_transactionbtnActionPerformed
+
+    private void consultantsbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultantsbtnActionPerformed
+        new Consultants().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_consultantsbtnActionPerformed
+
+    private void paymentbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymentbtnActionPerformed
+        new Payments().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_paymentbtnActionPerformed
+
+    private void reportbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportbtnActionPerformed
+        new Reports().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_reportbtnActionPerformed
+
+    private void ipmbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ipmbtnActionPerformed
+        new adminInquiry().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_ipmbtnActionPerformed
+
+    private void schedulingbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_schedulingbtnActionPerformed
+        new adminScheduling().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_schedulingbtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new AdminDash().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -289,12 +209,9 @@ public class FileMaintenance extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton consultantsbtn;
-    private javax.swing.JButton employeebtn;
     private javax.swing.JButton ipmbtn;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JButton paymentbtn;
     private javax.swing.JButton reportbtn;

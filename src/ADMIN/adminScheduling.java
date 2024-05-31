@@ -9,9 +9,9 @@ package ADMIN;
  *
  * @author Admin
  */
-public class Payments extends javax.swing.JFrame {
+public class adminScheduling extends javax.swing.JFrame {
 
-    public Payments() {
+    public adminScheduling() {
         initComponents();
         
         this.setLocationRelativeTo(null);
@@ -53,13 +53,13 @@ public class Payments extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Client ID", "Company Name", "Total Payment"
+                "Transaction ID", "No. of Days", "Duration"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
 
         jPanel2.add(jScrollPane2);
-        jScrollPane2.setBounds(30, 120, 680, 510);
+        jScrollPane2.setBounds(460, 110, 680, 510);
 
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -77,24 +77,25 @@ public class Payments extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jTextField1);
-        jTextField1.setBounds(960, 180, 210, 40);
+        jTextField1.setBounds(100, 300, 270, 40);
 
         jButton2.setBackground(new java.awt.Color(204, 204, 204));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton2.setText("Delete");
         jPanel2.add(jButton2);
-        jButton2.setBounds(1010, 540, 110, 40);
+        jButton2.setBounds(100, 510, 110, 40);
 
         jButton3.setBackground(new java.awt.Color(255, 204, 51));
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton3.setText("Update");
         jPanel2.add(jButton3);
-        jButton3.setBounds(800, 540, 110, 40);
+        jButton3.setBounds(260, 510, 110, 40);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setText("Company Name");
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("No. of Days");
         jPanel2.add(jLabel2);
-        jLabel2.setBounds(960, 150, 150, 25);
+        jLabel2.setBounds(160, 270, 150, 25);
 
         jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
@@ -103,12 +104,14 @@ public class Payments extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jTextField3);
-        jTextField3.setBounds(850, 330, 210, 40);
+        jTextField3.setBounds(100, 420, 270, 40);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setText("Payment");
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("During");
+        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel2.add(jLabel3);
-        jLabel3.setBounds(910, 300, 80, 25);
+        jLabel3.setBounds(180, 390, 110, 25);
 
         jTextField4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
@@ -117,14 +120,15 @@ public class Payments extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jTextField4);
-        jTextField4.setBounds(730, 180, 210, 40);
+        jTextField4.setBounds(100, 190, 270, 40);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel4.setText("Client ID");
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Transaction ID");
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(730, 150, 130, 25);
+        jLabel4.setBounds(170, 160, 130, 25);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ADMIN/payments bg.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ADMIN/Schedulingbg.png"))); // NOI18N
         jPanel2.add(jLabel1);
         jLabel1.setBounds(0, 0, 1200, 700);
 
@@ -177,20 +181,23 @@ public class Payments extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Payments.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(adminScheduling.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Payments.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(adminScheduling.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Payments.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(adminScheduling.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Payments.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(adminScheduling.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Payments().setVisible(true);
+                new adminScheduling().setVisible(true);
             }
         });
     }
