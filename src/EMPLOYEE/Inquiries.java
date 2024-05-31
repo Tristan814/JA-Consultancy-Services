@@ -375,6 +375,10 @@ public class Inquiries extends javax.swing.JFrame {
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
 
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.addRow(new Object[] {ipmtf.getText(),companytf.getText(),stat.getText(),inquirytf.getText(),servicetf.getText()});
+        
+       
        String ipm, cn, stats, inq, serv, query;
        
        table.setShowGrid(true);
