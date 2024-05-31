@@ -20,6 +20,12 @@ public class Inquiries extends javax.swing.JFrame {
     Connection con ;
     PreparedStatement pst;
     ResultSet rs;
+    
+    Connection con1 ;
+    PreparedStatement pst1;
+    ResultSet rs1;
+    
+    
     public Inquiries() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -119,7 +125,15 @@ public class Inquiries extends javax.swing.JFrame {
             new String [] {
                 "IPM ID", "Company Name", "Inquiry Date", "Service Type", "Status"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(table);
 
         jPanel1.add(jScrollPane1);
@@ -375,13 +389,9 @@ public class Inquiries extends javax.swing.JFrame {
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
 
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-        model.addRow(new Object[] {ipmtf.getText(),companytf.getText(),stat.getText(),inquirytf.getText(),servicetf.getText()});
-        
-       
+ 
        String ipm, cn, stats, inq, serv, query;
        
-       table.setShowGrid(true);
        try{
            Class.forName("com.mysql.cj.jdbc.Driver");
            
@@ -391,10 +401,7 @@ public class Inquiries extends javax.swing.JFrame {
          
          Connection con = DriverManager.getConnection(url,user,pass);
          Statement st = con.createStatement();
-         
-         pst = con.prepareStatement("select * from inquiry_and_proposal");
-         rs = pst.executeQuery();
-         
+
          if("".equals(ipmtf.getText())){
              JOptionPane.showMessageDialog(new JFrame(), "IPM ID is required", "Error", JOptionPane.ERROR_MESSAGE);
          }
@@ -418,7 +425,12 @@ public class Inquiries extends javax.swing.JFrame {
        serv = servicetf.getText();
        query = "INSERT INTO inquiry_and_proposal(IPM_ID, Company_Name, Inquiry_Date, Service_Type, Status)"
                + "VALUES('"+ipm+"','"+cn+"','"+inq+"','"+serv+"','"+stats+"')";
+         
        
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.addRow(new Object[] {ipmtf.getText(),companytf.getText(),inquirytf.getText(),servicetf.getText(),stat.getText()});
+
+
        st.executeUpdate(query);
        ipmtf.setText("");
        companytf.setText("");
@@ -427,7 +439,8 @@ public class Inquiries extends javax.swing.JFrame {
        servicetf.setText("");
        JOptionPane.showMessageDialog(new JFrame(), "Successfuly Registered", "Successed!", JOptionPane.OK_OPTION);
        con.close();
-   
+       
+
          }
         
        }catch (ClassNotFoundException ex){
@@ -518,17 +531,26 @@ if(i>=0){
 try{
     Class.forName("com.mysql.cj.jdbc.Driver");
     con = DriverManager.getConnection("\"jdbc:MYSQL://localhost:3306/ja consultancy services", "root", "");
-    String query = "UPDATE table SET IPM_ID=?, Company_Name=?, Inquiry_Date=?, Service_Type=?, Status=? WHERE id";
+    String query = "UPDATE inquiry_and_proposal SET IPM_ID=?, Company_Name=?, Inquiry_Date=?, Service_Type=?, Status=? WHERE IPM_ID";
+
     pst = con.prepareStatement(query);
     pst.setString(2, ipmtf.getText());
     pst.setString(3, companytf.getText());
     pst.setString(4, inquirytf.getText());
     pst.setString(5, servicetf.getText());
     pst.setString(6, stat.getText());
-    
-}catch()
-    
-}
+    pst.executeUpdate();
+}catch (ClassNotFoundException ex){
+           Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE,null,ex);
+       //    System.out.println("Error" + ex.getMessage());
+       } catch (SQLException ex) {
+            Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       ipmtf.setText("");
+       companytf.setText("");
+       stat.setText("");
+       inquirytf.setText("");
+       servicetf.setText("");
     }//GEN-LAST:event_updateActionPerformed
 
     public static void main(String args[]) {
