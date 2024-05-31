@@ -1,25 +1,31 @@
 package EMPLOYEE;
 
 import ADMIN.*;
+import static java.awt.event.PaintEvent.UPDATE;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 public class Inquiries extends javax.swing.JFrame {
 
     
-    Connection con ;
-    PreparedStatement pst;
-    ResultSet rs;
+    Connection con = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    int q, i, id, deleteItem;
     
     Connection con1 ;
     PreparedStatement pst1;
@@ -52,9 +58,63 @@ public class Inquiries extends javax.swing.JFrame {
     btng.add(rb1);
     btng.add(rb2);
     btng.add(rb3);
-    }
-
     
+
+
+
+//    table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+//       public void valueChanged(ListSelectionEvent event) {
+//        if (!event.getValueIsAdjusting() && table.getSelectedRow() != -1) {
+//            int selectedRowIndex = table.getSelectedRow();
+//            DefaultTableModel model = (DefaultTableModel) table.getModel();
+//            ipmtf.setText(model.getValueAt(selectedRowIndex, 0).toString());
+//            companytf.setText(model.getValueAt(selectedRowIndex, 1).toString());
+//            inquirytf.setText(model.getValueAt(selectedRowIndex, 2).toString());
+//            servicetf.setText(model.getValueAt(selectedRowIndex, 3).toString());
+//            stat.setText(model.getValueAt(selectedRowIndex, 4).toString()); 
+//        }
+//    }
+//});
+    }
+    
+    public void upDateDB() throws SQLException, ClassNotFoundException
+    {
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+    con = DriverManager.getConnection("jdbc:MYSQL://localhost:3306/ja consultancy services", "root", "");
+    pst = con.prepareStatement("select * from connector");
+    
+    rs = pst.executeQuery();
+    ResultSetMetaData stData = rs.getMetaData();
+    
+    q = stData.getColumnCount();
+    DefaultTableModel RecordTable =(DefaultTableModel)table.getModel();
+    RecordTable.setRowCount(0);
+
+    while(rs.next()){
+        Vector columnData = new Vector();
+        
+        for (i = 1; i <= q; i++)
+        {
+            columnData.add(rs.getString("IPM_ID"));
+            columnData.add(rs.getString("Company_Name"));
+            columnData.add(rs.getString("Inquiry_Date"));
+            columnData.add(rs.getString("Service_Type"));
+            columnData.add(rs.getString("Status"));
+            
+        }
+        RecordTable.addRow(columnData);
+}
+            
+    
+        }
+        catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+            
+ 
     private void fetchdata(){
         
     String ipm = "IPM_ID";
@@ -132,6 +192,11 @@ public class Inquiries extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(table);
@@ -341,7 +406,13 @@ public class Inquiries extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+                            ipmtf.setEditable(true);
+                            companytf.setEditable(true);
+                            stat.setEditable(true);
+                            inquirytf.setEditable(true);
+                            servicetf.setEditable(true);        // TODO add your handling code here:
+        
+
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -388,9 +459,7 @@ public class Inquiries extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
-
- 
-       String ipm, cn, stats, inq, serv, query;
+ String ipm, cn, stats, inq, serv, query;
        
        try{
            Class.forName("com.mysql.cj.jdbc.Driver");
@@ -449,10 +518,7 @@ public class Inquiries extends javax.swing.JFrame {
        } catch (SQLException ex) {
             Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-//       }catch (Exception e){
-//           System.out.println("Error" + e.getMessage());
-//       }
+
     }//GEN-LAST:event_addActionPerformed
 
     private void monthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthActionPerformed
@@ -517,41 +583,179 @@ public class Inquiries extends javax.swing.JFrame {
     }//GEN-LAST:event_rb2ActionPerformed
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
-int i = table.getSelectedRow();
-DefaultTableModel model = (DefaultTableModel) table.getModel();
+String ipm, cn, stats, inq, serv, query;
+       
+       try{
+           Class.forName("com.mysql.cj.jdbc.Driver");
+           
+         String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+         String user = "jaroot";
+         String pass = "";
+         
+         Connection con = DriverManager.getConnection(url,user,pass);
+         Statement st = con.createStatement();
+         
+         pst = con.prepareStatement("UPDATE connector set IPM_ID=?, Company_Name=?, Inquiry_Date=?, Service_Type=?, Status=? WHERE IPM_ID=");
+                 
+         if("".equals(ipmtf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "IPM ID is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(companytf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Company Name is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(stat.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Status is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(inquirytf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Inquiry Date is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(servicetf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Service Type is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else{
+             pst.setString(1,ipmtf.getText());
+             pst.setString(2,companytf.getText());
+             pst.setString(3,stat.getText());
+             pst.setString(4,inquirytf.getText());
+             pst.setString(5,servicetf.getText());
+             
+             pst.executeUpdate();
+             JOptionPane.showMessageDialog(this, "Record Updated");
+//       ipm = ipmtf.getText();
+//       cn = companytf.getText();
+//       stats =  stat.getText();
+//       inq =  inquirytf.getText();
+//       serv = servicetf.getText();
+//       query = "INSERT INTO inquiry_and_proposal(IPM_ID, Company_Name, Inquiry_Date, Service_Type, Status)"
+//               + "VALUES('"+ipm+"','"+cn+"','"+inq+"','"+serv+"','"+stats+"')";
+         
+       
+//        DefaultTableModel model = (DefaultTableModel) table.getModel();
+//        model.addRow(new Object[] {ipmtf.getText(),companytf.getText(),inquirytf.getText(),servicetf.getText(),stat.getText()});
+//
+//
+//       st.executeUpdate(query);
+//       ipmtf.setText("");
+//       companytf.setText("");
+//       stat.setText("");
+//       inquirytf.setText("");
+//       servicetf.setText("");
+//       JOptionPane.showMessageDialog(new JFrame(), "Successfuly Registered", "Successed!", JOptionPane.OK_OPTION);
+//       con.close();
+       
 
-if(i>=0){
-    model.setValueAt(ipmtf.getText(),i,1);
-    model.setValueAt(companytf.getText(),i,2);
-    model.setValueAt(inquirytf.getText(),i,3);
-    model.setValueAt(servicetf.getText(),i,4);
-    model.setValueAt(stat.getText(),i,1);
-}
-
-try{
-    Class.forName("com.mysql.cj.jdbc.Driver");
-    con = DriverManager.getConnection("\"jdbc:MYSQL://localhost:3306/ja consultancy services", "root", "");
-    String query = "UPDATE inquiry_and_proposal SET IPM_ID=?, Company_Name=?, Inquiry_Date=?, Service_Type=?, Status=? WHERE IPM_ID";
-
-    pst = con.prepareStatement(query);
-    pst.setString(2, ipmtf.getText());
-    pst.setString(3, companytf.getText());
-    pst.setString(4, inquirytf.getText());
-    pst.setString(5, servicetf.getText());
-    pst.setString(6, stat.getText());
-    pst.executeUpdate();
-}catch (ClassNotFoundException ex){
+         }
+        
+       }catch (ClassNotFoundException ex){
            Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE,null,ex);
-       //    System.out.println("Error" + ex.getMessage());
+       //    System.out.println("Error" + ex.getMessage());     
        } catch (SQLException ex) {
             Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE, null, ex);
         }
-       ipmtf.setText("");
-       companytf.setText("");
-       stat.setText("");
-       inquirytf.setText("");
-       servicetf.setText("");
+
+//DefaultTableModel model = (DefaultTableModel) table.getModel();
+//
+//if (table.getSelectedRowCount() == 1) {
+//    String ipm = ipmtf.getText();
+//    String comp = companytf.getText();
+//    String inq = inquirytf.getText();
+//    String ser = servicetf.getText();
+//    String stats = stat.getText();
+//    int selectedRow = table.getSelectedRow();
+//    model.setValueAt(ipm, selectedRow, 0);
+//    model.setValueAt(comp, selectedRow, 1);
+//    model.setValueAt(inq, selectedRow, 2);
+//    model.setValueAt(ser, selectedRow, 3);
+//    model.setValueAt(stats, selectedRow, 4);
+//    int id = Integer.parseInt(table.getValueAt(table.getSelectedRow(),0).toString()); 
+//    
+//    
+//    
+//    String a = model.getValueAt(id,1).toString();
+//    String b = model.getValueAt(id,2).toString();
+//    String c = model.getValueAt(id,3).toString();
+//    String d = model.getValueAt(id,4).toString();
+//    String e = model.getValueAt(id,0).toString();
+//    String query = "UPDATE connector set IPM_ID=?, Company_Name=?, Inquiry_Date=?, Service_Type=?, Status=? WHERE IPM_ID='"+d+"'";
+//    
+//    try {
+//        Class.forName("com.mysql.cj.jdbc.Driver");
+//        con = DriverManager.getConnection("jdbc:MYSQL://localhost:3306/ja consultancy services", "root", "");
+//         
+//         Statement st = con.createStatement();
+//            pst = con.prepareStatement(query);
+//            pst.setString(1, comp);
+//            pst.setString(2, inq);
+//            pst.setString(3, ser);
+//            pst.setString(4, stats);
+//            pst.executeUpdate();
+//            
+//                        
+//        
+//
+//        JOptionPane.showMessageDialog(this, "Update Successfully");
+//    } catch (ClassNotFoundException ex) {
+//        Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE, null, ex);
+//        JOptionPane.showMessageDialog(this, "Database Driver not found: " + ex.getMessage());
+//    } catch (SQLException ex) {
+//        Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE, null, ex);
+//        JOptionPane.showMessageDialog(this, "SQL Error: " + ex.getMessage());
+//    } finally {
+//        try {
+//            if (pst != null) pst.close();
+//            if (con != null) con.close();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+//
+//    ipmtf.setText("");
+//    companytf.setText("");
+//    stat.setText("");
+//    inquirytf.setText("");
+//    servicetf.setText("");  
+//} else {
+//    if (table.getRowCount() == 0) {
+//        JOptionPane.showMessageDialog(this, "Table is Empty.");
+//    } else {
+//        JOptionPane.showMessageDialog(this, "Please select a Single Row For Update.");
+//    }
+//}
     }//GEN-LAST:event_updateActionPerformed
+
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+        
+        int id = Integer.parseInt(table.getValueAt(table.getSelectedRow(),0).toString());
+        try{
+               Class.forName("com.mysql.cj.jdbc.Driver");
+           
+         String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+         String user = "jaroot";
+         String pass = "";
+         
+         Connection con = DriverManager.getConnection(url,user,pass);
+         Statement st = con.createStatement();
+         ResultSet res =st.executeQuery("select * from inquiry_and_proposal where IPM_ID ="+id);
+                        while(res.next()){
+                            ipmtf.setText(res.getString("IPM_ID"));
+                            companytf.setText(res.getString("Company_Name"));
+                            stat.setText(res.getString("Status"));
+                            inquirytf.setText(res.getString("Inquiry_Date"));
+                             servicetf.setText(res.getString("Service_Type"));
+                             
+                             ipmtf.setEditable(false);
+                            companytf.setEditable(false);
+                            stat.setEditable(false);
+                            inquirytf.setEditable(false);
+                            servicetf.setEditable(false);
+                        }
+                
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_tableMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
