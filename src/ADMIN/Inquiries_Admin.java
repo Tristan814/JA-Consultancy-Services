@@ -2,35 +2,40 @@ package ADMIN;
 
 import EMPLOYEE.*;
 import ADMIN.*;
+import static java.awt.event.PaintEvent.UPDATE;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-public class adminInquiry extends javax.swing.JFrame {
+public class Inquiries_Admin extends javax.swing.JFrame {
 
     
-    Connection con ;
+    Connection con;
     PreparedStatement pst;
     ResultSet rs;
+    int q, i, id, deleteItem;
     
-    Connection con1 ;
-    PreparedStatement pst1;
-    ResultSet rs1;
+//    Connection con1 ;
+//    PreparedStatement pst1;
+//    ResultSet rs1;
     
     
-    public adminInquiry() {
+    public Inquiries_Admin() {
         initComponents();
         this.setLocationRelativeTo(null);
-
 
     String SUrl,Suser, Spass;
     SUrl = "jdbc:MYSQL://localhost:3306/ja consultancy services";
@@ -53,9 +58,47 @@ public class adminInquiry extends javax.swing.JFrame {
     btng.add(rb1);
     btng.add(rb2);
     btng.add(rb3);
-    }
-
     
+    }
+    
+    public void upDateDB() throws SQLException, ClassNotFoundException
+    {
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+    con = DriverManager.getConnection("jdbc:MYSQL://localhost:3306/ja consultancy services", "root", "");
+    pst = con.prepareStatement("select * from connector");
+    
+    rs = pst.executeQuery();
+    ResultSetMetaData stData = rs.getMetaData();
+    
+    q = stData.getColumnCount();
+    DefaultTableModel RecordTable =(DefaultTableModel)table.getModel();
+    RecordTable.setRowCount(0);
+
+    while(rs.next()){
+        Vector columnData = new Vector();
+        
+        for (i = 1; i <= q; i++)
+        {
+            columnData.add(rs.getString("IPM_ID"));
+            columnData.add(rs.getString("Company_Name"));
+            columnData.add(rs.getString("Inquiry_Date"));
+            columnData.add(rs.getString("Service_Type"));
+            columnData.add(rs.getString("Status"));
+            
+        }
+        RecordTable.addRow(columnData);
+}
+            
+    
+        }
+        catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+            
+ 
     private void fetchdata(){
         
     String ipm = "IPM_ID";
@@ -104,6 +147,7 @@ public class adminInquiry extends javax.swing.JFrame {
         rb1 = new javax.swing.JRadioButton();
         rb2 = new javax.swing.JRadioButton();
         rb3 = new javax.swing.JRadioButton();
+        update1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
 
         jButton3.setBackground(new java.awt.Color(118, 8, 8));
@@ -135,6 +179,11 @@ public class adminInquiry extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(table);
 
         jPanel1.add(jScrollPane1);
@@ -149,6 +198,11 @@ public class adminInquiry extends javax.swing.JFrame {
         stat.setBounds(1050, 430, 210, 50);
 
         ipmtf.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        ipmtf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ipmtfActionPerformed(evt);
+            }
+        });
         jPanel1.add(ipmtf);
         ipmtf.setBounds(720, 190, 250, 50);
 
@@ -321,6 +375,17 @@ public class adminInquiry extends javax.swing.JFrame {
         jPanel1.add(rb3);
         rb3.setBounds(1200, 400, 80, 21);
 
+        update1.setFont(new java.awt.Font("STZhongsong", 1, 16)); // NOI18N
+        update1.setText("Update");
+        update1.setAlignmentX(0.5F);
+        update1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(update1);
+        update1.setBounds(990, 540, 150, 40);
+
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EMPLOYEE/Inquiries BG.png"))); // NOI18N
         jPanel1.add(jLabel6);
@@ -342,7 +407,13 @@ public class adminInquiry extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+                            ipmtf.setEditable(true);
+                            companytf.setEditable(true);
+                            stat.setEditable(true);
+                            inquirytf.setEditable(true);
+                            servicetf.setEditable(true);        // TODO add your handling code here:
+        
+
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -370,7 +441,7 @@ public class adminInquiry extends javax.swing.JFrame {
     }//GEN-LAST:event_dayActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        new FileMaintenance().setVisible(true);
+        new EmployeeDash().setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -389,9 +460,7 @@ public class adminInquiry extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
-
- 
-       String ipm, cn, stats, inq, serv, query;
+ String ipm, cn, stats, inq, serv, query;
        
        try{
            Class.forName("com.mysql.cj.jdbc.Driver");
@@ -445,19 +514,12 @@ public class adminInquiry extends javax.swing.JFrame {
          }
         
        }catch (ClassNotFoundException ex){
-           Logger.getLogger(adminInquiry.class.getName()).log(Level.SEVERE,null,ex);
+           Logger.getLogger(Inquiries_Admin.class.getName()).log(Level.SEVERE,null,ex);
        //    System.out.println("Error" + ex.getMessage());
        } catch (SQLException ex) {
-            Logger.getLogger(adminInquiry.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Inquiries_Admin.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-//       }catch (Exception e){
-//           System.out.println("Error" + e.getMessage());
-//       }
-       
-//       }catch (Exception e){
-//           System.out.println("Error" + e.getMessage());
-//       }
+
     }//GEN-LAST:event_addActionPerformed
 
     private void monthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthActionPerformed
@@ -522,41 +584,99 @@ public class adminInquiry extends javax.swing.JFrame {
     }//GEN-LAST:event_rb2ActionPerformed
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
-int i = table.getSelectedRow();
-DefaultTableModel model = (DefaultTableModel) table.getModel();
-
-if(i>=0){
-    model.setValueAt(ipmtf.getText(),i,1);
-    model.setValueAt(companytf.getText(),i,2);
-    model.setValueAt(inquirytf.getText(),i,3);
-    model.setValueAt(servicetf.getText(),i,4);
-    model.setValueAt(stat.getText(),i,1);
-}
 
 try{
-    Class.forName("com.mysql.cj.jdbc.Driver");
-    con = DriverManager.getConnection("\"jdbc:MYSQL://localhost:3306/ja consultancy services", "root", "");
-    String query = "UPDATE inquiry_and_proposal SET IPM_ID=?, Company_Name=?, Inquiry_Date=?, Service_Type=?, Status=? WHERE IPM_ID";
-
-    pst = con.prepareStatement(query);
-    pst.setString(2, ipmtf.getText());
-    pst.setString(3, companytf.getText());
-    pst.setString(4, inquirytf.getText());
-    pst.setString(5, servicetf.getText());
-    pst.setString(6, stat.getText());
-    pst.executeUpdate();
-}catch (ClassNotFoundException ex){
-           Logger.getLogger(adminInquiry.class.getName()).log(Level.SEVERE,null,ex);
-       //    System.out.println("Error" + ex.getMessage());
-       } catch (SQLException ex) {
-            Logger.getLogger(adminInquiry.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    pst = con.prepareStatement("update inquiry_and_proposal set Company_Name =?, Inquiry_Date =?, Service_Type =?, Status =? where IPM_ID=?");
+    pst.setString(1,companytf.getText());
+    pst.setString(2,inquirytf.getText());
+    pst.setString(3,servicetf.getText());
+    pst.setString(4,stat.getText());
+    pst.setString(5,ipmtf.getText());
+    
+        
+    int rowsAffected = pst.executeUpdate(); 
+    
+    if (rowsAffected > 0 ){
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        int selectedRowIndex = table.getSelectedRow();
+        
+        model.setValueAt(ipmtf.getText(), selectedRowIndex, 0);
+        model.setValueAt(companytf.getText(), selectedRowIndex, 1);
+        model.setValueAt(inquirytf.getText(), selectedRowIndex, 2);
+        model.setValueAt(servicetf.getText(), selectedRowIndex, 3);
+        model.setValueAt(stat.getText(), selectedRowIndex, 4);
+        
+       JOptionPane.showMessageDialog(new JFrame(), "Updated Successfully", "Successed!", JOptionPane.OK_CANCEL_OPTION);
+       con.close();
+    } else{
+        JOptionPane.showMessageDialog(new JFrame(), "Update Failed", "Warning!", JOptionPane.ERROR_MESSAGE);
+       con.close();
+    }
+       
+               
        ipmtf.setText("");
        companytf.setText("");
        stat.setText("");
        inquirytf.setText("");
        servicetf.setText("");
+       
+} catch (SQLException ex) {
+            Logger.getLogger(Inquiries_Admin.class.getName()).log(Level.SEVERE, null, ex);
+       
+}
+
     }//GEN-LAST:event_updateActionPerformed
+
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+        
+        int id = Integer.parseInt(table.getValueAt(table.getSelectedRow(),0).toString());
+        try{
+               Class.forName("com.mysql.cj.jdbc.Driver");
+           
+         String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+         String user = "jaroot";
+         String pass = "";
+         
+         Connection con = DriverManager.getConnection(url,user,pass);
+         Statement st = con.createStatement();
+         ResultSet res =st.executeQuery("select * from inquiry_and_proposal where IPM_ID ="+id);
+                        while(res.next()){
+                            ipmtf.setText(res.getString("IPM_ID"));
+                            companytf.setText(res.getString("Company_Name"));
+                            stat.setText(res.getString("Status"));
+                            inquirytf.setText(res.getString("Inquiry_Date"));
+                             servicetf.setText(res.getString("Service_Type"));
+                             
+                             ipmtf.setEditable(false);
+                            companytf.setEditable(false);
+                            stat.setEditable(false);
+                            inquirytf.setEditable(false);
+                            servicetf.setEditable(false);
+                        }
+                
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_tableMouseClicked
+
+    private void update1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update1ActionPerformed
+
+//        
+//        try{
+//            pst = con.prepareStatement("delete from inquiry_and_proposal where IPM_ID=?");
+//            pst.setString(1,ipmtf.getText());
+//            pst.executeUpdate();
+//            JOptionPane.showMessageDialog(this,"Success");
+//}catch (SQLException ex){
+//    Logger.getLogger (Inquiries.class.getName()).log(Level.SEVERE,null, ex);
+//        }
+    }//GEN-LAST:event_update1ActionPerformed
+
+    private void ipmtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ipmtfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ipmtfActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -572,22 +692,14 @@ try{
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(adminInquiry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Inquiries_Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(adminInquiry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Inquiries_Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(adminInquiry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Inquiries_Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(adminInquiry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Inquiries_Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -600,7 +712,7 @@ try{
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new adminInquiry().setVisible(true);
+                new Inquiries_Admin().setVisible(true);
             }
         });
     }
@@ -633,6 +745,7 @@ try{
     private javax.swing.JTextField stat;
     private javax.swing.JTable table;
     private javax.swing.JButton update;
+    private javax.swing.JButton update1;
     private javax.swing.JComboBox<String> year;
     // End of variables declaration//GEN-END:variables
 }

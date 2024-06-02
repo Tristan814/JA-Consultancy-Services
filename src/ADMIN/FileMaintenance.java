@@ -160,7 +160,7 @@ public class FileMaintenance extends javax.swing.JFrame {
     }//GEN-LAST:event_reportbtnActionPerformed
 
     private void ipmbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ipmbtnActionPerformed
-        new adminInquiry().setVisible(true);
+        new Inquiries_Admin().setVisible(true);
         dispose();
     }//GEN-LAST:event_ipmbtnActionPerformed
 

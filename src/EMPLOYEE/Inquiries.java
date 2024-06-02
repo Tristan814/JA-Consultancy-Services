@@ -22,20 +22,19 @@ import javax.swing.table.DefaultTableModel;
 public class Inquiries extends javax.swing.JFrame {
 
     
-    Connection con = null;
-    PreparedStatement pst = null;
-    ResultSet rs = null;
+    Connection con;
+    PreparedStatement pst;
+    ResultSet rs;
     int q, i, id, deleteItem;
     
-    Connection con1 ;
-    PreparedStatement pst1;
-    ResultSet rs1;
+//    Connection con1 ;
+//    PreparedStatement pst1;
+//    ResultSet rs1;
     
     
     public Inquiries() {
         initComponents();
         this.setLocationRelativeTo(null);
-
 
     String SUrl,Suser, Spass;
     SUrl = "jdbc:MYSQL://localhost:3306/ja consultancy services";
@@ -59,22 +58,6 @@ public class Inquiries extends javax.swing.JFrame {
     btng.add(rb2);
     btng.add(rb3);
     
-
-
-
-//    table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-//       public void valueChanged(ListSelectionEvent event) {
-//        if (!event.getValueIsAdjusting() && table.getSelectedRow() != -1) {
-//            int selectedRowIndex = table.getSelectedRow();
-//            DefaultTableModel model = (DefaultTableModel) table.getModel();
-//            ipmtf.setText(model.getValueAt(selectedRowIndex, 0).toString());
-//            companytf.setText(model.getValueAt(selectedRowIndex, 1).toString());
-//            inquirytf.setText(model.getValueAt(selectedRowIndex, 2).toString());
-//            servicetf.setText(model.getValueAt(selectedRowIndex, 3).toString());
-//            stat.setText(model.getValueAt(selectedRowIndex, 4).toString()); 
-//        }
-//    }
-//});
     }
     
     public void upDateDB() throws SQLException, ClassNotFoundException
@@ -163,6 +146,7 @@ public class Inquiries extends javax.swing.JFrame {
         rb1 = new javax.swing.JRadioButton();
         rb2 = new javax.swing.JRadioButton();
         rb3 = new javax.swing.JRadioButton();
+        update1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
 
         jButton3.setBackground(new java.awt.Color(118, 8, 8));
@@ -213,6 +197,11 @@ public class Inquiries extends javax.swing.JFrame {
         stat.setBounds(1050, 430, 210, 50);
 
         ipmtf.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        ipmtf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ipmtfActionPerformed(evt);
+            }
+        });
         jPanel1.add(ipmtf);
         ipmtf.setBounds(720, 190, 250, 50);
 
@@ -384,6 +373,17 @@ public class Inquiries extends javax.swing.JFrame {
         });
         jPanel1.add(rb3);
         rb3.setBounds(1200, 400, 80, 21);
+
+        update1.setFont(new java.awt.Font("STZhongsong", 1, 16)); // NOI18N
+        update1.setText("Update");
+        update1.setAlignmentX(0.5F);
+        update1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(update1);
+        update1.setBounds(990, 540, 150, 40);
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EMPLOYEE/Inquiries BG.png"))); // NOI18N
@@ -583,144 +583,47 @@ public class Inquiries extends javax.swing.JFrame {
     }//GEN-LAST:event_rb2ActionPerformed
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
-String ipm, cn, stats, inq, serv, query;
-       
-       try{
-           Class.forName("com.mysql.cj.jdbc.Driver");
-           
-         String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
-         String user = "jaroot";
-         String pass = "";
-         
-         Connection con = DriverManager.getConnection(url,user,pass);
-         Statement st = con.createStatement();
-         
-         pst = con.prepareStatement("UPDATE connector set IPM_ID=?, Company_Name=?, Inquiry_Date=?, Service_Type=?, Status=? WHERE IPM_ID=");
-                 
-         if("".equals(ipmtf.getText())){
-             JOptionPane.showMessageDialog(new JFrame(), "IPM ID is required", "Error", JOptionPane.ERROR_MESSAGE);
-         }
-         else if("".equals(companytf.getText())){
-             JOptionPane.showMessageDialog(new JFrame(), "Company Name is required", "Error", JOptionPane.ERROR_MESSAGE);
-         }
-         else if("".equals(stat.getText())){
-             JOptionPane.showMessageDialog(new JFrame(), "Status is required", "Error", JOptionPane.ERROR_MESSAGE);
-         }
-         else if("".equals(inquirytf.getText())){
-             JOptionPane.showMessageDialog(new JFrame(), "Inquiry Date is required", "Error", JOptionPane.ERROR_MESSAGE);
-         }
-         else if("".equals(servicetf.getText())){
-             JOptionPane.showMessageDialog(new JFrame(), "Service Type is required", "Error", JOptionPane.ERROR_MESSAGE);
-         }
-         else{
-             pst.setString(1,ipmtf.getText());
-             pst.setString(2,companytf.getText());
-             pst.setString(3,stat.getText());
-             pst.setString(4,inquirytf.getText());
-             pst.setString(5,servicetf.getText());
-             
-             pst.executeUpdate();
-             JOptionPane.showMessageDialog(this, "Record Updated");
-//       ipm = ipmtf.getText();
-//       cn = companytf.getText();
-//       stats =  stat.getText();
-//       inq =  inquirytf.getText();
-//       serv = servicetf.getText();
-//       query = "INSERT INTO inquiry_and_proposal(IPM_ID, Company_Name, Inquiry_Date, Service_Type, Status)"
-//               + "VALUES('"+ipm+"','"+cn+"','"+inq+"','"+serv+"','"+stats+"')";
-         
-       
-//        DefaultTableModel model = (DefaultTableModel) table.getModel();
-//        model.addRow(new Object[] {ipmtf.getText(),companytf.getText(),inquirytf.getText(),servicetf.getText(),stat.getText()});
-//
-//
-//       st.executeUpdate(query);
-//       ipmtf.setText("");
-//       companytf.setText("");
-//       stat.setText("");
-//       inquirytf.setText("");
-//       servicetf.setText("");
-//       JOptionPane.showMessageDialog(new JFrame(), "Successfuly Registered", "Successed!", JOptionPane.OK_OPTION);
-//       con.close();
-       
 
-         }
+try{
+    pst = con.prepareStatement("update inquiry_and_proposal set Company_Name =?, Inquiry_Date =?, Service_Type =?, Status =? where IPM_ID=?");
+    pst.setString(1,companytf.getText());
+    pst.setString(2,inquirytf.getText());
+    pst.setString(3,servicetf.getText());
+    pst.setString(4,stat.getText());
+    pst.setString(5,ipmtf.getText());
+    
         
-       }catch (ClassNotFoundException ex){
-           Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE,null,ex);
-       //    System.out.println("Error" + ex.getMessage());     
-       } catch (SQLException ex) {
+    int rowsAffected = pst.executeUpdate(); 
+    
+    if (rowsAffected > 0 ){
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        int selectedRowIndex = table.getSelectedRow();
+        
+        model.setValueAt(ipmtf.getText(), selectedRowIndex, 0);
+        model.setValueAt(companytf.getText(), selectedRowIndex, 1);
+        model.setValueAt(inquirytf.getText(), selectedRowIndex, 2);
+        model.setValueAt(servicetf.getText(), selectedRowIndex, 3);
+        model.setValueAt(stat.getText(), selectedRowIndex, 4);
+        
+       JOptionPane.showMessageDialog(new JFrame(), "Updated Successfully", "Successed!", JOptionPane.OK_CANCEL_OPTION);
+       con.close();
+    } else{
+        JOptionPane.showMessageDialog(new JFrame(), "Update Failed", "Warning!", JOptionPane.ERROR_MESSAGE);
+       con.close();
+    }
+       
+               
+       ipmtf.setText("");
+       companytf.setText("");
+       stat.setText("");
+       inquirytf.setText("");
+       servicetf.setText("");
+       
+} catch (SQLException ex) {
             Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
+}
 
-//DefaultTableModel model = (DefaultTableModel) table.getModel();
-//
-//if (table.getSelectedRowCount() == 1) {
-//    String ipm = ipmtf.getText();
-//    String comp = companytf.getText();
-//    String inq = inquirytf.getText();
-//    String ser = servicetf.getText();
-//    String stats = stat.getText();
-//    int selectedRow = table.getSelectedRow();
-//    model.setValueAt(ipm, selectedRow, 0);
-//    model.setValueAt(comp, selectedRow, 1);
-//    model.setValueAt(inq, selectedRow, 2);
-//    model.setValueAt(ser, selectedRow, 3);
-//    model.setValueAt(stats, selectedRow, 4);
-//    int id = Integer.parseInt(table.getValueAt(table.getSelectedRow(),0).toString()); 
-//    
-//    
-//    
-//    String a = model.getValueAt(id,1).toString();
-//    String b = model.getValueAt(id,2).toString();
-//    String c = model.getValueAt(id,3).toString();
-//    String d = model.getValueAt(id,4).toString();
-//    String e = model.getValueAt(id,0).toString();
-//    String query = "UPDATE connector set IPM_ID=?, Company_Name=?, Inquiry_Date=?, Service_Type=?, Status=? WHERE IPM_ID='"+d+"'";
-//    
-//    try {
-//        Class.forName("com.mysql.cj.jdbc.Driver");
-//        con = DriverManager.getConnection("jdbc:MYSQL://localhost:3306/ja consultancy services", "root", "");
-//         
-//         Statement st = con.createStatement();
-//            pst = con.prepareStatement(query);
-//            pst.setString(1, comp);
-//            pst.setString(2, inq);
-//            pst.setString(3, ser);
-//            pst.setString(4, stats);
-//            pst.executeUpdate();
-//            
-//                        
-//        
-//
-//        JOptionPane.showMessageDialog(this, "Update Successfully");
-//    } catch (ClassNotFoundException ex) {
-//        Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE, null, ex);
-//        JOptionPane.showMessageDialog(this, "Database Driver not found: " + ex.getMessage());
-//    } catch (SQLException ex) {
-//        Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE, null, ex);
-//        JOptionPane.showMessageDialog(this, "SQL Error: " + ex.getMessage());
-//    } finally {
-//        try {
-//            if (pst != null) pst.close();
-//            if (con != null) con.close();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-//
-//    ipmtf.setText("");
-//    companytf.setText("");
-//    stat.setText("");
-//    inquirytf.setText("");
-//    servicetf.setText("");  
-//} else {
-//    if (table.getRowCount() == 0) {
-//        JOptionPane.showMessageDialog(this, "Table is Empty.");
-//    } else {
-//        JOptionPane.showMessageDialog(this, "Please select a Single Row For Update.");
-//    }
-//}
     }//GEN-LAST:event_updateActionPerformed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
@@ -756,6 +659,23 @@ String ipm, cn, stats, inq, serv, query;
         }
         
     }//GEN-LAST:event_tableMouseClicked
+
+    private void update1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update1ActionPerformed
+
+//        
+//        try{
+//            pst = con.prepareStatement("delete from inquiry_and_proposal where IPM_ID=?");
+//            pst.setString(1,ipmtf.getText());
+//            pst.executeUpdate();
+//            JOptionPane.showMessageDialog(this,"Success");
+//}catch (SQLException ex){
+//    Logger.getLogger (Inquiries.class.getName()).log(Level.SEVERE,null, ex);
+//        }
+    }//GEN-LAST:event_update1ActionPerformed
+
+    private void ipmtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ipmtfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ipmtfActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -820,6 +740,7 @@ String ipm, cn, stats, inq, serv, query;
     private javax.swing.JTextField stat;
     private javax.swing.JTable table;
     private javax.swing.JButton update;
+    private javax.swing.JButton update1;
     private javax.swing.JComboBox<String> year;
     // End of variables declaration//GEN-END:variables
 }
