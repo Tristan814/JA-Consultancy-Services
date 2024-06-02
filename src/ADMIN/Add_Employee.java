@@ -299,6 +299,8 @@ public class Add_Employee extends javax.swing.JFrame {
         });
         jPanel2.add(jButton3);
         jButton3.setBounds(380, 580, 126, 47);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ADMIN/add emp bg.png"))); // NOI18N
         jPanel2.add(jLabel1);
         jLabel1.setBounds(0, 0, 1600, 680);
 
