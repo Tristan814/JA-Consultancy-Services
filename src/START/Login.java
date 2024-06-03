@@ -36,7 +36,6 @@ public class Login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
@@ -94,7 +93,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         jPanel1.add(toadmin);
-        toadmin.setBounds(10, 770, 70, 20);
+        toadmin.setBounds(10, 720, 70, 20);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));

@@ -47,10 +47,10 @@ public class Add_Employee extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        Add = new javax.swing.JButton();
+        addbtn = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        clearbtn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         address = new javax.swing.JTextField();
@@ -68,10 +68,10 @@ public class Add_Employee extends javax.swing.JFrame {
         year = new javax.swing.JComboBox<>();
         day = new javax.swing.JComboBox<>();
         month = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
+        backbtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
+        updatebtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -94,17 +94,17 @@ public class Add_Employee extends javax.swing.JFrame {
         jPanel2.add(jLabel3);
         jLabel3.setBounds(30, 200, 120, 20);
 
-        Add.setBackground(new java.awt.Color(153, 0, 0));
-        Add.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        Add.setForeground(new java.awt.Color(255, 255, 255));
-        Add.setText("ADD");
-        Add.addActionListener(new java.awt.event.ActionListener() {
+        addbtn.setBackground(new java.awt.Color(153, 0, 0));
+        addbtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        addbtn.setForeground(new java.awt.Color(255, 255, 255));
+        addbtn.setText("ADD");
+        addbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddActionPerformed(evt);
+                addbtnActionPerformed(evt);
             }
         });
-        jPanel2.add(Add);
-        Add.setBounds(530, 580, 138, 47);
+        jPanel2.add(addbtn);
+        addbtn.setBounds(530, 580, 138, 47);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setText("Date of Birth");
@@ -113,16 +113,16 @@ public class Add_Employee extends javax.swing.JFrame {
         jPanel2.add(jLabel10);
         jLabel10.setBounds(575, 167, 0, 0);
 
-        jButton1.setBackground(new java.awt.Color(204, 204, 204));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setText("CLEAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        clearbtn.setBackground(new java.awt.Color(204, 204, 204));
+        clearbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        clearbtn.setText("CLEAR");
+        clearbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                clearbtnActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1);
-        jButton1.setBounds(230, 580, 126, 47);
+        jPanel2.add(clearbtn);
+        clearbtn.setBounds(230, 580, 126, 47);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Employee ID");
@@ -252,7 +252,7 @@ public class Add_Employee extends javax.swing.JFrame {
             }
         });
         jPanel2.add(day);
-        day.setBounds(510, 130, 72, 40);
+        day.setBounds(510, 130, 44, 40);
 
         month.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Month", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
         month.addActionListener(new java.awt.event.ActionListener() {
@@ -263,14 +263,14 @@ public class Add_Employee extends javax.swing.JFrame {
         jPanel2.add(month);
         month.setBounds(390, 130, 110, 40);
 
-        jButton2.setText("Back");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        backbtn.setText("Back");
+        backbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                backbtnActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton2);
-        jButton2.setBounds(20, 640, 72, 23);
+        jPanel2.add(backbtn);
+        backbtn.setBounds(20, 640, 55, 23);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -288,17 +288,17 @@ public class Add_Employee extends javax.swing.JFrame {
         jPanel2.add(jScrollPane1);
         jScrollPane1.setBounds(710, 120, 870, 510);
 
-        jButton3.setBackground(new java.awt.Color(255, 204, 102));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(51, 51, 0));
-        jButton3.setText("UPDATE");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        updatebtn.setBackground(new java.awt.Color(255, 204, 102));
+        updatebtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        updatebtn.setForeground(new java.awt.Color(51, 51, 0));
+        updatebtn.setText("UPDATE");
+        updatebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                updatebtnActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton3);
-        jButton3.setBounds(380, 580, 126, 47);
+        jPanel2.add(updatebtn);
+        updatebtn.setBounds(380, 580, 126, 47);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ADMIN/add emp bg.png"))); // NOI18N
         jPanel2.add(jLabel1);
@@ -351,20 +351,22 @@ public class Add_Employee extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_lastnameActionPerformed
 
-    private void AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddActionPerformed
+    private void addbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addbtnActionPerformed
     String lname,fname,Password,eid,contact,eaddress,bday,mail,eage,query;
     String SUrl,Suser, Spass;
     SUrl = "jdbc:MYSQL://localhost:3306/ja consultancy services";
     Suser = "root";
     Spass = "";
-
-
+    
 try{
     Class.forName("com.mysql.cj.jdbc.Driver");
     Connection con = DriverManager.getConnection(SUrl,Suser,Spass);
     Statement st =con.createStatement();
     if("".equals(lastname.getText())){
-        JOptionPane.showMessageDialog(new JFrame(),"Last Name is Required","Error",JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(new JFrame(),"Last Name is Required","Error",JOptionPane.ERROR_MESSAGE);   
+    }
+    else if (lastname != null && !(lastname.equals("[a-zA-Z]+"))) {
+          JOptionPane.showMessageDialog(new JFrame(),"Last Name is Required","Error",JOptionPane.ERROR_MESSAGE);        
         
     }
     else if("".equals(firstname.getText())){
@@ -427,9 +429,15 @@ try{
 }catch(Exception e){
    System.out.println("Error!!" + e.getMessage());
 }                         
-    }//GEN-LAST:event_AddActionPerformed
+    }//GEN-LAST:event_addbtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void clearbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearbtnActionPerformed
+            
+        
+        int option = JOptionPane.showConfirmDialog (new JFrame(),"Are you sure you want to clear?","Confirmation",JOptionPane.OK_CANCEL_OPTION);
+     
+       
+         if (option == JOptionPane.OK_OPTION) {
             lastname.setText("");
             firstname.setText("");
             empID.setText("");
@@ -439,7 +447,16 @@ try{
             email.setText("");
             age.setText("");
             emppass.setText("");
-    }//GEN-LAST:event_jButton1ActionPerformed
+            month.setSelectedIndex(0);
+            day.setSelectedIndex(0);
+            year.setSelectedIndex(0);
+            dateofb.setText("");
+            
+        } else   {
+         }
+            
+            
+    }//GEN-LAST:event_clearbtnActionPerformed
 
     private void ageKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ageKeyTyped
          char enter = evt.getKeyChar();
@@ -510,14 +527,53 @@ try{
        dateofb.setText(tot);
     }//GEN-LAST:event_yearActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void backbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbtnActionPerformed
         new AdminDash().setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_backbtnActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void updatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatebtnActionPerformed
+     
+        //  try{
+//    pst = con.prepareStatement("update inquiry_and_proposal set Company_Name =?, Inquiry_Date =?, Service_Type =?, Status =? where IPM_ID=?");
+//    pst.setString(1,companytf.getText());
+//    pst.setString(2,inquirytf.getText());
+//    pst.setString(3,servicetf.getText());
+//    pst.setString(4,stat.getText());
+//    pst.setString(5,ipmtf.getText());
+//    
+//        
+//    int rowsAffected = pst.executeUpdate(); 
+//    
+//    if (rowsAffected > 0 ){
+//        DefaultTableModel model = (DefaultTableModel) table.getModel();
+//        int selectedRowIndex = table.getSelectedRow();
+//        
+//        model.setValueAt(ipmtf.getText(), selectedRowIndex, 0);
+//        model.setValueAt(companytf.getText(), selectedRowIndex, 1);
+//        model.setValueAt(inquirytf.getText(), selectedRowIndex, 2);
+//        model.setValueAt(servicetf.getText(), selectedRowIndex, 3);
+//        model.setValueAt(stat.getText(), selectedRowIndex, 4);
+//        
+//       JOptionPane.showMessageDialog(new JFrame(), "Updated Successfully", "Successed!", JOptionPane.OK_CANCEL_OPTION);
+//       con.close();
+//    } else{
+//        JOptionPane.showMessageDialog(new JFrame(), "Update Failed", "Warning!", JOptionPane.ERROR_MESSAGE);
+//       con.close();
+//    }
+//       
+//               
+//       ipmtf.setText("");
+//       companytf.setText("");
+//       stat.setText("");
+//       inquirytf.setText("");
+//       servicetf.setText("");
+//       
+//} catch (SQLException ex) {
+//            Logger.getLogger(Inquiries_Admin.class.getName()).log(Level.SEVERE, null, ex);
+//       
+//}
+    }//GEN-LAST:event_updatebtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -558,19 +614,18 @@ try{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Add;
+    private javax.swing.JButton addbtn;
     private javax.swing.JTextField address;
     private javax.swing.JTextField age;
+    private javax.swing.JButton backbtn;
     private javax.swing.JTextField cellno;
+    private javax.swing.JButton clearbtn;
     private javax.swing.JTextField dateofb;
     private javax.swing.JComboBox<String> day;
     private javax.swing.JTextField email;
     private javax.swing.JTextField empID;
     private javax.swing.JTextField emppass;
     private javax.swing.JTextField firstname;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -587,6 +642,7 @@ try{
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField lastname;
     private javax.swing.JComboBox<String> month;
+    private javax.swing.JButton updatebtn;
     private javax.swing.JComboBox<String> year;
     // End of variables declaration//GEN-END:variables
 }
