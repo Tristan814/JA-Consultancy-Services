@@ -135,8 +135,8 @@ public class FileMaintenance extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void standardsbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_standardsbtnActionPerformed
-//        new System_Standards().setVisible(true);
-//        dispose();
+        new System_Standards().setVisible(true);
+        dispose();
     }//GEN-LAST:event_standardsbtnActionPerformed
 
     private void transactionbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transactionbtnActionPerformed
