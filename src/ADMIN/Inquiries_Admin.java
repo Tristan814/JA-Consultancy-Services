@@ -248,7 +248,7 @@ public class Inquiries_Admin extends javax.swing.JFrame {
             }
         });
         jPanel1.add(update);
-        update.setBounds(990, 540, 150, 40);
+        update.setBounds(910, 540, 150, 40);
 
         jButton1.setText("next");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -270,7 +270,7 @@ public class Inquiries_Admin extends javax.swing.JFrame {
             }
         });
         jPanel1.add(add);
-        add.setBounds(810, 540, 150, 40);
+        add.setBounds(720, 540, 150, 40);
 
         jButton5.setFont(new java.awt.Font("STZhongsong", 1, 16)); // NOI18N
         jButton5.setText("Back");
@@ -376,7 +376,7 @@ public class Inquiries_Admin extends javax.swing.JFrame {
         rb3.setBounds(1200, 400, 80, 21);
 
         update1.setFont(new java.awt.Font("STZhongsong", 1, 16)); // NOI18N
-        update1.setText("Update");
+        update1.setText("Delete");
         update1.setAlignmentX(0.5F);
         update1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -384,7 +384,7 @@ public class Inquiries_Admin extends javax.swing.JFrame {
             }
         });
         jPanel1.add(update1);
-        update1.setBounds(990, 540, 150, 40);
+        update1.setBounds(1100, 540, 150, 40);
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EMPLOYEE/Inquiries BG.png"))); // NOI18N
@@ -661,22 +661,26 @@ try{
         
     }//GEN-LAST:event_tableMouseClicked
 
-    private void update1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update1ActionPerformed
-
-//        
-//        try{
-//            pst = con.prepareStatement("delete from inquiry_and_proposal where IPM_ID=?");
-//            pst.setString(1,ipmtf.getText());
-//            pst.executeUpdate();
-//            JOptionPane.showMessageDialog(this,"Success");
-//}catch (SQLException ex){
-//    Logger.getLogger (Inquiries.class.getName()).log(Level.SEVERE,null, ex);
-//        }
-    }//GEN-LAST:event_update1ActionPerformed
-
     private void ipmtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ipmtfActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ipmtfActionPerformed
+
+    private void update1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update1ActionPerformed
+try {
+    DefaultTableModel model = (DefaultTableModel) table.getModel();
+    int selectedRowIndex = table.getSelectedRow();
+
+    if (selectedRowIndex != -1) {
+        model.removeRow(selectedRowIndex);
+        JOptionPane.showMessageDialog(new JFrame(), "Row Deleted Successfully", "Success!", JOptionPane.OK_CANCEL_OPTION);
+    } else {
+        JOptionPane.showMessageDialog(new JFrame(), "No Row Selected", "Warning!", JOptionPane.WARNING_MESSAGE);
+    }
+} catch (Exception ex) {
+    Logger.getLogger(Inquiries_Admin.class.getName()).log(Level.SEVERE, null, ex);
+    JOptionPane.showMessageDialog(new JFrame(), "Deletion Failed", "Error!", JOptionPane.ERROR_MESSAGE);
+}
+    }//GEN-LAST:event_update1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

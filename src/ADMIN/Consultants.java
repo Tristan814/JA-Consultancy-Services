@@ -5,17 +5,53 @@
  */
 package ADMIN;
 
+import EMPLOYEE.Inquiries;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Admin
  */
 public class Consultants extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Consultants
-     */
+    Connection con;
+    PreparedStatement pst;
+    ResultSet rs;
+    int q, i, id, deleteItem;
+
     public Consultants() {
         initComponents();
+
+        String SUrl, Suser, Spass;
+        SUrl = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+        Suser = "root";
+        Spass = "";
+        String query = "SELECT * FROM consultant_table";
+        
+    try{
+             con = DriverManager.getConnection(SUrl,Suser,Spass);
+             pst = con.prepareStatement(query);
+             rs = pst.executeQuery();
+             DefaultTableModel model = (DefaultTableModel)(table.getModel());    
+             while(rs.next()){
+                 model.addRow(new String[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)});
+             }
+    }catch (Exception ex){
+        System.out.println("Error : " + ex.getMessage());
+    }
+    
+    
+    
     }
 
     /**
@@ -28,22 +64,22 @@ public class Consultants extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        save = new javax.swing.JButton();
+        constf = new javax.swing.JTextField();
+        emailtf = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        firstntf = new javax.swing.JTextField();
+        lastntf = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jTextField6 = new javax.swing.JTextField();
+        table = new javax.swing.JTable();
+        contactnotf = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        add = new javax.swing.JButton();
+        edit = new javax.swing.JButton();
+        reset = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -51,35 +87,35 @@ public class Consultants extends javax.swing.JFrame {
 
         jPanel2.setLayout(null);
 
-        jButton1.setBackground(new java.awt.Color(0, 153, 102));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Edit");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        save.setBackground(new java.awt.Color(0, 153, 102));
+        save.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        save.setForeground(new java.awt.Color(255, 255, 255));
+        save.setText("Save");
+        save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                saveActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1);
-        jButton1.setBounds(1140, 530, 110, 50);
+        jPanel2.add(save);
+        save.setBounds(1140, 530, 110, 50);
 
-        jTextField5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        constf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        constf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                constfActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField5);
-        jTextField5.setBounds(1030, 260, 190, 40);
+        jPanel2.add(constf);
+        constf.setBounds(1030, 260, 190, 40);
 
-        jTextField4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        emailtf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        emailtf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                emailtfActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField4);
-        jTextField4.setBounds(800, 260, 190, 40);
+        jPanel2.add(emailtf);
+        emailtf.setBounds(800, 260, 190, 40);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Contact Number");
@@ -91,23 +127,23 @@ public class Consultants extends javax.swing.JFrame {
         jPanel2.add(jLabel4);
         jLabel4.setBounds(800, 240, 60, 16);
 
-        jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        firstntf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        firstntf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                firstntfActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField3);
-        jTextField3.setBounds(800, 350, 190, 40);
+        jPanel2.add(firstntf);
+        firstntf.setBounds(800, 350, 190, 40);
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        lastntf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lastntf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                lastntfActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField2);
-        jTextField2.setBounds(800, 170, 190, 40);
+        jPanel2.add(lastntf);
+        lastntf.setBounds(800, 170, 190, 40);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Consultant ID");
@@ -119,8 +155,8 @@ public class Consultants extends javax.swing.JFrame {
         jPanel2.add(jLabel2);
         jLabel2.setBounds(800, 150, 70, 20);
 
-        jTable2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        table.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -139,67 +175,72 @@ public class Consultants extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setResizable(false);
-            jTable2.getColumnModel().getColumn(1).setResizable(false);
-            jTable2.getColumnModel().getColumn(2).setResizable(false);
-            jTable2.getColumnModel().getColumn(3).setResizable(false);
-            jTable2.getColumnModel().getColumn(4).setResizable(false);
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(table);
+        if (table.getColumnModel().getColumnCount() > 0) {
+            table.getColumnModel().getColumn(0).setResizable(false);
+            table.getColumnModel().getColumn(1).setResizable(false);
+            table.getColumnModel().getColumn(2).setResizable(false);
+            table.getColumnModel().getColumn(3).setResizable(false);
+            table.getColumnModel().getColumn(4).setResizable(false);
         }
 
         jPanel2.add(jScrollPane2);
         jScrollPane2.setBounds(30, 130, 720, 470);
 
-        jTextField6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        contactnotf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        contactnotf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                contactnotfActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField6);
-        jTextField6.setBounds(1030, 170, 190, 40);
+        jPanel2.add(contactnotf);
+        contactnotf.setBounds(1030, 170, 190, 40);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("First Name");
         jPanel2.add(jLabel6);
         jLabel6.setBounds(800, 330, 80, 20);
 
-        jButton7.setBackground(new java.awt.Color(153, 0, 0));
-        jButton7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(255, 255, 255));
-        jButton7.setText("Add");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        add.setBackground(new java.awt.Color(153, 0, 0));
+        add.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        add.setForeground(new java.awt.Color(255, 255, 255));
+        add.setText("Add");
+        add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                addActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton7);
-        jButton7.setBounds(780, 530, 110, 50);
+        jPanel2.add(add);
+        add.setBounds(780, 530, 110, 50);
 
-        jButton8.setBackground(new java.awt.Color(0, 204, 204));
-        jButton8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(255, 255, 255));
-        jButton8.setText("Save");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        edit.setBackground(new java.awt.Color(0, 204, 204));
+        edit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        edit.setForeground(new java.awt.Color(255, 255, 255));
+        edit.setText("Edit");
+        edit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                editActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton8);
-        jButton8.setBounds(900, 530, 110, 50);
+        jPanel2.add(edit);
+        edit.setBounds(900, 530, 110, 50);
 
-        jButton9.setBackground(new java.awt.Color(204, 204, 0));
-        jButton9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton9.setForeground(new java.awt.Color(255, 255, 255));
-        jButton9.setText("Delete");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        reset.setBackground(new java.awt.Color(204, 204, 0));
+        reset.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        reset.setForeground(new java.awt.Color(255, 255, 255));
+        reset.setText("Reset");
+        reset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                resetActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton9);
-        jButton9.setBounds(1020, 530, 110, 50);
+        jPanel2.add(reset);
+        reset.setBounds(1020, 530, 110, 50);
 
         jButton2.setText("Back");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -209,10 +250,8 @@ public class Consultants extends javax.swing.JFrame {
         });
         jPanel2.add(jButton2);
         jButton2.setBounds(30, 620, 110, 30);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ADMIN/Consultant bg.png"))); // NOI18N
         jPanel2.add(jLabel1);
-        jLabel1.setBounds(0, 0, 1300, 670);
+        jLabel1.setBounds(0, 0, 0, 670);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -229,46 +268,185 @@ public class Consultants extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void lastntfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastntfActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_lastntfActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void firstntfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstntfActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_firstntfActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void emailtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailtfActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_emailtfActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void constfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_constfActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_constfActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
+    try{
+    pst = con.prepareStatement("update consultant_table set Last_Name =?, First_Name =?, Contact_No =?, Email =? where Cons_ID=?");
+    pst.setString(1,constf.getText());
+    pst.setString(2,lastntf.getText());
+    pst.setString(3,firstntf.getText());
+    pst.setString(4,contactnotf.getText());
+    pst.setString(5,emailtf.getText());
+    
+        
+    int rowsAffected = pst.executeUpdate(); 
+    
+    if (rowsAffected > 0 ){
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        int selectedRowIndex = table.getSelectedRow();
+        
+        model.setValueAt(constf.getText(), selectedRowIndex, 0);
+        model.setValueAt(lastntf.getText(), selectedRowIndex, 1);
+        model.setValueAt(firstntf.getText(), selectedRowIndex, 2);
+        model.setValueAt(contactnotf.getText(), selectedRowIndex, 3);
+        model.setValueAt(emailtf.getText(), selectedRowIndex, 4);
+        
+       JOptionPane.showMessageDialog(new JFrame(), "Updated Successfully", "Successed!", JOptionPane.OK_CANCEL_OPTION);
+       con.close();
+    } else{
+        JOptionPane.showMessageDialog(new JFrame(), "Update Failed", "Warning!", JOptionPane.ERROR_MESSAGE);
+       con.close();
+    }
+       
+               
+       constf.setText("");
+       lastntf.setText("");
+       firstntf.setText("");
+       contactnotf.setText("");
+       emailtf.setText("");
+       
+} catch (SQLException ex) {
+            Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE, null, ex);
+       
+}
+                      
+                              
+    }//GEN-LAST:event_saveActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void contactnotfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contactnotfActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    }//GEN-LAST:event_contactnotfActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
+String ipm, cn, stats, inq, serv, query;
+       
+       try{
+           Class.forName("com.mysql.cj.jdbc.Driver");
+           
+         String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+         String user = "jaroot";
+         String pass = "";
+         
+         Connection con = DriverManager.getConnection(url,user,pass);
+         Statement st = con.createStatement();
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+         if("".equals(lastntf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Last Name is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(emailtf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Email is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(firstntf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "First Name is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(contactnotf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Contact Number is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(constf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Consultant ID is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else{
+       cn = lastntf.getText();
+       stats = emailtf.getText();
+       inq =  firstntf.getText();
+       serv =  contactnotf.getText();
+       ipm = constf.getText();
+       query = "INSERT INTO consultant_table(Cons_ID, Last_Name, First_Name, Contact_No, Email)"
+               + "VALUES('"+ipm+"','"+cn+"','"+inq+"','"+serv+"','"+stats+"')";
+         
+       
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.addRow(new Object[] {constf.getText(),lastntf.getText(),firstntf.getText(),emailtf.getText(),contactnotf.getText()});
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
+
+       st.executeUpdate(query);
+       emailtf.setText("");
+       firstntf.setText("");
+       contactnotf.setText("");
+       constf.setText("");
+       lastntf.setText("");
+       JOptionPane.showMessageDialog(new JFrame(), "Successfuly Registered", "Successed!", JOptionPane.OK_OPTION);
+       con.close();
+       
+
+         }
+        
+       }catch (ClassNotFoundException ex){
+           Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE,null,ex);
+       //    System.out.println("Error" + ex.getMessage());
+       } catch (SQLException ex) {
+            Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_addActionPerformed
+
+    private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
+    lastntf.setEditable(true);
+    emailtf.setEditable(true);
+    firstntf.setEditable(true);
+    contactnotf.setEditable(true);
+    }//GEN-LAST:event_editActionPerformed
+
+    private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
+        
+       emailtf.setText("");
+       firstntf.setText("");
+       contactnotf.setText("");
+       constf.setText("");
+       lastntf.setText("");
+
+    }//GEN-LAST:event_resetActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         new FileMaintenance().setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+        int id = Integer.parseInt(table.getValueAt(table.getSelectedRow(),0).toString());
+        try{
+               Class.forName("com.mysql.cj.jdbc.Driver");
+           
+         String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+         String user = "jaroot";
+         String pass = "";
+         
+         Connection con = DriverManager.getConnection(url,user,pass);
+         Statement st = con.createStatement();
+         ResultSet res =st.executeQuery("select * from consultant_table where Cons_ID ="+id);
+                        while(res.next()){
+                            constf.setText(res.getString("Cons_ID"));
+                            lastntf.setText(res.getString("Last_Name"));
+                            firstntf.setText(res.getString("First_Name"));
+                            contactnotf.setText(res.getString("Contact_No"));
+                             emailtf.setText(res.getString("Email"));
+                             
+                             constf.setEditable(false);
+                            lastntf.setEditable(false);
+                            firstntf.setEditable(false);
+                            contactnotf.setEditable(false);
+                            emailtf.setEditable(false);
+                        }
+                
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_tableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -307,11 +485,13 @@ public class Consultants extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton add;
+    private javax.swing.JTextField constf;
+    private javax.swing.JTextField contactnotf;
+    private javax.swing.JButton edit;
+    private javax.swing.JTextField emailtf;
+    private javax.swing.JTextField firstntf;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -320,11 +500,9 @@ public class Consultants extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField lastntf;
+    private javax.swing.JButton reset;
+    private javax.swing.JButton save;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

@@ -263,7 +263,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="990" y="540" width="150" height="40"/>
+              <AbsoluteConstraints x="910" y="540" width="150" height="40"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -299,7 +299,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="810" y="540" width="150" height="40"/>
+              <AbsoluteConstraints x="720" y="540" width="150" height="40"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -554,7 +554,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="STZhongsong" size="16" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Update"/>
+            <Property name="text" type="java.lang.String" value="Delete"/>
             <Property name="alignmentX" type="float" value="0.5"/>
           </Properties>
           <Events>
@@ -562,7 +562,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="990" y="540" width="150" height="40"/>
+              <AbsoluteConstraints x="1100" y="540" width="150" height="40"/>
             </Constraint>
           </Constraints>
         </Component>

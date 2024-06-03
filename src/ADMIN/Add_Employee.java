@@ -388,11 +388,7 @@ try{
     Connection con = DriverManager.getConnection(SUrl,Suser,Spass);
     Statement st =con.createStatement();
     if("".equals(lastname.getText())){
-        JOptionPane.showMessageDialog(new JFrame(),"Last Name is Required","Error",JOptionPane.ERROR_MESSAGE);   
-    }
-    else if (lastname != null && !(lastname.equals("[a-zA-Z]+"))) {
-          JOptionPane.showMessageDialog(new JFrame(),"Last Name is Required","Error",JOptionPane.ERROR_MESSAGE);        
-        
+        JOptionPane.showMessageDialog(new JFrame(),"sfsfd","Error",JOptionPane.ERROR_MESSAGE);      
     }
     else if("".equals(firstname.getText())){
         JOptionPane.showMessageDialog(new JFrame(),"First  Name is Required","Error",JOptionPane.ERROR_MESSAGE);
@@ -434,7 +430,16 @@ try{
        
        query = "INSERT INTO employee_table(Employee_ID,Employee_LastName,Employee_FirstName,Cellphone_No,Address,Birthday,Email,Age,Password)"+
                "VALUES('"+eid+"','"+lname+"','"+fname+"','"+contact+"','"+eaddress+"','"+bday+"','"+mail+"','"+eage+"','"+Password+"' )";
+       
+
+//      DefaultTableModel model = (DefaultTableModel) emptable.getModel();
+//        model.addRow(new Object[] {empID.getText(),lastname.getText(),firstname.getText(),emppass.getText(),cellno.getText(), address.getText(), dateofb.getText(),age.getText(),email.getText()});
+//        
+        
        st.execute(query);
+        DefaultTableModel model = (DefaultTableModel) emptable.getModel();
+        model.addRow(new Object[] {empID.getText(),lastname.getText(),firstname.getText(),emppass.getText(),cellno.getText(), address.getText(), dateofb.getText(),age.getText(),email.getText()});
+        
         empID.setText("");
        lastname.setText("");
        firstname.setText("");
