@@ -8,11 +8,16 @@ package ADMIN;
 import java.awt.Cursor;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
+import javax.swing.table.DefaultTableModel;
 
 
 /**
@@ -20,7 +25,10 @@ import static javax.swing.JOptionPane.showMessageDialog;
  * @author Admin
  */
 public class Add_Employee extends javax.swing.JFrame {
-
+    Connection con;
+    PreparedStatement pst;
+    ResultSet rs;
+    int q, i, id, deleteItem;
     /**
      * Creates new form Add_Employee
      */
@@ -70,8 +78,9 @@ public class Add_Employee extends javax.swing.JFrame {
         month = new javax.swing.JComboBox<>();
         backbtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        emptable = new javax.swing.JTable();
         updatebtn = new javax.swing.JButton();
+        editbtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -272,7 +281,7 @@ public class Add_Employee extends javax.swing.JFrame {
         jPanel2.add(backbtn);
         backbtn.setBounds(20, 640, 55, 23);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        emptable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
@@ -283,7 +292,12 @@ public class Add_Employee extends javax.swing.JFrame {
                 "Employee ID", "Password", "Last Name", "First Name", "Age", "Address", "Birthdate", "No.", "Email"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        emptable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                emptableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(emptable);
 
         jPanel2.add(jScrollPane1);
         jScrollPane1.setBounds(710, 120, 870, 510);
@@ -299,6 +313,17 @@ public class Add_Employee extends javax.swing.JFrame {
         });
         jPanel2.add(updatebtn);
         updatebtn.setBounds(380, 580, 126, 47);
+
+        editbtn.setFont(new java.awt.Font("STZhongsong", 1, 16)); // NOI18N
+        editbtn.setText("Edit");
+        editbtn.setAlignmentX(0.5F);
+        editbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editbtnActionPerformed(evt);
+            }
+        });
+        jPanel2.add(editbtn);
+        editbtn.setBounds(90, 580, 130, 50);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ADMIN/add emp bg.png"))); // NOI18N
         jPanel2.add(jLabel1);
@@ -534,46 +559,117 @@ try{
 
     private void updatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatebtnActionPerformed
      
-        //  try{
-//    pst = con.prepareStatement("update inquiry_and_proposal set Company_Name =?, Inquiry_Date =?, Service_Type =?, Status =? where IPM_ID=?");
-//    pst.setString(1,companytf.getText());
-//    pst.setString(2,inquirytf.getText());
-//    pst.setString(3,servicetf.getText());
-//    pst.setString(4,stat.getText());
-//    pst.setString(5,ipmtf.getText());
-//    
-//        
-//    int rowsAffected = pst.executeUpdate(); 
-//    
-//    if (rowsAffected > 0 ){
-//        DefaultTableModel model = (DefaultTableModel) table.getModel();
-//        int selectedRowIndex = table.getSelectedRow();
-//        
-//        model.setValueAt(ipmtf.getText(), selectedRowIndex, 0);
-//        model.setValueAt(companytf.getText(), selectedRowIndex, 1);
-//        model.setValueAt(inquirytf.getText(), selectedRowIndex, 2);
-//        model.setValueAt(servicetf.getText(), selectedRowIndex, 3);
-//        model.setValueAt(stat.getText(), selectedRowIndex, 4);
-//        
-//       JOptionPane.showMessageDialog(new JFrame(), "Updated Successfully", "Successed!", JOptionPane.OK_CANCEL_OPTION);
-//       con.close();
-//    } else{
-//        JOptionPane.showMessageDialog(new JFrame(), "Update Failed", "Warning!", JOptionPane.ERROR_MESSAGE);
-//       con.close();
-//    }
-//       
-//               
-//       ipmtf.setText("");
-//       companytf.setText("");
-//       stat.setText("");
-//       inquirytf.setText("");
-//       servicetf.setText("");
-//       
-//} catch (SQLException ex) {
-//            Logger.getLogger(Inquiries_Admin.class.getName()).log(Level.SEVERE, null, ex);
-//       
-//}
+          try{
+    pst = con.prepareStatement("update employee_table set Employee_ID =?, Employee_LastName =?,Employee_FirstName =?,Cellphone_No =?,Address =?, Birthday =?, Email =?,Age =?,Password =? where Employee_ID=?");
+    pst.setString(1,empID.getText());
+    pst.setString(2,lastname.getText());
+    pst.setString(3,firstname.getText());
+    pst.setString(4,cellno.getText());
+    pst.setString(5,address.getText());
+    pst.setString(6,email.getText());
+    pst.setString(7,dateofb.getText());
+    pst.setString(8,age.getText());
+    pst.setString(9,emppass.getText());
+    
+        
+    int rowsAffected = pst.executeUpdate(); 
+    
+    if (rowsAffected > 0 ){
+        DefaultTableModel model = (DefaultTableModel) emptable.getModel();
+        int selectedRowIndex = emptable.getSelectedRow();
+        
+        model.setValueAt(lastname.getText(), selectedRowIndex, 0);
+        model.setValueAt(firstname.getText(), selectedRowIndex, 1);
+        model.setValueAt(age.getText(), selectedRowIndex, 2);
+        model.setValueAt(cellno.getText(), selectedRowIndex, 3);
+        model.setValueAt(address.getText(), selectedRowIndex, 4);
+        model.setValueAt(dateofb.getText(), selectedRowIndex, 5);
+        model.setValueAt(email.getText(), selectedRowIndex, 6);
+        model.setValueAt(empID.getText(), selectedRowIndex, 7);
+        model.setValueAt(emppass.getText(), selectedRowIndex, 8);
+        
+       JOptionPane.showMessageDialog(new JFrame(), "Updated Successfully", "Successed!", JOptionPane.OK_CANCEL_OPTION);
+       con.close();
+    } else{
+        JOptionPane.showMessageDialog(new JFrame(), "Update Failed", "Warning!", JOptionPane.ERROR_MESSAGE);
+       con.close();
+    }
+       
+               
+       lastname.setText("");
+       firstname.setText("");
+       age.setText("");
+       cellno.setText("");
+       address.setText("");
+       dateofb.setText("");
+       email.setText("");
+       empID.setText("");
+       emppass.setText("");
+       
+} catch (SQLException ex) {
+            Logger.getLogger(Inquiries_Admin.class.getName()).log(Level.SEVERE, null, ex);
+       
+}
     }//GEN-LAST:event_updatebtnActionPerformed
+
+    private void editbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editbtnActionPerformed
+    empID.setEditable(true);
+    lastname.setEditable(true);
+    firstname.setEditable(true);
+    cellno.setEditable(true);
+    address.setEditable(true);
+    dateofb.setEditable(false);
+    email.setEditable(true);
+    age.setEditable(true);
+    emppass.setEditable(true);
+    month.setEnabled(true);
+    day.setEnabled(true);
+    year.setEnabled(true);      // TODO add your handling code here:
+
+    }//GEN-LAST:event_editbtnActionPerformed
+
+    private void emptableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emptableMouseClicked
+      int id = Integer.parseInt(emptable.getValueAt(emptable.getSelectedRow(),0).toString());
+        try{
+               Class.forName("com.mysql.cj.jdbc.Driver");
+           
+         String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+         String user = "jaroot";
+         String pass = "";
+         
+         Connection con = DriverManager.getConnection(url,user,pass);
+         Statement st = con.createStatement();
+         ResultSet res =st.executeQuery("select * from inquiry_and_proposal where IPM_ID ="+id);
+                        while(res.next()){
+                            empID.setText(res.getString("Employee_ID"));
+                            lastname.setText(res.getString("Employee_LastName"));
+                            firstname.setText(res.getString("Employee_FirstName"));
+                            cellno.setText(res.getString("Cellphone_No"));
+                            address.setText(res.getString("Address"));
+                            dateofb.setText(res.getString("Birthday"));
+                            email.setText(res.getString("Email"));
+                            age.setText(res.getString("Age"));
+                            emppass.setText(res.getString("Password"));
+                             
+                             empID.setEditable(false);
+                             lastname.setEditable(false);
+                             firstname.setEditable(false);
+                             cellno.setEditable(false);
+                             address.setEditable(false);
+                            dateofb.setEditable(false);
+                            email.setEditable(false);
+                            age.setEditable(false);
+                            emppass.setEditable(false);
+                            month.setEnabled(false);
+                            day.setEnabled(false);
+                            year.setEnabled(false);
+                        }
+                        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+                
+    }//GEN-LAST:event_emptableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -622,9 +718,11 @@ try{
     private javax.swing.JButton clearbtn;
     private javax.swing.JTextField dateofb;
     private javax.swing.JComboBox<String> day;
+    private javax.swing.JButton editbtn;
     private javax.swing.JTextField email;
     private javax.swing.JTextField empID;
     private javax.swing.JTextField emppass;
+    private javax.swing.JTable emptable;
     private javax.swing.JTextField firstname;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -639,7 +737,6 @@ try{
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField lastname;
     private javax.swing.JComboBox<String> month;
     private javax.swing.JButton updatebtn;
