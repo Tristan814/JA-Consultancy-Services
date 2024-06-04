@@ -16,9 +16,11 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
+import javax.swing.RowFilter;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 public class Inquiries_Admin extends javax.swing.JFrame {
 
@@ -134,7 +136,6 @@ public class Inquiries_Admin extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         update = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         add = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -148,6 +149,8 @@ public class Inquiries_Admin extends javax.swing.JFrame {
         rb2 = new javax.swing.JRadioButton();
         rb3 = new javax.swing.JRadioButton();
         update1 = new javax.swing.JButton();
+        searchtf = new javax.swing.JTextField();
+        search = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
 
         jButton3.setBackground(new java.awt.Color(118, 8, 8));
@@ -187,7 +190,7 @@ public class Inquiries_Admin extends javax.swing.JFrame {
         jScrollPane1.setViewportView(table);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(50, 150, 630, 540);
+        jScrollPane1.setBounds(50, 170, 630, 540);
 
         companytf.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jPanel1.add(companytf);
@@ -249,15 +252,6 @@ public class Inquiries_Admin extends javax.swing.JFrame {
         });
         jPanel1.add(update);
         update.setBounds(910, 540, 150, 40);
-
-        jButton1.setText("next");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1);
-        jButton1.setBounds(1170, 690, 75, 23);
 
         add.setBackground(new java.awt.Color(118, 8, 8));
         add.setFont(new java.awt.Font("STZhongsong", 1, 16)); // NOI18N
@@ -322,7 +316,7 @@ public class Inquiries_Admin extends javax.swing.JFrame {
         year.setBounds(918, 360, 90, 40);
 
         jButton7.setFont(new java.awt.Font("STZhongsong", 1, 16)); // NOI18N
-        jButton7.setText("Reset");
+        jButton7.setText("Clear");
         jButton7.setAlignmentX(0.5F);
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -386,6 +380,28 @@ public class Inquiries_Admin extends javax.swing.JFrame {
         jPanel1.add(update1);
         update1.setBounds(1100, 540, 150, 40);
 
+        searchtf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchtfActionPerformed(evt);
+            }
+        });
+        searchtf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchtfKeyReleased(evt);
+            }
+        });
+        jPanel1.add(searchtf);
+        searchtf.setBounds(80, 110, 280, 50);
+
+        search.setText("Search");
+        search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchActionPerformed(evt);
+            }
+        });
+        jPanel1.add(search);
+        search.setBounds(370, 120, 140, 30);
+
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EMPLOYEE/Inquiries BG.png"))); // NOI18N
         jPanel1.add(jLabel6);
@@ -416,11 +432,6 @@ public class Inquiries_Admin extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new ClientDeets().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void dayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dayActionPerformed
       String a;
       String b;
@@ -441,7 +452,7 @@ public class Inquiries_Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_dayActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        new EmployeeDash().setVisible(true);
+        new FileMaintenance().setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -682,6 +693,26 @@ try {
 }
     }//GEN-LAST:event_update1ActionPerformed
 
+    private void searchtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchtfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchtfActionPerformed
+
+    private void searchtfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchtfKeyReleased
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
+        table.setRowSorter(obj);
+        obj.setRowFilter(RowFilter.regexFilter(searchtf.getText()));
+    }//GEN-LAST:event_searchtfKeyReleased
+
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
+        table.setRowSorter(obj);
+        obj.setRowFilter(RowFilter.regexFilter(searchtf.getText()));
+
+    }//GEN-LAST:event_searchActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -728,7 +759,6 @@ try {
     private javax.swing.JComboBox<String> day;
     private javax.swing.JTextField inquirytf;
     private javax.swing.JTextField ipmtf;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -745,6 +775,8 @@ try {
     private javax.swing.JRadioButton rb1;
     private javax.swing.JRadioButton rb2;
     private javax.swing.JRadioButton rb3;
+    private javax.swing.JButton search;
+    private javax.swing.JTextField searchtf;
     private javax.swing.JTextField servicetf;
     private javax.swing.JTextField stat;
     private javax.swing.JTable table;

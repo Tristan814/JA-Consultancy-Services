@@ -4,14 +4,29 @@
  */
 package EMPLOYEE;
 
+import static EMPLOYEE.ClientDeets.ipmidtf;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Henreizh Nathan
  */
 public class Scheduling extends javax.swing.JFrame {
+
+    Object idc;
     public Scheduling() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        clientid.setEditable(false);
     }
 
     /**
@@ -24,27 +39,51 @@ public class Scheduling extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        sched = new javax.swing.JTextField();
+        transtf = new javax.swing.JTextField();
+        clientid = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        totalamount = new javax.swing.JTextField();
+        payment = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        noofdays = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        duration1 = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        reporttf = new javax.swing.JTextField();
+        constf = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(680, 740));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(680, 740));
         jPanel1.setLayout(null);
-        jPanel1.add(jTextField1);
-        jTextField1.setBounds(360, 200, 250, 47);
-        jPanel1.add(jTextField2);
-        jTextField2.setBounds(60, 330, 250, 47);
-        jPanel1.add(jTextField3);
-        jTextField3.setBounds(60, 200, 250, 47);
+        jPanel1.add(sched);
+        sched.setBounds(400, 120, 250, 47);
+
+        transtf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transtfActionPerformed(evt);
+            }
+        });
+        jPanel1.add(transtf);
+        transtf.setBounds(10, 490, 250, 50);
+
+        clientid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clientidActionPerformed(evt);
+            }
+        });
+        jPanel1.add(clientid);
+        clientid.setBounds(10, 360, 250, 47);
 
         jButton1.setBackground(new java.awt.Color(51, 51, 51));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -56,25 +95,25 @@ public class Scheduling extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(30, 620, 181, 52);
+        jButton1.setBounds(320, 690, 160, 40);
 
         jLabel7.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel7.setText("PAYMENT:");
+        jLabel7.setText("SCHED ID");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(60, 175, 90, 18);
+        jLabel7.setBounds(470, 90, 90, 18);
 
         jLabel8.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel8.setText("NO. OF DAYS:");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(360, 175, 111, 18);
+        jLabel8.setBounds(460, 210, 111, 18);
 
         jLabel9.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel9.setText("DURATION:");
+        jLabel9.setText("TOTAL AMOUNT");
         jPanel1.add(jLabel9);
-        jLabel9.setBounds(60, 305, 110, 18);
+        jLabel9.setBounds(60, 210, 140, 18);
 
         jButton2.setBackground(new java.awt.Color(153, 0, 0));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -86,7 +125,76 @@ public class Scheduling extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(460, 620, 181, 52);
+        jButton2.setBounds(490, 690, 170, 40);
+
+        jLabel10.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel10.setText("CLIENT ID");
+        jPanel1.add(jLabel10);
+        jLabel10.setBounds(70, 340, 90, 18);
+        jPanel1.add(totalamount);
+        totalamount.setBounds(10, 240, 250, 47);
+        jPanel1.add(payment);
+        payment.setBounds(10, 120, 250, 47);
+
+        jLabel11.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel11.setText("PAYMENT ID");
+        jPanel1.add(jLabel11);
+        jLabel11.setBounds(70, 90, 140, 18);
+        jPanel1.add(noofdays);
+        noofdays.setBounds(400, 240, 250, 47);
+
+        jLabel12.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel12.setText("FOR TRANSACTION ID:");
+        jPanel1.add(jLabel12);
+        jLabel12.setBounds(40, 470, 190, 20);
+
+        jButton3.setText("Reset");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3);
+        jButton3.setBounds(190, 690, 120, 40);
+        jPanel1.add(duration1);
+        duration1.setBounds(400, 360, 250, 50);
+
+        jLabel13.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel13.setText("DURATION:");
+        jPanel1.add(jLabel13);
+        jLabel13.setBounds(470, 340, 110, 18);
+
+        jLabel14.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel14.setText("FOR REPORT ID:");
+        jPanel1.add(jLabel14);
+        jLabel14.setBounds(50, 590, 160, 18);
+
+        reporttf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reporttfActionPerformed(evt);
+            }
+        });
+        jPanel1.add(reporttf);
+        reporttf.setBounds(10, 610, 250, 50);
+
+        constf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                constfActionPerformed(evt);
+            }
+        });
+        jPanel1.add(constf);
+        constf.setBounds(400, 490, 250, 50);
+
+        jLabel15.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel15.setText("CONSULTANT ID:");
+        jPanel1.add(jLabel15);
+        jLabel15.setBounds(450, 470, 160, 18);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EMPLOYEE/scheduling bg.png"))); // NOI18N
         jPanel1.add(jLabel1);
@@ -112,8 +220,126 @@ public class Scheduling extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+ 
+ String client, pay, tot, sche, nod, dura, trans, cons, query1, query2, query3;
+
+       
+       try{
+           Class.forName("com.mysql.cj.jdbc.Driver");
+           
+         String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+         String user = "jaroot";
+         String pass = "";
+         
+         Connection con = DriverManager.getConnection(url,user,pass);
+         Statement st = con.createStatement();
+
+         if("".equals(clientid.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Client ID is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(payment.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Payment ID is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(totalamount.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Total Amount is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(sched.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Sched ID is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(noofdays.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Number of Days is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+
+         else if("".equals(transtf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Duration is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+
+         else{
+        
+
+ 
+       client = clientid.getText();
+       pay = payment.getText();
+       tot =  totalamount.getText();
+       sche =  sched.getText();
+       nod = noofdays.getText();
+       dura = transtf.getText();
+       trans = transtf.getText();
+       cons = constf.getText();
+       
+       query1 = "INSERT INTO payment_table (Payment_ID, Total_Amount, Client_ID)"
+               + "VALUES(?,?,?)";
+       //('"+pay+"','"+tot+"','"+client+"')
+       query2 = "INSERT INTO scheduling_id (Sched_ID, No_of_Days, Duration, Client_ID)"
+               + "VALUES(?,?,?,?)";
+       //('"+sche+"','"+nod+"','"+dura+"','"+client+"')
+        query3 = "INSERT INTO transaction_table (Trans_ID, Cons_ID, Client_ID, Payment_ID, Schedule_ID)"
+               + "VALUES(?,?,?,?,?)";
+       
+       
+       PreparedStatement preparedStatement1 = con.prepareStatement(query1);
+       preparedStatement1.setString(1,pay);
+       preparedStatement1.setString(2,tot);
+       preparedStatement1.setString(3,client);
+       
+       PreparedStatement preparedStatement2 = con.prepareStatement(query2);
+       preparedStatement2.setString(1,sche);
+       preparedStatement2.setString(2,nod);
+       preparedStatement2.setString(3,dura);
+       preparedStatement2.setString(4,client);
+       
+       PreparedStatement preparedStatement3 = con.prepareStatement(query3);
+       preparedStatement3.setString(1,trans);
+       preparedStatement3.setString(2,cons);
+       preparedStatement3.setString(3,client);
+       preparedStatement3.setString(4,pay);
+       preparedStatement3.setString(5,sche);
+       
+        preparedStatement1.executeUpdate();
+        preparedStatement2.executeUpdate();
+        preparedStatement3.executeUpdate();
+       
+//            st.executeUpdate(query1);
+//            st.executeUpdate(query2);
+            
+        JOptionPane.showMessageDialog(null, "Company Successfully Inquired", "Successed!", JOptionPane.OK_OPTION);
+        
+        new EmployeeDash().setVisible(true);
+        this.dispose();
+
+         }
+        
+       }catch (ClassNotFoundException ex){
+           Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE,null,ex);
+       //    System.out.println("Error" + ex.getMessage());
+       } catch (SQLException ex) {
+            Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+       
+       
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void clientidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientidActionPerformed
+
+    }//GEN-LAST:event_clientidActionPerformed
+
+    private void transtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transtfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_transtfActionPerformed
+
+    private void reporttfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporttfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_reporttfActionPerformed
+
+    private void constfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_constfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_constfActionPerformed
 
     /**
      * @param args the command line arguments
@@ -124,22 +350,7 @@ public class Scheduling extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Scheduling.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Scheduling.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Scheduling.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Scheduling.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+        
         //</editor-fold>
 
         /* Create and display the form */
@@ -151,15 +362,28 @@ public class Scheduling extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JTextField clientid;
+    private javax.swing.JTextField constf;
+    private javax.swing.JTextField duration1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField noofdays;
+    private javax.swing.JTextField payment;
+    private javax.swing.JTextField reporttf;
+    private javax.swing.JTextField sched;
+    private javax.swing.JTextField totalamount;
+    private javax.swing.JTextField transtf;
     // End of variables declaration//GEN-END:variables
 }

@@ -17,7 +17,9 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 
 /**
@@ -38,6 +40,24 @@ public class Add_Employee extends javax.swing.JFrame {
         initComponents();
         
         this.setLocationRelativeTo(null);
+        
+            String SUrl,Suser, Spass;
+    SUrl = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+    Suser = "root";
+    Spass = "";
+    String query = "SELECT * FROM employee_table";
+    
+    try{
+             con = DriverManager.getConnection(SUrl,Suser,Spass);
+             pst = con.prepareStatement(query);
+             rs = pst.executeQuery();
+             DefaultTableModel model = (DefaultTableModel)(emptable.getModel());    
+             while(rs.next()){
+                 model.addRow(new String[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9)});
+             }
+    }catch (Exception ex){
+        System.out.println("Error : " + ex.getMessage());
+    }
     }
 
     /**
@@ -81,6 +101,8 @@ public class Add_Employee extends javax.swing.JFrame {
         emptable = new javax.swing.JTable();
         updatebtn = new javax.swing.JButton();
         editbtn = new javax.swing.JButton();
+        searchtxt = new javax.swing.JTextField();
+        searchbtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -261,7 +283,7 @@ public class Add_Employee extends javax.swing.JFrame {
             }
         });
         jPanel2.add(day);
-        day.setBounds(510, 130, 44, 40);
+        day.setBounds(510, 130, 72, 40);
 
         month.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Month", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
         month.addActionListener(new java.awt.event.ActionListener() {
@@ -279,25 +301,41 @@ public class Add_Employee extends javax.swing.JFrame {
             }
         });
         jPanel2.add(backbtn);
-        backbtn.setBounds(20, 640, 55, 23);
+        backbtn.setBounds(20, 640, 72, 23);
 
         emptable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Employee ID", "Password", "Last Name", "First Name", "Age", "Address", "Birthdate", "No.", "Email"
+                "Employee ID", "Employee_LastName", "Employee_FirstName", "Cell No.", "Address", "Birthday", "Email", "Age", "Password"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         emptable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 emptableMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(emptable);
+        if (emptable.getColumnModel().getColumnCount() > 0) {
+            emptable.getColumnModel().getColumn(0).setResizable(false);
+            emptable.getColumnModel().getColumn(1).setResizable(false);
+            emptable.getColumnModel().getColumn(2).setResizable(false);
+            emptable.getColumnModel().getColumn(3).setResizable(false);
+            emptable.getColumnModel().getColumn(4).setResizable(false);
+            emptable.getColumnModel().getColumn(5).setResizable(false);
+            emptable.getColumnModel().getColumn(6).setResizable(false);
+            emptable.getColumnModel().getColumn(7).setResizable(false);
+            emptable.getColumnModel().getColumn(8).setResizable(false);
+        }
 
         jPanel2.add(jScrollPane1);
         jScrollPane1.setBounds(710, 120, 870, 510);
@@ -324,6 +362,28 @@ public class Add_Employee extends javax.swing.JFrame {
         });
         jPanel2.add(editbtn);
         editbtn.setBounds(90, 580, 130, 50);
+
+        searchtxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchtxtActionPerformed(evt);
+            }
+        });
+        searchtxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchtxtKeyReleased(evt);
+            }
+        });
+        jPanel2.add(searchtxt);
+        searchtxt.setBounds(800, 70, 220, 40);
+
+        searchbtn.setText("Search");
+        searchbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchbtnActionPerformed(evt);
+            }
+        });
+        jPanel2.add(searchbtn);
+        searchbtn.setBounds(1050, 70, 110, 40);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ADMIN/add emp bg.png"))); // NOI18N
         jPanel2.add(jLabel1);
@@ -432,10 +492,7 @@ try{
                "VALUES('"+eid+"','"+lname+"','"+fname+"','"+contact+"','"+eaddress+"','"+bday+"','"+mail+"','"+eage+"','"+Password+"' )";
        
 
-//      DefaultTableModel model = (DefaultTableModel) emptable.getModel();
-//        model.addRow(new Object[] {empID.getText(),lastname.getText(),firstname.getText(),emppass.getText(),cellno.getText(), address.getText(), dateofb.getText(),age.getText(),email.getText()});
-//        
-        
+     
        st.execute(query);
         DefaultTableModel model = (DefaultTableModel) emptable.getModel();
         model.addRow(new Object[] {empID.getText(),lastname.getText(),firstname.getText(),emppass.getText(),cellno.getText(), address.getText(), dateofb.getText(),age.getText(),email.getText()});
@@ -565,16 +622,16 @@ try{
     private void updatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatebtnActionPerformed
      
           try{
-    pst = con.prepareStatement("update employee_table set Employee_ID =?, Employee_LastName =?,Employee_FirstName =?,Cellphone_No =?,Address =?, Birthday =?, Email =?,Age =?,Password =? where Employee_ID=?");
-    pst.setString(1,empID.getText());
-    pst.setString(2,lastname.getText());
-    pst.setString(3,firstname.getText());
-    pst.setString(4,cellno.getText());
-    pst.setString(5,address.getText());
+    pst = con.prepareStatement("update employee_table set Employee_LastName =?,Employee_FirstName =?,Cellphone_No =?,Address =?, Birthday =?, Email =?,Age =?,Password =? where Employee_ID=?");
+    pst.setString(1,lastname.getText());
+    pst.setString(2,firstname.getText());
+    pst.setString(3,cellno.getText());
+    pst.setString(4,address.getText());
+    pst.setString(5,dateofb.getText());
     pst.setString(6,email.getText());
-    pst.setString(7,dateofb.getText());
-    pst.setString(8,age.getText());
-    pst.setString(9,emppass.getText());
+    pst.setString(7,age.getText());
+    pst.setString(8,emppass.getText());
+    pst.setString(9,empID.getText());
     
         
     int rowsAffected = pst.executeUpdate(); 
@@ -583,14 +640,14 @@ try{
         DefaultTableModel model = (DefaultTableModel) emptable.getModel();
         int selectedRowIndex = emptable.getSelectedRow();
         
-        model.setValueAt(lastname.getText(), selectedRowIndex, 0);
-        model.setValueAt(firstname.getText(), selectedRowIndex, 1);
-        model.setValueAt(age.getText(), selectedRowIndex, 2);
+        model.setValueAt(empID.getText(), selectedRowIndex, 0);
+        model.setValueAt(lastname.getText(), selectedRowIndex, 1);
+        model.setValueAt(firstname.getText(), selectedRowIndex, 2);
         model.setValueAt(cellno.getText(), selectedRowIndex, 3);
         model.setValueAt(address.getText(), selectedRowIndex, 4);
         model.setValueAt(dateofb.getText(), selectedRowIndex, 5);
         model.setValueAt(email.getText(), selectedRowIndex, 6);
-        model.setValueAt(empID.getText(), selectedRowIndex, 7);
+        model.setValueAt(age.getText(), selectedRowIndex, 7);
         model.setValueAt(emppass.getText(), selectedRowIndex, 8);
         
        JOptionPane.showMessageDialog(new JFrame(), "Updated Successfully", "Successed!", JOptionPane.OK_CANCEL_OPTION);
@@ -644,7 +701,7 @@ try{
          
          Connection con = DriverManager.getConnection(url,user,pass);
          Statement st = con.createStatement();
-         ResultSet res =st.executeQuery("select * from inquiry_and_proposal where IPM_ID ="+id);
+         ResultSet res =st.executeQuery("select * from employee_table where Employee_ID ="+id);
                         while(res.next()){
                             empID.setText(res.getString("Employee_ID"));
                             lastname.setText(res.getString("Employee_LastName"));
@@ -675,6 +732,29 @@ try{
         }
                 
     }//GEN-LAST:event_emptableMouseClicked
+
+    private void searchbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchbtnActionPerformed
+       
+        DefaultTableModel model = (DefaultTableModel) emptable.getModel();
+        TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
+        emptable.setRowSorter(obj);
+        obj.setRowFilter(RowFilter.regexFilter(searchtxt.getText()));
+
+//    DefaultTableModel model = (DefaultTableModel) emptable.getModel();
+//    TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
+//    tab
+    }//GEN-LAST:event_searchbtnActionPerformed
+
+    private void searchtxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchtxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchtxtActionPerformed
+
+    private void searchtxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchtxtKeyReleased
+        DefaultTableModel model = (DefaultTableModel) emptable.getModel();
+        TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
+        emptable.setRowSorter(obj);
+        obj.setRowFilter(RowFilter.regexFilter(searchtxt.getText()));
+    }//GEN-LAST:event_searchtxtKeyReleased
 
     /**
      * @param args the command line arguments
@@ -744,6 +824,8 @@ try{
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField lastname;
     private javax.swing.JComboBox<String> month;
+    private javax.swing.JButton searchbtn;
+    private javax.swing.JTextField searchtxt;
     private javax.swing.JButton updatebtn;
     private javax.swing.JComboBox<String> year;
     // End of variables declaration//GEN-END:variables

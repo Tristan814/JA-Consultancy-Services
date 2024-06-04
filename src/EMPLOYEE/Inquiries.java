@@ -15,9 +15,11 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
+import javax.swing.RowFilter;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 public class Inquiries extends javax.swing.JFrame {
 
@@ -26,11 +28,6 @@ public class Inquiries extends javax.swing.JFrame {
     PreparedStatement pst;
     ResultSet rs;
     int q, i, id, deleteItem;
-    
-//    Connection con1 ;
-//    PreparedStatement pst1;
-//    ResultSet rs1;
-    
     
     public Inquiries() {
         initComponents();
@@ -121,19 +118,18 @@ public class Inquiries extends javax.swing.JFrame {
 
         jButton3 = new javax.swing.JButton();
         btng = new javax.swing.ButtonGroup();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         companytf = new javax.swing.JTextField();
         stat = new javax.swing.JTextField();
-        ipmtf = new javax.swing.JTextField();
         inquirytf = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         save = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        next = new javax.swing.JButton();
         add = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -149,6 +145,11 @@ public class Inquiries extends javax.swing.JFrame {
         Delete = new javax.swing.JButton();
         searchtf = new javax.swing.JTextField();
         search = new javax.swing.JButton();
+        rb11 = new javax.swing.JRadioButton();
+        rb33 = new javax.swing.JRadioButton();
+        rb22 = new javax.swing.JRadioButton();
+        jLabel8 = new javax.swing.JLabel();
+        ipmtf = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
 
         jButton3.setBackground(new java.awt.Color(118, 8, 8));
@@ -192,20 +193,11 @@ public class Inquiries extends javax.swing.JFrame {
 
         companytf.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jPanel1.add(companytf);
-        companytf.setBounds(1010, 190, 250, 50);
+        companytf.setBounds(720, 250, 220, 50);
 
         stat.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jPanel1.add(stat);
-        stat.setBounds(1050, 430, 210, 50);
-
-        ipmtf.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        ipmtf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ipmtfActionPerformed(evt);
-            }
-        });
-        jPanel1.add(ipmtf);
-        ipmtf.setBounds(720, 190, 250, 50);
+        stat.setBounds(1100, 420, 170, 40);
 
         inquirytf.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         inquirytf.addActionListener(new java.awt.event.ActionListener() {
@@ -214,19 +206,13 @@ public class Inquiries extends javax.swing.JFrame {
             }
         });
         jPanel1.add(inquirytf);
-        inquirytf.setBounds(720, 420, 250, 40);
-
-        jLabel2.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("IPM ID:");
-        jPanel1.add(jLabel2);
-        jLabel2.setBounds(720, 160, 70, 18);
+        inquirytf.setBounds(720, 420, 220, 40);
 
         jLabel3.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Company Name:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(1010, 160, 130, 18);
+        jLabel3.setBounds(720, 220, 130, 18);
 
         jLabel4.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -238,7 +224,7 @@ public class Inquiries extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Status");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(1050, 370, 110, 18);
+        jLabel5.setBounds(1000, 380, 110, 18);
 
         save.setFont(new java.awt.Font("STZhongsong", 1, 16)); // NOI18N
         save.setText("Save");
@@ -251,14 +237,14 @@ public class Inquiries extends javax.swing.JFrame {
         jPanel1.add(save);
         save.setBounds(750, 540, 150, 40);
 
-        jButton1.setText("next");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        next.setText("next");
+        next.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                nextActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1);
-        jButton1.setBounds(1170, 690, 75, 23);
+        jPanel1.add(next);
+        next.setBounds(1170, 690, 75, 23);
 
         add.setBackground(new java.awt.Color(118, 8, 8));
         add.setFont(new java.awt.Font("STZhongsong", 1, 16)); // NOI18N
@@ -302,7 +288,7 @@ public class Inquiries extends javax.swing.JFrame {
             }
         });
         jPanel1.add(month);
-        month.setBounds(720, 360, 110, 40);
+        month.setBounds(710, 360, 100, 40);
 
         day.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Day", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
         day.addActionListener(new java.awt.event.ActionListener() {
@@ -311,7 +297,7 @@ public class Inquiries extends javax.swing.JFrame {
             }
         });
         jPanel1.add(day);
-        day.setBounds(838, 360, 72, 40);
+        day.setBounds(820, 360, 70, 40);
 
         year.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Year", "2018", "2019", "2020", "2021", "2022", "2023", "2024" }));
         year.addActionListener(new java.awt.event.ActionListener() {
@@ -320,10 +306,10 @@ public class Inquiries extends javax.swing.JFrame {
             }
         });
         jPanel1.add(year);
-        year.setBounds(918, 360, 90, 40);
+        year.setBounds(900, 360, 70, 40);
 
         jButton7.setFont(new java.awt.Font("STZhongsong", 1, 16)); // NOI18N
-        jButton7.setText("Reset");
+        jButton7.setText("Clear");
         jButton7.setAlignmentX(0.5F);
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -335,46 +321,46 @@ public class Inquiries extends javax.swing.JFrame {
 
         servicetf.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jPanel1.add(servicetf);
-        servicetf.setBounds(1050, 300, 210, 50);
+        servicetf.setBounds(1100, 260, 170, 40);
 
         jLabel7.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Service Type");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(1050, 270, 110, 18);
+        jLabel7.setBounds(1000, 210, 130, 40);
 
         rb1.setBackground(new java.awt.Color(48, 54, 66));
         rb1.setForeground(new java.awt.Color(255, 255, 255));
-        rb1.setText("Approved");
+        rb1.setText("Training");
         rb1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rb1ActionPerformed(evt);
             }
         });
         jPanel1.add(rb1);
-        rb1.setBounds(1030, 400, 90, 21);
+        rb1.setBounds(1000, 260, 90, 21);
 
         rb2.setBackground(new java.awt.Color(48, 54, 66));
         rb2.setForeground(new java.awt.Color(255, 255, 255));
-        rb2.setText("Declined");
+        rb2.setText("Consultancy");
         rb2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rb2ActionPerformed(evt);
             }
         });
         jPanel1.add(rb2);
-        rb2.setBounds(1120, 400, 80, 21);
+        rb2.setBounds(1000, 290, 100, 21);
 
         rb3.setBackground(new java.awt.Color(48, 54, 66));
         rb3.setForeground(new java.awt.Color(255, 255, 255));
-        rb3.setText("Pending");
+        rb3.setText("Audit");
         rb3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rb3ActionPerformed(evt);
             }
         });
         jPanel1.add(rb3);
-        rb3.setBounds(1200, 400, 80, 21);
+        rb3.setBounds(1000, 320, 80, 21);
 
         Delete.setFont(new java.awt.Font("STZhongsong", 1, 16)); // NOI18N
         Delete.setText("Delete");
@@ -386,6 +372,17 @@ public class Inquiries extends javax.swing.JFrame {
         });
         jPanel1.add(Delete);
         Delete.setBounds(1120, 540, 150, 40);
+
+        searchtf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchtfActionPerformed(evt);
+            }
+        });
+        searchtf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchtfKeyReleased(evt);
+            }
+        });
         jPanel1.add(searchtf);
         searchtf.setBounds(80, 110, 280, 50);
 
@@ -398,10 +395,58 @@ public class Inquiries extends javax.swing.JFrame {
         jPanel1.add(search);
         search.setBounds(370, 120, 140, 30);
 
+        rb11.setBackground(new java.awt.Color(48, 54, 66));
+        rb11.setForeground(new java.awt.Color(255, 255, 255));
+        rb11.setText("Approved");
+        rb11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rb11ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(rb11);
+        rb11.setBounds(1000, 410, 90, 21);
+
+        rb33.setBackground(new java.awt.Color(48, 54, 66));
+        rb33.setForeground(new java.awt.Color(255, 255, 255));
+        rb33.setText("Declined");
+        rb33.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rb33ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(rb33);
+        rb33.setBounds(1000, 470, 80, 21);
+
+        rb22.setBackground(new java.awt.Color(48, 54, 66));
+        rb22.setForeground(new java.awt.Color(255, 255, 255));
+        rb22.setText("Pending");
+        rb22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rb22ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(rb22);
+        rb22.setBounds(1000, 440, 80, 21);
+
+        jLabel8.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("IPM ID:");
+        jPanel1.add(jLabel8);
+        jLabel8.setBounds(720, 120, 70, 18);
+
+        ipmtf.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        ipmtf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ipmtfActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ipmtf);
+        ipmtf.setBounds(720, 150, 220, 50);
+
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EMPLOYEE/Inquiries BG.png"))); // NOI18N
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(10, 20, 1300, 800);
+        jLabel6.setBounds(0, 0, 1300, 800);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -422,15 +467,41 @@ public class Inquiries extends javax.swing.JFrame {
                             companytf.setEditable(true);
                             stat.setEditable(true);
                             inquirytf.setEditable(true);
-                            servicetf.setEditable(true);        // TODO add your handling code here:
+                            servicetf.setEditable(true); 
+                            ipmtf.setEditable(true);// TODO add your handling code here:
         
 
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new ClientDeets().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
+        ClientDeets cd = new ClientDeets();
+        
+                 if("".equals(ipmtf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "IPM ID is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(companytf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Company Name is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(stat.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Status is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(inquirytf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Inquiry Date is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(servicetf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Service Type is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }else{
+        cd.ipmidtf.setText(ipmtf.getText());
+        cd.statustf.setText(stat.getText());
+        cd.datetf.setText(inquirytf.getText());
+        cd.companyytf.setText(companytf.getText());
+        
+        JOptionPane.showConfirmDialog(new JFrame(), "Click YES to proceed", "Successed!", JOptionPane.YES_NO_OPTION);
+        
+        cd.setVisible(true);
+        this.dispose();  
+         }
+    }//GEN-LAST:event_nextActionPerformed
 
     private void dayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dayActionPerformed
       String a;
@@ -470,11 +541,13 @@ public class Inquiries extends javax.swing.JFrame {
         
         servicetf.setText("");
         inquirytf.setText("");
+        
+
 
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
- String ipm, cn, stats, inq, serv, query;
+ String ipm, cn, stats, inq, serv, query1;
        
        try{
            Class.forName("com.mysql.cj.jdbc.Driver");
@@ -484,7 +557,8 @@ public class Inquiries extends javax.swing.JFrame {
          String pass = "";
          
          Connection con = DriverManager.getConnection(url,user,pass);
-         Statement st = con.createStatement();
+         Statement st1 = con.createStatement();
+         Statement st2 = con.createStatement();
 
          if("".equals(ipmtf.getText())){
              JOptionPane.showMessageDialog(new JFrame(), "IPM ID is required", "Error", JOptionPane.ERROR_MESSAGE);
@@ -507,20 +581,21 @@ public class Inquiries extends javax.swing.JFrame {
        stats =  stat.getText();
        inq =  inquirytf.getText();
        serv = servicetf.getText();
-       query = "INSERT INTO inquiry_and_proposal(IPM_ID, Company_Name, Inquiry_Date, Service_Type, Status)"
+       
+
+       
+       query1 = "INSERT INTO inquiry_and_proposal(IPM_ID, Company_Name, Inquiry_Date, Service_Type, Status)"
                + "VALUES('"+ipm+"','"+cn+"','"+inq+"','"+serv+"','"+stats+"')";
          
+//       query2 = "INSERT INTO transaction_table (Trans_ID, Cons_ID, Client_ID, Payment_ID, Schedule_ID)"
+//               + "VALUES(?,'"+cons+"',?,?,?)";
        
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.addRow(new Object[] {ipmtf.getText(),companytf.getText(),inquirytf.getText(),servicetf.getText(),stat.getText()});
 
 
-       st.executeUpdate(query);
-       ipmtf.setText("");
-       companytf.setText("");
-       stat.setText("");
-       inquirytf.setText("");
-       servicetf.setText("");
+       st1.executeUpdate(query1);
+
        JOptionPane.showMessageDialog(new JFrame(), "Successfuly Registered", "Successed!", JOptionPane.OK_OPTION);
        con.close();
        
@@ -580,20 +655,20 @@ public class Inquiries extends javax.swing.JFrame {
 
     private void rb3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb3ActionPerformed
         if (rb3.isSelected()){
-        stat.setText(rb3.getText());
+        servicetf.setText(rb3.getText());
     }
     }//GEN-LAST:event_rb3ActionPerformed
 
     private void rb1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb1ActionPerformed
      
         if (rb1.isSelected()){
-        stat.setText(rb1.getText());
+        servicetf.setText(rb1.getText());
     }
     }//GEN-LAST:event_rb1ActionPerformed
 
     private void rb2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb2ActionPerformed
-        if (rb1.isSelected()){
-        stat.setText(rb1.getText());
+        if (rb2.isSelected()){
+        servicetf.setText(rb2.getText());
     }
     }//GEN-LAST:event_rb2ActionPerformed
 
@@ -606,6 +681,7 @@ public class Inquiries extends javax.swing.JFrame {
     pst.setString(3,servicetf.getText());
     pst.setString(4,stat.getText());
     pst.setString(5,ipmtf.getText());
+   
     
         
     int rowsAffected = pst.executeUpdate(); 
@@ -626,13 +702,7 @@ public class Inquiries extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(new JFrame(), "Update Failed", "Warning!", JOptionPane.ERROR_MESSAGE);
        con.close();
     }
-       
-               
-       ipmtf.setText("");
-       companytf.setText("");
-       stat.setText("");
-       inquirytf.setText("");
-       servicetf.setText("");
+
        
 } catch (SQLException ex) {
             Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE, null, ex);
@@ -659,13 +729,14 @@ public class Inquiries extends javax.swing.JFrame {
                             companytf.setText(res.getString("Company_Name"));
                             stat.setText(res.getString("Status"));
                             inquirytf.setText(res.getString("Inquiry_Date"));
-                             servicetf.setText(res.getString("Service_Type"));
+                            servicetf.setText(res.getString("Service_Type"));
                              
-                             ipmtf.setEditable(false);
+                             
                             companytf.setEditable(false);
                             stat.setEditable(false);
                             inquirytf.setEditable(false);
                             servicetf.setEditable(false);
+                            
                         }
                 
         }
@@ -692,13 +763,46 @@ try {
 }
     }//GEN-LAST:event_DeleteActionPerformed
 
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
+        table.setRowSorter(obj);
+        obj.setRowFilter(RowFilter.regexFilter(searchtf.getText()));
+        
+    }//GEN-LAST:event_searchActionPerformed
+
+    private void searchtfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchtfKeyReleased
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
+        table.setRowSorter(obj);
+        obj.setRowFilter(RowFilter.regexFilter(searchtf.getText()));
+    }//GEN-LAST:event_searchtfKeyReleased
+
+    private void searchtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchtfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchtfActionPerformed
+
+    private void rb11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb11ActionPerformed
+        if (rb11.isSelected()){
+        stat.setText(rb11.getText());
+    }
+    }//GEN-LAST:event_rb11ActionPerformed
+
+    private void rb33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb33ActionPerformed
+        if (rb33.isSelected()){
+        stat.setText(rb33.getText());
+        }
+    }//GEN-LAST:event_rb33ActionPerformed
+
+    private void rb22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb22ActionPerformed
+        if (rb22.isSelected()){
+        stat.setText(rb22.getText());
+        }
+    }//GEN-LAST:event_rb22ActionPerformed
+
     private void ipmtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ipmtfActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ipmtfActionPerformed
-
-    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-
-    }//GEN-LAST:event_searchActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -739,32 +843,36 @@ try {
     private javax.swing.JButton Delete;
     private javax.swing.JButton add;
     private javax.swing.ButtonGroup btng;
-    private javax.swing.JTextField companytf;
+    private javax.swing.ButtonGroup buttonGroup1;
+    public static javax.swing.JTextField companytf;
     private javax.swing.JComboBox<String> day;
-    private javax.swing.JTextField inquirytf;
-    private javax.swing.JTextField ipmtf;
-    private javax.swing.JButton jButton1;
+    public static javax.swing.JTextField inquirytf;
+    public static javax.swing.JTextField ipmtf;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> month;
+    public static javax.swing.JButton next;
     private javax.swing.JRadioButton rb1;
+    private javax.swing.JRadioButton rb11;
     private javax.swing.JRadioButton rb2;
+    private javax.swing.JRadioButton rb22;
     private javax.swing.JRadioButton rb3;
+    private javax.swing.JRadioButton rb33;
     private javax.swing.JButton save;
     private javax.swing.JButton search;
     private javax.swing.JTextField searchtf;
-    private javax.swing.JTextField servicetf;
-    private javax.swing.JTextField stat;
+    public static javax.swing.JTextField servicetf;
+    public static javax.swing.JTextField stat;
     private javax.swing.JTable table;
     private javax.swing.JComboBox<String> year;
     // End of variables declaration//GEN-END:variables

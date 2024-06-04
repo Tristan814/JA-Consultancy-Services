@@ -16,7 +16,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -81,6 +83,8 @@ public class Consultants extends javax.swing.JFrame {
         edit = new javax.swing.JButton();
         reset = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        searchtf = new javax.swing.JTextField();
+        searchbtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -115,7 +119,7 @@ public class Consultants extends javax.swing.JFrame {
             }
         });
         jPanel2.add(emailtf);
-        emailtf.setBounds(800, 260, 190, 40);
+        emailtf.setBounds(800, 350, 190, 40);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Contact Number");
@@ -125,7 +129,7 @@ public class Consultants extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Email");
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(800, 240, 60, 16);
+        jLabel4.setBounds(800, 330, 60, 16);
 
         firstntf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         firstntf.addActionListener(new java.awt.event.ActionListener() {
@@ -134,7 +138,7 @@ public class Consultants extends javax.swing.JFrame {
             }
         });
         jPanel2.add(firstntf);
-        firstntf.setBounds(800, 350, 190, 40);
+        firstntf.setBounds(800, 260, 190, 40);
 
         lastntf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lastntf.addActionListener(new java.awt.event.ActionListener() {
@@ -158,13 +162,10 @@ public class Consultants extends javax.swing.JFrame {
         table.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "CONSULTANT ID", "LAST NAME", "FIRST NAME", "EMAIL", "CONTACT NO."
+                "CONSULTANT ID", "LAST NAME", "FIRST NAME", "CONTACT NO.", "EMAIL"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -190,7 +191,7 @@ public class Consultants extends javax.swing.JFrame {
         }
 
         jPanel2.add(jScrollPane2);
-        jScrollPane2.setBounds(30, 130, 720, 470);
+        jScrollPane2.setBounds(30, 140, 720, 470);
 
         contactnotf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         contactnotf.addActionListener(new java.awt.event.ActionListener() {
@@ -204,7 +205,7 @@ public class Consultants extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("First Name");
         jPanel2.add(jLabel6);
-        jLabel6.setBounds(800, 330, 80, 20);
+        jLabel6.setBounds(800, 240, 80, 20);
 
         add.setBackground(new java.awt.Color(153, 0, 0));
         add.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -249,9 +250,28 @@ public class Consultants extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jButton2);
-        jButton2.setBounds(30, 620, 110, 30);
+        jButton2.setBounds(30, 630, 110, 30);
+
+        searchtf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchtfKeyReleased(evt);
+            }
+        });
+        jPanel2.add(searchtf);
+        searchtf.setBounds(220, 80, 220, 40);
+
+        searchbtn.setText("Search");
+        searchbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchbtnActionPerformed(evt);
+            }
+        });
+        jPanel2.add(searchbtn);
+        searchbtn.setBounds(450, 80, 80, 40);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ADMIN/Consultant bg.png"))); // NOI18N
         jPanel2.add(jLabel1);
-        jLabel1.setBounds(0, 0, 0, 670);
+        jLabel1.setBounds(0, 0, 1300, 670);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -287,11 +307,11 @@ public class Consultants extends javax.swing.JFrame {
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
     try{
     pst = con.prepareStatement("update consultant_table set Last_Name =?, First_Name =?, Contact_No =?, Email =? where Cons_ID=?");
-    pst.setString(1,constf.getText());
-    pst.setString(2,lastntf.getText());
-    pst.setString(3,firstntf.getText());
-    pst.setString(4,contactnotf.getText());
-    pst.setString(5,emailtf.getText());
+    pst.setString(1,lastntf.getText());
+    pst.setString(2,firstntf.getText());
+    pst.setString(3,contactnotf.getText());
+    pst.setString(4,emailtf.getText());
+    pst.setString(5,constf.getText());
     
         
     int rowsAffected = pst.executeUpdate(); 
@@ -333,7 +353,7 @@ public class Consultants extends javax.swing.JFrame {
     }//GEN-LAST:event_contactnotfActionPerformed
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
-String ipm, cn, stats, inq, serv, query;
+    String ipm, cn, stats, inq, serv, query;
        
        try{
            Class.forName("com.mysql.cj.jdbc.Driver");
@@ -448,6 +468,20 @@ String ipm, cn, stats, inq, serv, query;
         }
     }//GEN-LAST:event_tableMouseClicked
 
+    private void searchbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchbtnActionPerformed
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
+        table.setRowSorter(obj);
+        obj.setRowFilter(RowFilter.regexFilter(searchtf.getText()));
+    }//GEN-LAST:event_searchbtnActionPerformed
+
+    private void searchtfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchtfKeyReleased
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
+        table.setRowSorter(obj);
+        obj.setRowFilter(RowFilter.regexFilter(searchtf.getText()));
+    }//GEN-LAST:event_searchtfKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -503,6 +537,8 @@ String ipm, cn, stats, inq, serv, query;
     private javax.swing.JTextField lastntf;
     private javax.swing.JButton reset;
     private javax.swing.JButton save;
+    private javax.swing.JButton searchbtn;
+    private javax.swing.JTextField searchtf;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

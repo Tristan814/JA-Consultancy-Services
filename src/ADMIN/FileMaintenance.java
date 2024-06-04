@@ -21,6 +21,7 @@ public class FileMaintenance extends javax.swing.JFrame {
         schedulingbtn = new javax.swing.JButton();
         standardsbtn = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        standardsbtn1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -42,7 +43,7 @@ public class FileMaintenance extends javax.swing.JFrame {
 
         reportbtn.setBackground(new java.awt.Color(255, 153, 153));
         reportbtn.setFont(new java.awt.Font("STZhongsong", 1, 24)); // NOI18N
-        reportbtn.setText("Reports");
+        reportbtn.setText("Records");
         reportbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 reportbtnActionPerformed(evt);
@@ -95,16 +96,16 @@ public class FileMaintenance extends javax.swing.JFrame {
         jPanel3.add(schedulingbtn);
         schedulingbtn.setBounds(520, 290, 343, 93);
 
-        standardsbtn.setBackground(new java.awt.Color(153, 204, 255));
+        standardsbtn.setBackground(new java.awt.Color(102, 255, 204));
         standardsbtn.setFont(new java.awt.Font("STZhongsong", 1, 24)); // NOI18N
-        standardsbtn.setText("System Standards");
+        standardsbtn.setText("Reports");
         standardsbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 standardsbtnActionPerformed(evt);
             }
         });
         jPanel3.add(standardsbtn);
-        standardsbtn.setBounds(520, 440, 343, 93);
+        standardsbtn.setBounds(520, 580, 343, 93);
 
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -114,6 +115,17 @@ public class FileMaintenance extends javax.swing.JFrame {
         });
         jPanel3.add(jButton1);
         jButton1.setBounds(20, 720, 72, 23);
+
+        standardsbtn1.setBackground(new java.awt.Color(153, 204, 255));
+        standardsbtn1.setFont(new java.awt.Font("STZhongsong", 1, 24)); // NOI18N
+        standardsbtn1.setText("System Standards");
+        standardsbtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                standardsbtn1ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(standardsbtn1);
+        standardsbtn1.setBounds(520, 440, 343, 93);
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ADMIN/FileMaintenance bg.png"))); // NOI18N
         jPanel3.add(jLabel5);
@@ -135,7 +147,7 @@ public class FileMaintenance extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void standardsbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_standardsbtnActionPerformed
-        new System_Standards().setVisible(true);
+        new Reports().setVisible(true);
         dispose();
     }//GEN-LAST:event_standardsbtnActionPerformed
 
@@ -155,7 +167,7 @@ public class FileMaintenance extends javax.swing.JFrame {
     }//GEN-LAST:event_paymentbtnActionPerformed
 
     private void reportbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportbtnActionPerformed
-        new Reports().setVisible(true);
+        new Records().setVisible(true);
         dispose();
     }//GEN-LAST:event_reportbtnActionPerformed
 
@@ -173,6 +185,11 @@ public class FileMaintenance extends javax.swing.JFrame {
         new AdminDash().setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void standardsbtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_standardsbtn1ActionPerformed
+        new System_Standards().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_standardsbtn1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -217,6 +234,7 @@ public class FileMaintenance extends javax.swing.JFrame {
     private javax.swing.JButton reportbtn;
     private javax.swing.JButton schedulingbtn;
     private javax.swing.JButton standardsbtn;
+    private javax.swing.JButton standardsbtn1;
     private javax.swing.JButton transactionbtn;
     // End of variables declaration//GEN-END:variables
 }

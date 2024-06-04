@@ -1,6 +1,18 @@
 package EMPLOYEE;
 
 import ADMIN.*;
+import static EMPLOYEE.Inquiries.companytf;
+import static EMPLOYEE.Inquiries.inquirytf;
+import static EMPLOYEE.Inquiries.servicetf;
+import static EMPLOYEE.Inquiries.stat;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class ClientDeets extends javax.swing.JFrame {
 
@@ -8,6 +20,11 @@ public class ClientDeets extends javax.swing.JFrame {
     public ClientDeets() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        ipmidtf.setEditable(false);
+        statustf.setEditable(false);
+        datetf.setEditable(false);
+        companytf.setEditable(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -15,20 +32,20 @@ public class ClientDeets extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        addresstf = new javax.swing.JTextField();
+        emailtf = new javax.swing.JTextField();
+        statustf = new javax.swing.JTextField();
+        contactnotf = new javax.swing.JTextField();
         back = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
+        clienidtf = new javax.swing.JTextField();
+        datetf = new javax.swing.JTextField();
+        companyytf = new javax.swing.JTextField();
+        ipmidtf = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -36,19 +53,18 @@ public class ClientDeets extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1300, 800));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
-        jPanel1.add(jTextField1);
-        jTextField1.setBounds(340, 390, 250, 40);
-        jPanel1.add(jTextField2);
-        jTextField2.setBounds(340, 500, 250, 40);
-        jPanel1.add(jTextField3);
-        jTextField3.setBounds(340, 160, 250, 40);
-        jPanel1.add(jTextField4);
-        jTextField4.setBounds(50, 500, 250, 40);
+        jPanel1.add(addresstf);
+        addresstf.setBounds(340, 390, 250, 40);
+        jPanel1.add(emailtf);
+        emailtf.setBounds(340, 500, 250, 40);
+        jPanel1.add(statustf);
+        statustf.setBounds(340, 160, 250, 40);
+        jPanel1.add(contactnotf);
+        contactnotf.setBounds(50, 500, 250, 40);
 
         back.setText("Back");
         back.addActionListener(new java.awt.event.ActionListener() {
@@ -91,14 +107,20 @@ public class ClientDeets extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1);
         jButton1.setBounds(485, 650, 100, 40);
-        jPanel1.add(jTextField5);
-        jTextField5.setBounds(50, 390, 250, 40);
-        jPanel1.add(jTextField6);
-        jTextField6.setBounds(50, 270, 250, 40);
-        jPanel1.add(jTextField7);
-        jTextField7.setBounds(340, 270, 250, 40);
-        jPanel1.add(jTextField8);
-        jTextField8.setBounds(50, 160, 250, 40);
+        jPanel1.add(clienidtf);
+        clienidtf.setBounds(50, 390, 250, 40);
+        jPanel1.add(datetf);
+        datetf.setBounds(50, 270, 250, 40);
+        jPanel1.add(companyytf);
+        companyytf.setBounds(340, 270, 250, 40);
+
+        ipmidtf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ipmidtfActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ipmidtf);
+        ipmidtf.setBounds(50, 160, 250, 40);
 
         jLabel6.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -155,9 +177,72 @@ public class ClientDeets extends javax.swing.JFrame {
     }//GEN-LAST:event_backActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new Scheduling().setVisible(true);
-        dispose();
+ String ipm, cid, contactno, email, address, query;
+ Scheduling cd = new Scheduling();
+       
+       try{
+           Class.forName("com.mysql.cj.jdbc.Driver");
+           
+         String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+         String user = "jaroot";
+         String pass = "";
+         
+         Connection con = DriverManager.getConnection(url,user,pass);
+         Statement st = con.createStatement();
+
+         if("".equals(clienidtf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Client ID is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(addresstf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Address is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(contactnotf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Contact Number is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(emailtf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Email Date is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+
+         else{
+        
+        cd.clientid.setText(clienidtf.getText());
+ 
+       ipm = ipmidtf.getText();
+       cid = clienidtf.getText();
+       contactno =  contactnotf.getText();
+       email =  emailtf.getText();
+       address = addresstf.getText();
+       query = "INSERT INTO client_table (Client_ID, IPM_ID, Contact_No, Email, Address)"
+               + "VALUES('"+cid+"','"+ipm+"','"+contactno+"','"+email+"','"+address+"')";
+         
+            st.executeUpdate(query);
+        JOptionPane.showConfirmDialog(new JFrame(), "Click YES to proceed", "Successed!", JOptionPane.YES_NO_OPTION);
+        
+        cd.setVisible(true);
+        this.dispose();  
+
+         }
+        
+       }catch (ClassNotFoundException ex){
+           Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE,null,ex);
+       //    System.out.println("Error" + ex.getMessage());
+       } catch (SQLException ex) {
+            Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+ 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void ipmidtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ipmidtfActionPerformed
+      //  Inquiries.ipmtf.getText();
+                
+//       ipm = ipmtf.getText();
+//       cn = companytf.getText();
+//       stats =  stat.getText();
+//       inq =  inquirytf.getText();
+//       serv = servicetf.getText();
+    }//GEN-LAST:event_ipmidtfActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -199,7 +284,14 @@ public class ClientDeets extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField addresstf;
     private javax.swing.JButton back;
+    public javax.swing.JTextField clienidtf;
+    public static javax.swing.JTextField companyytf;
+    private javax.swing.JTextField contactnotf;
+    public static javax.swing.JTextField datetf;
+    private javax.swing.JTextField emailtf;
+    public static javax.swing.JTextField ipmidtf;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -211,13 +303,6 @@ public class ClientDeets extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
+    public static javax.swing.JTextField statustf;
     // End of variables declaration//GEN-END:variables
 }

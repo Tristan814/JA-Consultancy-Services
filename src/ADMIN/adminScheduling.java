@@ -5,6 +5,14 @@
  */
 package ADMIN;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author Admin
@@ -15,6 +23,29 @@ public class adminScheduling extends javax.swing.JFrame {
         initComponents();
         
         this.setLocationRelativeTo(null);
+    Connection con;
+    PreparedStatement pst;
+    ResultSet rs;
+    int q, i, id, deleteItem;
+    
+            String SUrl,Suser, Spass;
+    SUrl = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+    Suser = "root";
+    Spass = "";
+    String query = "SELECT * FROM scheduling_id";
+    
+    try{
+             con = DriverManager.getConnection(SUrl,Suser,Spass);
+             pst = con.prepareStatement(query);
+             rs = pst.executeQuery();
+             DefaultTableModel model = (DefaultTableModel)(tablee.getModel());    
+             while(rs.next()){
+                 model.addRow(new String[]{rs.getString(1), rs.getString(2), rs.getString(3)});
+             }
+    }catch (Exception ex){
+        System.out.println("Error : " + ex.getMessage());
+    }
+    
     }
 
     /**
@@ -28,7 +59,7 @@ public class adminScheduling extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tablee = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
@@ -38,6 +69,8 @@ public class adminScheduling extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        searchtf = new javax.swing.JTextField();
+        search = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -45,21 +78,18 @@ public class adminScheduling extends javax.swing.JFrame {
 
         jPanel2.setLayout(null);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tablee.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Transaction ID", "No. of Days", "Duration"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tablee);
 
         jPanel2.add(jScrollPane2);
-        jScrollPane2.setBounds(460, 110, 680, 510);
+        jScrollPane2.setBounds(450, 180, 690, 460);
 
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -128,6 +158,28 @@ public class adminScheduling extends javax.swing.JFrame {
         jPanel2.add(jLabel4);
         jLabel4.setBounds(170, 160, 130, 25);
 
+        searchtf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchtfActionPerformed(evt);
+            }
+        });
+        searchtf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchtfKeyReleased(evt);
+            }
+        });
+        jPanel2.add(searchtf);
+        searchtf.setBounds(540, 100, 300, 40);
+
+        search.setText("Search");
+        search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchActionPerformed(evt);
+            }
+        });
+        jPanel2.add(search);
+        search.setBounds(850, 100, 150, 40);
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ADMIN/Schedulingbg.png"))); // NOI18N
         jPanel2.add(jLabel1);
         jLabel1.setBounds(0, 0, 1200, 700);
@@ -163,6 +215,24 @@ public class adminScheduling extends javax.swing.JFrame {
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void searchtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchtfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchtfActionPerformed
+
+    private void searchtfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchtfKeyReleased
+        DefaultTableModel model = (DefaultTableModel) tablee.getModel();
+        TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
+        tablee.setRowSorter(obj);
+        obj.setRowFilter(RowFilter.regexFilter(searchtf.getText()));
+    }//GEN-LAST:event_searchtfKeyReleased
+
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+        DefaultTableModel model = (DefaultTableModel) tablee.getModel();
+        TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
+        tablee.setRowSorter(obj);
+        obj.setRowFilter(RowFilter.regexFilter(searchtf.getText()));
+    }//GEN-LAST:event_searchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,9 +282,11 @@ public class adminScheduling extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JButton search;
+    private javax.swing.JTextField searchtf;
+    private javax.swing.JTable tablee;
     // End of variables declaration//GEN-END:variables
 }

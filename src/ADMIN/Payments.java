@@ -5,16 +5,57 @@
  */
 package ADMIN;
 
+import static EMPLOYEE.Inquiries.companytf;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showMessageDialog;
+import javax.swing.RowFilter;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author Admin
  */
 public class Payments extends javax.swing.JFrame {
+    
 
     public Payments() {
         initComponents();
-        
-        this.setLocationRelativeTo(null);
+  
+    Connection con;
+    PreparedStatement pst;
+    ResultSet rs;
+   
+    
+    
+            String SUrl,Suser, Spass;
+    SUrl = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+    Suser = "root";
+    Spass = "";
+    String query = "SELECT p.*, iap.company_name FROM payment_table p\n" +
+"INNER JOIN client_table c ON p.client_id = c.client_id\n" +
+"INNER JOIN inquiry_and_proposal iap ON c.IPM_ID = iap.IPM_ID;";
+    //String query = "SELECT * FROM payment_table WHERE client_id" + "SELECT company_name FROM inquiry_and_proposal WHERE IPM_ID IN SELECT IPM_ID FROM client_table";
+           // + ""(SELECT client_id FROM client_table WHERE IPM_ID = (SELECT IPM_ID FROM inquiry_and_proposal WHERE Company_Name)" ;
+    
+    try{
+             con = DriverManager.getConnection(SUrl,Suser,Spass);
+             pst = con.prepareStatement(query);
+             rs = pst.executeQuery();
+             DefaultTableModel model = (DefaultTableModel)(table.getModel());    
+             while(rs.next()){
+                 model.addRow(new String[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)});
+             }
+    }catch (Exception ex){
+        System.out.println("Error : " + ex.getMessage());
+    }
     }
 
     /**
@@ -28,16 +69,22 @@ public class Payments extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        table = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        companyntf = new javax.swing.JTextField();
+        delete = new javax.swing.JButton();
+        edit = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        totalamounttf = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        clienttf = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        clear = new javax.swing.JButton();
+        save = new javax.swing.JButton();
+        searchtf = new javax.swing.JTextField();
+        search = new javax.swing.JButton();
+        paymenttf = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -45,21 +92,37 @@ public class Payments extends javax.swing.JFrame {
 
         jPanel2.setLayout(null);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Client ID", "Company Name", "Total Payment"
+                "Payment_ID", "Total_Amount", "Client_ID", "Company_Name"
             }
-        ));
-        jScrollPane2.setViewportView(jTable2);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(table);
+        if (table.getColumnModel().getColumnCount() > 0) {
+            table.getColumnModel().getColumn(0).setResizable(false);
+            table.getColumnModel().getColumn(1).setResizable(false);
+            table.getColumnModel().getColumn(2).setResizable(false);
+            table.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         jPanel2.add(jScrollPane2);
-        jScrollPane2.setBounds(30, 120, 680, 510);
+        jScrollPane2.setBounds(20, 140, 680, 510);
 
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -68,61 +131,124 @@ public class Payments extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jButton1);
-        jButton1.setBounds(30, 650, 80, 30);
+        jButton1.setBounds(20, 660, 80, 30);
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        companyntf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        companyntf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                companyntfActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField1);
-        jTextField1.setBounds(960, 180, 210, 40);
+        jPanel2.add(companyntf);
+        companyntf.setBounds(730, 220, 210, 40);
 
-        jButton2.setBackground(new java.awt.Color(204, 204, 204));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setText("Delete");
-        jPanel2.add(jButton2);
-        jButton2.setBounds(1010, 540, 110, 40);
+        delete.setBackground(new java.awt.Color(204, 204, 204));
+        delete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        delete.setText("Delete");
+        jPanel2.add(delete);
+        delete.setBounds(990, 540, 110, 40);
 
-        jButton3.setBackground(new java.awt.Color(255, 204, 51));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setText("Update");
-        jPanel2.add(jButton3);
-        jButton3.setBounds(800, 540, 110, 40);
+        edit.setBackground(new java.awt.Color(255, 204, 51));
+        edit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        edit.setText("Edit");
+        edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editActionPerformed(evt);
+            }
+        });
+        jPanel2.add(edit);
+        edit.setBounds(800, 480, 110, 40);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Company Name");
         jPanel2.add(jLabel2);
-        jLabel2.setBounds(960, 150, 150, 25);
+        jLabel2.setBounds(740, 180, 150, 25);
 
-        jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        totalamounttf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        totalamounttf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                totalamounttfActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField3);
-        jTextField3.setBounds(850, 330, 210, 40);
+        jPanel2.add(totalamounttf);
+        totalamounttf.setBounds(970, 340, 210, 40);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setText("Payment");
+        jLabel3.setText("Total Amount");
         jPanel2.add(jLabel3);
-        jLabel3.setBounds(910, 300, 80, 25);
+        jLabel3.setBounds(980, 300, 140, 25);
 
-        jTextField4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        clienttf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        clienttf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                clienttfActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField4);
-        jTextField4.setBounds(730, 180, 210, 40);
+        jPanel2.add(clienttf);
+        clienttf.setBounds(970, 220, 210, 40);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setText("Client ID");
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(730, 150, 130, 25);
+        jLabel4.setBounds(970, 180, 130, 25);
+
+        clear.setBackground(new java.awt.Color(255, 204, 51));
+        clear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        clear.setText("Clear");
+        clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearActionPerformed(evt);
+            }
+        });
+        jPanel2.add(clear);
+        clear.setBounds(990, 480, 110, 40);
+
+        save.setBackground(new java.awt.Color(255, 204, 51));
+        save.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        save.setText("Save");
+        save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveActionPerformed(evt);
+            }
+        });
+        jPanel2.add(save);
+        save.setBounds(800, 540, 110, 40);
+
+        searchtf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchtfActionPerformed(evt);
+            }
+        });
+        searchtf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchtfKeyReleased(evt);
+            }
+        });
+        jPanel2.add(searchtf);
+        searchtf.setBounds(90, 90, 270, 30);
+
+        search.setText("Search");
+        search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchActionPerformed(evt);
+            }
+        });
+        jPanel2.add(search);
+        search.setBounds(390, 90, 140, 30);
+
+        paymenttf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        paymenttf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                paymenttfActionPerformed(evt);
+            }
+        });
+        jPanel2.add(paymenttf);
+        paymenttf.setBounds(730, 340, 210, 40);
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel5.setText("Payment ID");
+        jPanel2.add(jLabel5);
+        jLabel5.setBounds(730, 300, 130, 25);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ADMIN/payments bg.png"))); // NOI18N
         jPanel2.add(jLabel1);
@@ -148,17 +274,85 @@ public class Payments extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void companyntfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_companyntfActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_companyntfActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void totalamounttfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalamounttfActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_totalamounttfActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void clienttfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienttfActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_clienttfActionPerformed
+
+    private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saveActionPerformed
+
+    private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
+
+    }//GEN-LAST:event_editActionPerformed
+
+    private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_clearActionPerformed
+
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+
+//      int id = Integer.parseInt(table.getValueAt(table.getSelectedRow(),0).toString());
+//      
+//    
+//        try{
+//               Class.forName("com.mysql.cj.jdbc.Driver");
+//           
+//         String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+//         String user = "jaroot";
+//         String pass = "";
+//         
+//         Connection con = DriverManager.getConnection(url,user,pass);
+//         Statement st = con.createStatement();
+//         ResultSet res =st.executeQuery("select * from payment_table where Payment_ID ="+id +"INNER JOIN client_table c ON p.client_id = c.client_id" +"INNER JOIN inquiry_and_proposal iap ON c.IPM_ID = iap.IPM_ID;");
+//                        while(res.next()){
+//                            companyntf.setText(res.getString("Payment_ID"));
+//                            clienttf.setText(res.getString("Total_Amount"));
+//                            paymenttf.setText(res.getString("Client_ID"));
+//                            totalamounttf.setText(res.getString("Company_Name"));
+//                             
+//                             companyntf.setEditable(false);
+//                             clienttf.setEditable(false);
+//                             paymenttf.setEditable(false);
+//                             totalamounttf.setEditable(false);
+//
+//                        }
+//                        }
+//        catch(Exception e){
+//            e.printStackTrace();
+//        }
+    }//GEN-LAST:event_tableMouseClicked
+
+    private void searchtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchtfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchtfActionPerformed
+
+    private void searchtfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchtfKeyReleased
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
+        table.setRowSorter(obj);
+        obj.setRowFilter(RowFilter.regexFilter(searchtf.getText()));
+    }//GEN-LAST:event_searchtfKeyReleased
+
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
+        table.setRowSorter(obj);
+        obj.setRowFilter(RowFilter.regexFilter(searchtf.getText()));
+
+    }//GEN-LAST:event_searchActionPerformed
+
+    private void paymenttfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymenttfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_paymenttfActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,18 +390,24 @@ public class Payments extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton clear;
+    private javax.swing.JTextField clienttf;
+    private javax.swing.JTextField companyntf;
+    private javax.swing.JButton delete;
+    private javax.swing.JButton edit;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField paymenttf;
+    private javax.swing.JButton save;
+    private javax.swing.JButton search;
+    private javax.swing.JTextField searchtf;
+    private javax.swing.JTable table;
+    private javax.swing.JTextField totalamounttf;
     // End of variables declaration//GEN-END:variables
 }
