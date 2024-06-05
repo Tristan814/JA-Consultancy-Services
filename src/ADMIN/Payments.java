@@ -122,7 +122,7 @@ public class Payments extends javax.swing.JFrame {
         }
 
         jPanel2.add(jScrollPane2);
-        jScrollPane2.setBounds(20, 140, 680, 510);
+        jScrollPane2.setBounds(20, 170, 680, 480);
 
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -140,16 +140,17 @@ public class Payments extends javax.swing.JFrame {
             }
         });
         jPanel2.add(companyntf);
-        companyntf.setBounds(730, 220, 210, 40);
+        companyntf.setBounds(730, 180, 200, 40);
 
-        delete.setBackground(new java.awt.Color(204, 204, 204));
+        delete.setBackground(new java.awt.Color(255, 204, 204));
         delete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         delete.setText("Delete");
         jPanel2.add(delete);
-        delete.setBounds(990, 540, 110, 40);
+        delete.setBounds(890, 560, 110, 40);
 
-        edit.setBackground(new java.awt.Color(255, 204, 51));
+        edit.setBackground(new java.awt.Color(153, 0, 0));
         edit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        edit.setForeground(new java.awt.Color(255, 255, 255));
         edit.setText("Edit");
         edit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,12 +158,12 @@ public class Payments extends javax.swing.JFrame {
             }
         });
         jPanel2.add(edit);
-        edit.setBounds(800, 480, 110, 40);
+        edit.setBounds(740, 480, 110, 40);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setText("Company Name");
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        jLabel2.setText("Company Name:");
         jPanel2.add(jLabel2);
-        jLabel2.setBounds(740, 180, 150, 25);
+        jLabel2.setBounds(730, 140, 150, 25);
 
         totalamounttf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         totalamounttf.addActionListener(new java.awt.event.ActionListener() {
@@ -171,12 +172,12 @@ public class Payments extends javax.swing.JFrame {
             }
         });
         jPanel2.add(totalamounttf);
-        totalamounttf.setBounds(970, 340, 210, 40);
+        totalamounttf.setBounds(970, 310, 200, 40);
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setText("Total Amount");
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        jLabel3.setText("Total Amount:");
         jPanel2.add(jLabel3);
-        jLabel3.setBounds(980, 300, 140, 25);
+        jLabel3.setBounds(970, 270, 140, 25);
 
         clienttf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         clienttf.addActionListener(new java.awt.event.ActionListener() {
@@ -185,14 +186,14 @@ public class Payments extends javax.swing.JFrame {
             }
         });
         jPanel2.add(clienttf);
-        clienttf.setBounds(970, 220, 210, 40);
+        clienttf.setBounds(970, 180, 200, 40);
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel4.setText("Client ID");
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        jLabel4.setText("Client ID:");
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(970, 180, 130, 25);
+        jLabel4.setBounds(970, 140, 130, 25);
 
-        clear.setBackground(new java.awt.Color(255, 204, 51));
+        clear.setBackground(new java.awt.Color(204, 204, 204));
         clear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         clear.setText("Clear");
         clear.addActionListener(new java.awt.event.ActionListener() {
@@ -201,10 +202,11 @@ public class Payments extends javax.swing.JFrame {
             }
         });
         jPanel2.add(clear);
-        clear.setBounds(990, 480, 110, 40);
+        clear.setBounds(1040, 480, 110, 40);
 
-        save.setBackground(new java.awt.Color(255, 204, 51));
+        save.setBackground(new java.awt.Color(0, 153, 102));
         save.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        save.setForeground(new java.awt.Color(255, 255, 255));
         save.setText("Save");
         save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -212,7 +214,7 @@ public class Payments extends javax.swing.JFrame {
             }
         });
         jPanel2.add(save);
-        save.setBounds(800, 540, 110, 40);
+        save.setBounds(890, 480, 110, 40);
 
         searchtf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -225,8 +227,11 @@ public class Payments extends javax.swing.JFrame {
             }
         });
         jPanel2.add(searchtf);
-        searchtf.setBounds(90, 90, 270, 30);
+        searchtf.setBounds(20, 110, 270, 40);
 
+        search.setBackground(new java.awt.Color(204, 0, 0));
+        search.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        search.setForeground(new java.awt.Color(255, 255, 255));
         search.setText("Search");
         search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -234,7 +239,7 @@ public class Payments extends javax.swing.JFrame {
             }
         });
         jPanel2.add(search);
-        search.setBounds(390, 90, 140, 30);
+        search.setBounds(310, 110, 100, 40);
 
         paymenttf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         paymenttf.addActionListener(new java.awt.event.ActionListener() {
@@ -243,12 +248,12 @@ public class Payments extends javax.swing.JFrame {
             }
         });
         jPanel2.add(paymenttf);
-        paymenttf.setBounds(730, 340, 210, 40);
+        paymenttf.setBounds(730, 310, 200, 40);
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel5.setText("Payment ID");
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        jLabel5.setText("Payment ID:");
         jPanel2.add(jLabel5);
-        jLabel5.setBounds(730, 300, 130, 25);
+        jLabel5.setBounds(730, 270, 130, 25);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ADMIN/payments bg.png"))); // NOI18N
         jPanel2.add(jLabel1);

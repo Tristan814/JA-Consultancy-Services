@@ -1,5 +1,6 @@
-package EMPLOYEE;
+package ADMIN;
 
+import EMPLOYEE.*;
 import ADMIN.*;
 import static java.awt.event.PaintEvent.UPDATE;
 import java.sql.Connection;
@@ -21,7 +22,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
-public class Inquiries extends javax.swing.JFrame {
+public class InquiriesAdmin extends javax.swing.JFrame {
 
     
     Connection con;
@@ -29,7 +30,7 @@ public class Inquiries extends javax.swing.JFrame {
     ResultSet rs;
     int q, i, id, deleteItem;
     
-    public Inquiries() {
+    public InquiriesAdmin() {
         initComponents();
         this.setLocationRelativeTo(null);
 
@@ -531,7 +532,7 @@ public class Inquiries extends javax.swing.JFrame {
     }//GEN-LAST:event_dayActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        new EmployeeDash().setVisible(true);
+        new FileMaintenance().setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -611,10 +612,10 @@ public class Inquiries extends javax.swing.JFrame {
          }
         
        }catch (ClassNotFoundException ex){
-           Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE,null,ex);
+           Logger.getLogger(InquiriesAdmin.class.getName()).log(Level.SEVERE,null,ex);
        //    System.out.println("Error" + ex.getMessage());
        } catch (SQLException ex) {
-            Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InquiriesAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_addActionPerformed
@@ -713,7 +714,7 @@ public class Inquiries extends javax.swing.JFrame {
 
        
 } catch (SQLException ex) {
-            Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InquiriesAdmin.class.getName()).log(Level.SEVERE, null, ex);
        
 }
 
@@ -830,14 +831,18 @@ try {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Inquiries.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InquiriesAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Inquiries.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InquiriesAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Inquiries.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InquiriesAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Inquiries.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InquiriesAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -846,7 +851,7 @@ try {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Inquiries().setVisible(true);
+                new InquiriesAdmin().setVisible(true);
             }
         });
     }

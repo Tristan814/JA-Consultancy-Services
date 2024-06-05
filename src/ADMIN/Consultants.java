@@ -121,13 +121,13 @@ public class Consultants extends javax.swing.JFrame {
         jPanel2.add(emailtf);
         emailtf.setBounds(800, 350, 190, 40);
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel5.setText("Contact Number");
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setText("Contact Number:");
         jPanel2.add(jLabel5);
-        jLabel5.setBounds(1030, 150, 110, 20);
+        jLabel5.setBounds(1030, 150, 140, 20);
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setText("Email");
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setText("Email:");
         jPanel2.add(jLabel4);
         jLabel4.setBounds(800, 330, 60, 16);
 
@@ -149,15 +149,15 @@ public class Consultants extends javax.swing.JFrame {
         jPanel2.add(lastntf);
         lastntf.setBounds(800, 170, 190, 40);
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setText("Consultant ID");
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setText("Consultant ID:");
         jPanel2.add(jLabel3);
-        jLabel3.setBounds(1030, 240, 90, 20);
+        jLabel3.setBounds(1030, 240, 120, 20);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Last Name");
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("Last Name:");
         jPanel2.add(jLabel2);
-        jLabel2.setBounds(800, 150, 70, 20);
+        jLabel2.setBounds(800, 150, 90, 20);
 
         table.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         table.setModel(new javax.swing.table.DefaultTableModel(
@@ -202,10 +202,10 @@ public class Consultants extends javax.swing.JFrame {
         jPanel2.add(contactnotf);
         contactnotf.setBounds(1030, 170, 190, 40);
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel6.setText("First Name");
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setText("First Name:");
         jPanel2.add(jLabel6);
-        jLabel6.setBounds(800, 240, 80, 20);
+        jLabel6.setBounds(800, 240, 90, 20);
 
         add.setBackground(new java.awt.Color(153, 0, 0));
         add.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -258,8 +258,11 @@ public class Consultants extends javax.swing.JFrame {
             }
         });
         jPanel2.add(searchtf);
-        searchtf.setBounds(220, 80, 220, 40);
+        searchtf.setBounds(30, 90, 220, 40);
 
+        searchbtn.setBackground(new java.awt.Color(0, 102, 102));
+        searchbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        searchbtn.setForeground(new java.awt.Color(255, 255, 255));
         searchbtn.setText("Search");
         searchbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -267,7 +270,7 @@ public class Consultants extends javax.swing.JFrame {
             }
         });
         jPanel2.add(searchbtn);
-        searchbtn.setBounds(450, 80, 80, 40);
+        searchbtn.setBounds(260, 90, 80, 40);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ADMIN/Consultant bg.png"))); // NOI18N
         jPanel2.add(jLabel1);

@@ -158,6 +158,7 @@ public class adminScheduling extends javax.swing.JFrame {
         jPanel2.add(jLabel4);
         jLabel4.setBounds(170, 160, 130, 25);
 
+        searchtf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         searchtf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchtfActionPerformed(evt);
@@ -169,8 +170,11 @@ public class adminScheduling extends javax.swing.JFrame {
             }
         });
         jPanel2.add(searchtf);
-        searchtf.setBounds(540, 100, 300, 40);
+        searchtf.setBounds(800, 120, 210, 40);
 
+        search.setBackground(new java.awt.Color(204, 0, 51));
+        search.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        search.setForeground(new java.awt.Color(255, 255, 255));
         search.setText("Search");
         search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,7 +182,7 @@ public class adminScheduling extends javax.swing.JFrame {
             }
         });
         jPanel2.add(search);
-        search.setBounds(850, 100, 150, 40);
+        search.setBounds(1030, 120, 110, 40);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ADMIN/Schedulingbg.png"))); // NOI18N
         jPanel2.add(jLabel1);

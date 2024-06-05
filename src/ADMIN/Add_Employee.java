@@ -135,7 +135,7 @@ public class Add_Employee extends javax.swing.JFrame {
             }
         });
         jPanel2.add(addbtn);
-        addbtn.setBounds(530, 580, 138, 47);
+        addbtn.setBounds(558, 580, 130, 47);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setText("Date of Birth");
@@ -153,7 +153,7 @@ public class Add_Employee extends javax.swing.JFrame {
             }
         });
         jPanel2.add(clearbtn);
-        clearbtn.setBounds(230, 580, 126, 47);
+        clearbtn.setBounds(300, 580, 120, 47);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Employee ID");
@@ -301,7 +301,7 @@ public class Add_Employee extends javax.swing.JFrame {
             }
         });
         jPanel2.add(backbtn);
-        backbtn.setBounds(20, 640, 72, 23);
+        backbtn.setBounds(10, 650, 72, 23);
 
         emptable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -338,11 +338,11 @@ public class Add_Employee extends javax.swing.JFrame {
         }
 
         jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(710, 120, 870, 510);
+        jScrollPane1.setBounds(710, 140, 870, 510);
 
-        updatebtn.setBackground(new java.awt.Color(255, 204, 102));
+        updatebtn.setBackground(new java.awt.Color(0, 153, 102));
         updatebtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        updatebtn.setForeground(new java.awt.Color(51, 51, 0));
+        updatebtn.setForeground(new java.awt.Color(255, 255, 255));
         updatebtn.setText("UPDATE");
         updatebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -350,10 +350,12 @@ public class Add_Employee extends javax.swing.JFrame {
             }
         });
         jPanel2.add(updatebtn);
-        updatebtn.setBounds(380, 580, 126, 47);
+        updatebtn.setBounds(430, 580, 120, 47);
 
-        editbtn.setFont(new java.awt.Font("STZhongsong", 1, 16)); // NOI18N
-        editbtn.setText("Edit");
+        editbtn.setBackground(new java.awt.Color(48, 54, 66));
+        editbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        editbtn.setForeground(new java.awt.Color(255, 255, 255));
+        editbtn.setText("EDIT");
         editbtn.setAlignmentX(0.5F);
         editbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -361,7 +363,7 @@ public class Add_Employee extends javax.swing.JFrame {
             }
         });
         jPanel2.add(editbtn);
-        editbtn.setBounds(90, 580, 130, 50);
+        editbtn.setBounds(170, 580, 120, 50);
 
         searchtxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -374,8 +376,11 @@ public class Add_Employee extends javax.swing.JFrame {
             }
         });
         jPanel2.add(searchtxt);
-        searchtxt.setBounds(800, 70, 220, 40);
+        searchtxt.setBounds(1240, 90, 220, 37);
 
+        searchbtn.setBackground(new java.awt.Color(204, 0, 0));
+        searchbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        searchbtn.setForeground(new java.awt.Color(255, 255, 255));
         searchbtn.setText("Search");
         searchbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -383,7 +388,7 @@ public class Add_Employee extends javax.swing.JFrame {
             }
         });
         jPanel2.add(searchbtn);
-        searchbtn.setBounds(1050, 70, 110, 40);
+        searchbtn.setBounds(1470, 90, 110, 37);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ADMIN/add emp bg.png"))); // NOI18N
         jPanel2.add(jLabel1);

@@ -142,65 +142,65 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_passActionPerformed
 
     private void loginbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginbtnActionPerformed
-//        new EmployeeDash().setVisible(true);
-//        dispose();
-//System.out.println("Welcome!!");
+        new EmployeeDash().setVisible(true);
+        dispose();
+System.out.println("Welcome!!");
 
-String password, query, passDb = null;
-int id;
-String SUrl,Suser, Spass;
-    SUrl = "jdbc:MYSQL://localhost:3306/ja consultancy services";
-    Suser = "root";
-    Spass = "";
-    int notFound = 0;
-
-try{
-    Class.forName("com.mysql.cj.jdbc.Driver");
-    Connection con = DriverManager.getConnection(SUrl,Suser,Spass);
-    Statement st =con.createStatement();
-    if("".equals(logid.getText())){
-        JOptionPane.showMessageDialog(new JFrame(),"ID is Required","Error",JOptionPane.ERROR_MESSAGE);
-    }
-    else if("".equals(pass.getText())){
-        JOptionPane.showMessageDialog(new JFrame(),"ID is Required","Error",JOptionPane.ERROR_MESSAGE);
-    }
-    else{
-        try {
-        id = Integer.parseInt(logid.getText());
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(new JFrame(), "ID must be a number", "Error", JOptionPane.ERROR_MESSAGE);
-                    return; // Exit the try block if the ID is not a valid integer
-                }
-        password = pass.getText();
-        
-    }
-       id = Integer.parseInt(logid.getText());
-       password = pass.getText();
-
-       query = "SELECT * FROM employee_table WHERE Employee_ID="+id;
-       ResultSet rs = st.executeQuery(query);
-       while(rs.next()){
-           passDb = rs.getString("password");
-           notFound = 1;
-       }
-       if(notFound == 1 && password.equals(passDb)){
-                  logid.setText("");
-       pass.setText("");
-       
-       showMessageDialog(null,"Login Successfuly");
-       new EmployeeDash().setVisible(true);
-       dispose();
-       }else{
-           JOptionPane.showMessageDialog(new JFrame(),"Incorrect ID or password","Error",JOptionPane.ERROR_MESSAGE);
-       }
-       
-       logid.setText("");
-       pass.setText("");
-       
-            
-}catch(Exception e){
-   System.out.println("Error!!" + e.getMessage());
-}
+//String password, query, passDb = null;
+//int id;
+//String SUrl,Suser, Spass;
+//    SUrl = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+//    Suser = "root";
+//    Spass = "";
+//    int notFound = 0;
+//
+//try{
+//    Class.forName("com.mysql.cj.jdbc.Driver");
+//    Connection con = DriverManager.getConnection(SUrl,Suser,Spass);
+//    Statement st =con.createStatement();
+//    if("".equals(logid.getText())){
+//        JOptionPane.showMessageDialog(new JFrame(),"ID is Required","Error",JOptionPane.ERROR_MESSAGE);
+//    }
+//    else if("".equals(pass.getText())){
+//        JOptionPane.showMessageDialog(new JFrame(),"ID is Required","Error",JOptionPane.ERROR_MESSAGE);
+//    }
+//    else{
+//        try {
+//        id = Integer.parseInt(logid.getText());
+//                } catch (NumberFormatException e) {
+//                    JOptionPane.showMessageDialog(new JFrame(), "ID must be a number", "Error", JOptionPane.ERROR_MESSAGE);
+//                    return; // Exit the try block if the ID is not a valid integer
+//                }
+//        password = pass.getText();
+//        
+//    }
+//       id = Integer.parseInt(logid.getText());
+//       password = pass.getText();
+//
+//       query = "SELECT * FROM employee_table WHERE Employee_ID="+id;
+//       ResultSet rs = st.executeQuery(query);
+//       while(rs.next()){
+//           passDb = rs.getString("password");
+//           notFound = 1;
+//       }
+//       if(notFound == 1 && password.equals(passDb)){
+//                  logid.setText("");
+//       pass.setText("");
+//       
+//       showMessageDialog(null,"Login Successfuly");
+//       new EmployeeDash().setVisible(true);
+//       dispose();
+//       }else{
+//           JOptionPane.showMessageDialog(new JFrame(),"Incorrect ID or password","Error",JOptionPane.ERROR_MESSAGE);
+//       }
+//       
+//       logid.setText("");
+//       pass.setText("");
+//       
+//            
+//}catch(Exception e){
+//   System.out.println("Error!!" + e.getMessage());
+//}
 
     }//GEN-LAST:event_loginbtnActionPerformed
 

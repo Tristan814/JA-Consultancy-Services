@@ -405,7 +405,7 @@ public class Inquiries_Admin extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EMPLOYEE/Inquiries BG.png"))); // NOI18N
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(0, 10, 1300, 800);
+        jLabel6.setBounds(0, -10, 1300, 820);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
