@@ -56,6 +56,9 @@ public class InquiriesAdmin extends javax.swing.JFrame {
     btng.add(rb2);
     btng.add(rb3);
     
+    btng2.add(rb11);
+    btng2.add(rb22);
+    btng2.add(rb33);
     
     
     servicetf.setEditable(false);
@@ -124,7 +127,7 @@ public class InquiriesAdmin extends javax.swing.JFrame {
 
         jButton3 = new javax.swing.JButton();
         btng = new javax.swing.ButtonGroup();
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        btng2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
@@ -680,13 +683,40 @@ public class InquiriesAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_tableMouseClicked
 
     private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
-try {
     DefaultTableModel model = (DefaultTableModel) table.getModel();
     int selectedRowIndex = table.getSelectedRow();
-
-    if (selectedRowIndex != -1) {
+//    DELETE FROM `inquiry_and_proposal` WHERE 0
+try {
+    
+         id = Integer.parseInt(model.getValueAt(selectedRowIndex, 0).toString());
+        
+        int delete = JOptionPane.showConfirmDialog(null,"Confirm if you want to delete item","Warning",JOptionPane.YES_NO_OPTION);
+        
+        if (delete ==JOptionPane.YES_NO_OPTION) {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+           
+         String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+         String user = "jaroot";
+         String pass = "";
+         Connection con = DriverManager.getConnection(url,user,pass);
+         String sql = "DELETE FROM `inquiry_and_proposal` WHERE IPM_ID=?";
+         pst = con.prepareStatement(sql);
+         pst.setInt(1,id);
+         pst.executeUpdate(); 
         model.removeRow(selectedRowIndex);
         JOptionPane.showMessageDialog(new JFrame(), "Row Deleted Successfully", "Success!", JOptionPane.CANCEL_OPTION);
+        ipmtf.setText("");
+        companytf.setText("");
+        stat.setText("");
+        
+        
+        day.setSelectedIndex(0);
+        month.setSelectedIndex(0);
+        year.setSelectedIndex(0);
+        
+        servicetf.setText("");
+        inquirytf.setText("");
+        
     } else {
         JOptionPane.showMessageDialog(new JFrame(), "No Row Selected", "Warning!", JOptionPane.WARNING_MESSAGE);
     }
@@ -705,10 +735,13 @@ try {
     }//GEN-LAST:event_searchActionPerformed
 
     private void searchtfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchtfKeyReleased
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
+      if(searchtf.getText().equals("")){
+          DefaultTableModel model = (DefaultTableModel) table.getModel();
         TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
         table.setRowSorter(obj);
-        obj.setRowFilter(RowFilter.regexFilter(searchtf.getText()));
+        obj.setRowFilter(RowFilter.regexFilter(""));
+      }
+        
     }//GEN-LAST:event_searchtfKeyReleased
 
     private void searchtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchtfActionPerformed
@@ -783,7 +816,7 @@ try {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Delete;
     private javax.swing.ButtonGroup btng;
-    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup btng2;
     public static javax.swing.JTextField companytf;
     private javax.swing.JComboBox<String> day;
     public static javax.swing.JTextField inquirytf;

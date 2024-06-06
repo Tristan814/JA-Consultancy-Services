@@ -739,11 +739,13 @@ try{
     }//GEN-LAST:event_emptableMouseClicked
 
     private void searchbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchbtnActionPerformed
-       
+      
+        
         DefaultTableModel model = (DefaultTableModel) emptable.getModel();
         TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
         emptable.setRowSorter(obj);
         obj.setRowFilter(RowFilter.regexFilter(searchtxt.getText()));
+       
 
 //    DefaultTableModel model = (DefaultTableModel) emptable.getModel();
 //    TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
@@ -755,10 +757,12 @@ try{
     }//GEN-LAST:event_searchtxtActionPerformed
 
     private void searchtxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchtxtKeyReleased
-        DefaultTableModel model = (DefaultTableModel) emptable.getModel();
-        TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
-        emptable.setRowSorter(obj);
-        obj.setRowFilter(RowFilter.regexFilter(searchtxt.getText()));
+    if (searchtxt.getText().equals("")) {
+            DefaultTableModel model = (DefaultTableModel) emptable.getModel();
+    TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
+    emptable.setRowSorter(obj);
+    obj.setRowFilter(null);
+    }
     }//GEN-LAST:event_searchtxtKeyReleased
 
     /**

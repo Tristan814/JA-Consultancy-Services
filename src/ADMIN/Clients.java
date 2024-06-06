@@ -4,6 +4,21 @@
  */
 package ADMIN;
 
+import static ADMIN.InquiriesAdmin.companytf;
+import static ADMIN.InquiriesAdmin.inquirytf;
+import static ADMIN.InquiriesAdmin.ipmtf;
+import static ADMIN.InquiriesAdmin.servicetf;
+import static ADMIN.InquiriesAdmin.stat;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -17,9 +32,33 @@ public class Clients extends javax.swing.JFrame {
     /**
      * Creates new form Clients
      */
+        Connection con;
+    PreparedStatement pst;
+    ResultSet rs;
+    int q, i, id, deleteItem;
     public Clients() {
         initComponents();
-        
+          initComponents();
+        this.setLocationRelativeTo(null);
+
+    String SUrl,Suser, Spass;
+    SUrl = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+    Suser = "root";
+    Spass = "";
+    String query = "SELECT * FROM client_table";
+    
+    try{
+             con = DriverManager.getConnection(SUrl,Suser,Spass);
+             pst = con.prepareStatement(query);
+             rs = pst.executeQuery();
+             DefaultTableModel model = (DefaultTableModel)(table.getModel());    
+             while(rs.next()){
+                 model.addRow(new String[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)});
+             }
+    }catch (Exception ex){
+        System.out.println("Error : " + ex.getMessage());
+    }
+        clientidtf.setEditable(false);
         
     }
 
@@ -37,19 +76,19 @@ public class Clients extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         clientidtf = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        comptf = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         searchtf = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        contacttf = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        emailtf = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        addresstf = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        save = new javax.swing.JButton();
+        deletebtn = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
@@ -70,10 +109,30 @@ public class Clients extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Client ID", "Company Name", "Contact No.", "Email", "Address"
+                "Client ID", "IPM_ID", "Contact No.", "Email", "Address"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(table);
+        if (table.getColumnModel().getColumnCount() > 0) {
+            table.getColumnModel().getColumn(0).setResizable(false);
+            table.getColumnModel().getColumn(1).setResizable(false);
+            table.getColumnModel().getColumn(2).setResizable(false);
+            table.getColumnModel().getColumn(3).setResizable(false);
+            table.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(40, 170, 860, 490);
@@ -82,9 +141,9 @@ public class Clients extends javax.swing.JFrame {
         jPanel1.add(clientidtf);
         clientidtf.setBounds(1210, 90, 220, 40);
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jPanel1.add(jTextField2);
-        jTextField2.setBounds(940, 200, 240, 40);
+        comptf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel1.add(comptf);
+        comptf.setBounds(940, 200, 240, 40);
 
         jButton1.setBackground(new java.awt.Color(0, 102, 102));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -99,7 +158,7 @@ public class Clients extends javax.swing.JFrame {
         jButton1.setBounds(290, 100, 80, 40);
 
         jLabel8.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        jLabel8.setText("Company Name:");
+        jLabel8.setText("IPM ID:");
         jPanel1.add(jLabel8);
         jLabel8.setBounds(940, 170, 180, 20);
 
@@ -117,56 +176,76 @@ public class Clients extends javax.swing.JFrame {
         jPanel1.add(jLabel9);
         jLabel9.setBounds(1110, 100, 110, 18);
 
-        jTextField4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jPanel1.add(jTextField4);
-        jTextField4.setBounds(940, 310, 240, 40);
+        contacttf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel1.add(contacttf);
+        contacttf.setBounds(940, 310, 240, 40);
 
         jLabel10.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel10.setText("Contact No.");
         jPanel1.add(jLabel10);
         jLabel10.setBounds(940, 280, 180, 20);
 
-        jTextField5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jPanel1.add(jTextField5);
-        jTextField5.setBounds(940, 420, 240, 40);
+        emailtf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel1.add(emailtf);
+        emailtf.setBounds(940, 420, 240, 40);
 
         jLabel11.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel11.setText("Email:");
         jPanel1.add(jLabel11);
         jLabel11.setBounds(940, 390, 180, 20);
 
-        jTextField6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jPanel1.add(jTextField6);
-        jTextField6.setBounds(940, 530, 240, 40);
+        addresstf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel1.add(addresstf);
+        addresstf.setBounds(940, 530, 240, 40);
 
         jLabel12.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel12.setText("Address:");
         jPanel1.add(jLabel12);
         jLabel12.setBounds(940, 500, 180, 20);
 
-        jButton2.setBackground(new java.awt.Color(0, 153, 102));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Save");
-        jPanel1.add(jButton2);
-        jButton2.setBounds(1060, 620, 100, 40);
+        save.setBackground(new java.awt.Color(0, 153, 102));
+        save.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        save.setForeground(new java.awt.Color(255, 255, 255));
+        save.setText("Save");
+        save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveActionPerformed(evt);
+            }
+        });
+        jPanel1.add(save);
+        save.setBounds(1060, 620, 100, 40);
 
-        jButton3.setBackground(new java.awt.Color(255, 204, 204));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jButton3.setText("Delete");
-        jPanel1.add(jButton3);
-        jButton3.setBounds(1300, 620, 100, 40);
+        deletebtn.setBackground(new java.awt.Color(255, 204, 204));
+        deletebtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        deletebtn.setText("Delete");
+        deletebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletebtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(deletebtn);
+        deletebtn.setBounds(1300, 620, 100, 40);
 
         jButton4.setBackground(new java.awt.Color(48, 54, 66));
         jButton4.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Edit");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton4);
         jButton4.setBounds(940, 620, 100, 40);
 
         jButton6.setBackground(new java.awt.Color(204, 204, 204));
         jButton6.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jButton6.setText("Reset");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton6);
         jButton6.setBounds(1180, 620, 100, 40);
 
@@ -214,6 +293,98 @@ public class Clients extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_searchtfActionPerformed
 
+    private void deletebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebtnActionPerformed
+
+    }//GEN-LAST:event_deletebtnActionPerformed
+
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+       
+        int id = Integer.parseInt(table.getValueAt(table.getSelectedRow(),0).toString());
+        try{
+               Class.forName("com.mysql.cj.jdbc.Driver");
+           
+         String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+         String user = "jaroot";
+         String pass = "";
+         
+         Connection con = DriverManager.getConnection(url,user,pass);
+         Statement st = con.createStatement();
+         ResultSet res =st.executeQuery("select * from client_table where Client_ID ="+id);
+                        while(res.next()){
+                            clientidtf.setText(res.getString("Client_ID"));
+                            comptf.setText(res.getString("IPM_ID"));
+                            contacttf.setText(res.getString("Status"));
+                            emailtf.setText(res.getString("Inquiry_Date"));
+                            addresstf.setText(res.getString("Service_Type"));
+                             
+                             
+                            clientidtf.setEditable(false);
+                            comptf.setEditable(false);
+                            contacttf.setEditable(false);
+                            emailtf.setEditable(false);
+                            addresstf.setEditable(false);
+                            
+                        }
+                
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_tableMouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+                        
+                            contacttf.setEditable(false);
+                            emailtf.setEditable(false);
+                            addresstf.setEditable(false);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+                        
+                            contacttf.setText("");
+                            emailtf.setText("");
+                            addresstf.setText("");
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
+        
+    try{
+    pst = con.prepareStatement("update client_table set IPM_ID =?, Contact_No =?, Email =?, Address =? where Client_ID=?");
+    pst.setString(1,comptf.getText());
+    pst.setString(2,contacttf.getText());
+    pst.setString(3,emailtf.getText());
+    pst.setString(4,addresstf.getText());
+    pst.setString(5,clientidtf.getText());
+   
+    
+        
+    int rowsAffected = pst.executeUpdate(); 
+    
+    if (rowsAffected > 0 ){
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        int selectedRowIndex = table.getSelectedRow();
+        
+        model.setValueAt(clientidtf.getText(), selectedRowIndex, 0);
+        model.setValueAt(comptf.getText(), selectedRowIndex, 1);
+        model.setValueAt(contacttf.getText(), selectedRowIndex, 2);
+        model.setValueAt(emailtf.getText(), selectedRowIndex, 3);
+        model.setValueAt(addresstf.getText(), selectedRowIndex, 4);
+        
+       JOptionPane.showMessageDialog(new JFrame(), "Updated Successfully", "Successed!", JOptionPane.OK_CANCEL_OPTION);
+       con.close();
+    } else{
+        JOptionPane.showMessageDialog(new JFrame(), "Update Failed", "Warning!", JOptionPane.ERROR_MESSAGE);
+       con.close();
+    }
+
+       
+} catch (SQLException ex) {
+            Logger.getLogger(InquiriesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+       
+}
+    }//GEN-LAST:event_saveActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -250,10 +421,13 @@ public class Clients extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField addresstf;
     private javax.swing.JTextField clientidtf;
+    private javax.swing.JTextField comptf;
+    private javax.swing.JTextField contacttf;
+    private javax.swing.JButton deletebtn;
+    private javax.swing.JTextField emailtf;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -266,10 +440,7 @@ public class Clients extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JButton save;
     private javax.swing.JTextField searchtf;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables

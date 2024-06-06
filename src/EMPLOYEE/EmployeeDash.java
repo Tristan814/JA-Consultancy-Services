@@ -110,7 +110,7 @@ public class EmployeeDash extends javax.swing.JFrame {
 
     private void recordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recordsActionPerformed
 
-        new empRecords().setVisible(true);
+        new RecordsEmp().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_recordsActionPerformed
 
