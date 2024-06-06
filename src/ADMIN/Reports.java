@@ -34,12 +34,11 @@ String query =
     "SELECT Transaction_Table.trans_ID, Payment_Table.Total_Amount, Inquiry_and_Proposal.Service_Type, Client_Table.Client_ID\n" +
 "FROM Transaction_Table\n" +
 "\n" +
-"LEFT JOIN Payment_Table ON  Transaction_Table.trans_ID = Payment_Table.client_ID\n" +
+"LEFT JOIN Payment_Table ON  Transaction_Table.Client_ID = Payment_Table.client_ID\n" +
 "\n" +
+"LEFT JOIN Client_Table ON Transaction_Table.client_id = Client_Table.client_id\n"+
 "LEFT JOIN Inquiry_and_Proposal ON Inquiry_and_Proposal.IPM_ID = Client_Table.IPM_ID\n" +
-"\n" +
-"LEFT JOIN Client_Table ON Transaction_Table.client_id = Client_Table.client_id\n" +
-"";
+"\n" ;
 
 try {
     Connection con = DriverManager.getConnection(SUrl, Suser, Spass);
@@ -54,7 +53,7 @@ try {
 
     while (rs.next()) {
         // Add a row to the model with the data from the result set
-        model.addRow(new Object[]{rs.getString("transaction_id"), rs.getString("total_amount"), rs.getString("service_type"), rs.getString("client_id")});
+        model.addRow(new Object[]{rs.getString("trans_id"), rs.getString("total_amount"), rs.getString("service_type"), rs.getString("client_id")});
     }
     
     // Close resources
