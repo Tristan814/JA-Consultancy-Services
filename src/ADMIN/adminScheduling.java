@@ -136,7 +136,7 @@ public class adminScheduling extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jButton1);
-        jButton1.setBounds(30, 650, 80, 30);
+        jButton1.setBounds(20, 660, 80, 30);
 
         Duration.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Duration.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +145,7 @@ public class adminScheduling extends javax.swing.JFrame {
             }
         });
         jPanel2.add(Duration);
-        Duration.setBounds(100, 320, 270, 40);
+        Duration.setBounds(90, 370, 270, 40);
 
         deletebtn.setBackground(new java.awt.Color(204, 204, 204));
         deletebtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -156,7 +156,7 @@ public class adminScheduling extends javax.swing.JFrame {
             }
         });
         jPanel2.add(deletebtn);
-        deletebtn.setBounds(100, 570, 110, 40);
+        deletebtn.setBounds(130, 580, 90, 40);
 
         resetbtn.setBackground(new java.awt.Color(255, 51, 51));
         resetbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -167,14 +167,15 @@ public class adminScheduling extends javax.swing.JFrame {
             }
         });
         jPanel2.add(resetbtn);
-        resetbtn.setBounds(260, 570, 110, 40);
+        resetbtn.setBounds(230, 580, 90, 40);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Duration");
         jPanel2.add(jLabel2);
-        jLabel2.setBounds(160, 290, 150, 25);
+        jLabel2.setBounds(150, 340, 150, 25);
 
+        client.setEditable(false);
         client.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         client.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -182,14 +183,14 @@ public class adminScheduling extends javax.swing.JFrame {
             }
         });
         jPanel2.add(client);
-        client.setBounds(100, 420, 270, 40);
+        client.setBounds(90, 470, 270, 40);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Client_ID");
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel2.add(jLabel3);
-        jLabel3.setBounds(180, 390, 110, 25);
+        jLabel3.setBounds(170, 440, 110, 25);
 
         nodays.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         nodays.addActionListener(new java.awt.event.ActionListener() {
@@ -197,14 +198,19 @@ public class adminScheduling extends javax.swing.JFrame {
                 nodaysActionPerformed(evt);
             }
         });
+        nodays.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nodaysKeyTyped(evt);
+            }
+        });
         jPanel2.add(nodays);
-        nodays.setBounds(100, 220, 270, 40);
+        nodays.setBounds(90, 270, 270, 40);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("No. of Days");
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(170, 190, 130, 25);
+        jLabel4.setBounds(160, 240, 130, 25);
 
         searchtf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         searchtf.addActionListener(new java.awt.event.ActionListener() {
@@ -241,7 +247,7 @@ public class adminScheduling extends javax.swing.JFrame {
             }
         });
         jPanel2.add(editbtn);
-        editbtn.setBounds(260, 510, 110, 40);
+        editbtn.setBounds(330, 580, 90, 40);
 
         save.setBackground(new java.awt.Color(0, 204, 51));
         save.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -252,8 +258,9 @@ public class adminScheduling extends javax.swing.JFrame {
             }
         });
         jPanel2.add(save);
-        save.setBounds(100, 510, 110, 40);
+        save.setBounds(30, 580, 90, 40);
 
+        sched.setEditable(false);
         sched.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         sched.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -261,13 +268,13 @@ public class adminScheduling extends javax.swing.JFrame {
             }
         });
         jPanel2.add(sched);
-        sched.setBounds(100, 120, 270, 40);
+        sched.setBounds(90, 170, 270, 40);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Scheduling ID");
         jPanel2.add(jLabel5);
-        jLabel5.setBounds(170, 90, 130, 25);
+        jLabel5.setBounds(160, 140, 130, 25);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ADMIN/Schedulingbg.png"))); // NOI18N
         jPanel2.add(jLabel1);
@@ -327,7 +334,13 @@ public class adminScheduling extends javax.swing.JFrame {
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
 
-       
+        if("".equals(nodays.getText())){
+                JOptionPane.showMessageDialog(new JFrame(), "No. of Days is required", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        else if("".equals(Duration.getText())){
+                JOptionPane.showMessageDialog(new JFrame(), "Duration is required", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        else{
         try{
             String SUrl,Suser, Spass;
     SUrl = "jdbc:MYSQL://localhost:3306/ja consultancy services";
@@ -365,6 +378,7 @@ public class adminScheduling extends javax.swing.JFrame {
             Logger.getLogger(adminScheduling.class.getName()).log(Level.SEVERE, null, ex);
        
 }
+        }
     }//GEN-LAST:event_saveActionPerformed
 
     private void deletebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebtnActionPerformed
@@ -454,6 +468,13 @@ try {
                             Duration.setEditable(true);
                             
     }//GEN-LAST:event_editbtnActionPerformed
+
+    private void nodaysKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nodaysKeyTyped
+        char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_nodaysKeyTyped
 
     /**
      * @param args the command line arguments

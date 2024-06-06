@@ -202,10 +202,12 @@ public class InquiriesAdmin extends javax.swing.JFrame {
         jPanel1.add(companytf);
         companytf.setBounds(890, 340, 220, 40);
 
+        stat.setEditable(false);
         stat.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel1.add(stat);
         stat.setBounds(1210, 520, 170, 40);
 
+        inquirytf.setEditable(false);
         inquirytf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         inquirytf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -314,6 +316,7 @@ public class InquiriesAdmin extends javax.swing.JFrame {
         jPanel1.add(jButton7);
         jButton7.setBounds(1150, 650, 100, 40);
 
+        servicetf.setEditable(false);
         servicetf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         servicetf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -468,7 +471,7 @@ public class InquiriesAdmin extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
                             companytf.setEditable(true);
-
+                            ipmtf.setEditable(false);
         
 
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -476,7 +479,7 @@ public class InquiriesAdmin extends javax.swing.JFrame {
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
         ClientDeets cd = new ClientDeets();
         
-                 if("".equals(ipmtf.getText())){
+         if("".equals(ipmtf.getText())){
              JOptionPane.showMessageDialog(new JFrame(), "IPM ID is required", "Error", JOptionPane.ERROR_MESSAGE);
          }
          else if("".equals(companytf.getText())){
@@ -608,8 +611,24 @@ public class InquiriesAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_rb2ActionPerformed
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
-
-    try{
+           if("".equals(ipmtf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "IPM ID is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(companytf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Company Name is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(stat.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Status is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(inquirytf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Inquiry Date is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(servicetf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Service Type is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else{
+         
+             try{
     pst = con.prepareStatement("update inquiry_and_proposal set Company_Name =?, Inquiry_Date =?, Service_Type =?, Status =? where IPM_ID=?");
     pst.setString(1,companytf.getText());
     pst.setString(2,inquirytf.getText());
@@ -617,8 +636,6 @@ public class InquiriesAdmin extends javax.swing.JFrame {
     pst.setString(4,stat.getText());
     pst.setString(5,ipmtf.getText());
    
-    
-        
     int rowsAffected = pst.executeUpdate(); 
     
     if (rowsAffected > 0 ){
@@ -643,6 +660,8 @@ public class InquiriesAdmin extends javax.swing.JFrame {
             Logger.getLogger(InquiriesAdmin.class.getName()).log(Level.SEVERE, null, ex);
        
 }
+         }
+    
 
     }//GEN-LAST:event_saveActionPerformed
 
