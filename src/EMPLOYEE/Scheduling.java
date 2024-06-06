@@ -236,7 +236,7 @@ public class Scheduling extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
  
- String client, pay, tot, sche, nod, dura, trans, cons, query1, query2, query3;
+ String client, pay, tot, sche, nod, dura, trans, cons, query1, query2, query3, query4;
 
        
        try{
@@ -290,6 +290,8 @@ public class Scheduling extends javax.swing.JFrame {
        //('"+sche+"','"+nod+"','"+dura+"','"+client+"')
         query3 = "INSERT INTO transaction_table (Trans_ID, Cons_ID, Client_ID, Payment_ID, Schedule_ID)"
                + "VALUES(?,?,?,?,?)";
+        query4 = "INSERT INTO realreport (Trans_ID, Total_Amount, Service_Type, Client_ID)"
+               + "VALUES(?,?,?,?,?)";
        
        
        PreparedStatement preparedStatement1 = con.prepareStatement(query1);
@@ -309,6 +311,13 @@ public class Scheduling extends javax.swing.JFrame {
        preparedStatement3.setString(3,client);
        preparedStatement3.setString(4,pay);
        preparedStatement3.setString(5,sche);
+       
+       PreparedStatement preparedStatement4 = con.prepareStatement(query4);
+       preparedStatement3.setString(1,trans);
+       preparedStatement3.setString(2,tot);
+       preparedStatement3.setString(3,client);
+       preparedStatement3.setString(4,client);
+       
        
         preparedStatement1.executeUpdate();
         preparedStatement2.executeUpdate();
