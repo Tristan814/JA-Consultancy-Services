@@ -55,6 +55,14 @@ public class Inquiries extends javax.swing.JFrame {
     btng.add(rb2);
     btng.add(rb3);
     
+    btng2.add(rb11);
+    btng2.add(rb22);
+    btng2.add(rb33);
+    
+    ipmtf.setEditable(false);
+    inquirytf.setEditable(false);
+    stat.setEditable(false);
+    servicetf.setEditable(false);
     }
     
     public void upDateDB() throws SQLException, ClassNotFoundException
@@ -118,7 +126,7 @@ public class Inquiries extends javax.swing.JFrame {
 
         jButton3 = new javax.swing.JButton();
         btng = new javax.swing.ButtonGroup();
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        btng2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
@@ -309,7 +317,7 @@ public class Inquiries extends javax.swing.JFrame {
 
         jButton7.setBackground(new java.awt.Color(204, 204, 204));
         jButton7.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jButton7.setText("Clear");
+        jButton7.setText("Reset");
         jButton7.setAlignmentX(0.5F);
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -473,45 +481,40 @@ public class Inquiries extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
                             companytf.setEditable(true);
-                            stat.setEditable(true);
-                            inquirytf.setEditable(true);
-                            servicetf.setEditable(true); 
-                            ipmtf.setEditable(true);// TODO add your handling code here:
+                           
         
 
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-        new ClientDeets().setVisible(true);
-        dispose();
+
+        ClientDeets cd = new ClientDeets();
         
-//        ClientDeets cd = new ClientDeets();
-//        
-//                 if("".equals(ipmtf.getText())){
-//             JOptionPane.showMessageDialog(new JFrame(), "IPM ID is required", "Error", JOptionPane.ERROR_MESSAGE);
-//         }
-//         else if("".equals(companytf.getText())){
-//             JOptionPane.showMessageDialog(new JFrame(), "Company Name is required", "Error", JOptionPane.ERROR_MESSAGE);
-//         }
-//         else if("".equals(stat.getText())){
-//             JOptionPane.showMessageDialog(new JFrame(), "Status is required", "Error", JOptionPane.ERROR_MESSAGE);
-//         }
-//         else if("".equals(inquirytf.getText())){
-//             JOptionPane.showMessageDialog(new JFrame(), "Inquiry Date is required", "Error", JOptionPane.ERROR_MESSAGE);
-//         }
-//         else if("".equals(servicetf.getText())){
-//             JOptionPane.showMessageDialog(new JFrame(), "Service Type is required", "Error", JOptionPane.ERROR_MESSAGE);
-//         }else{
-//        cd.ipmidtf.setText(ipmtf.getText());
-//        cd.statustf.setText(stat.getText());
-//        cd.datetf.setText(inquirytf.getText());
-//        cd.companyytf.setText(companytf.getText());
-//        
-//        JOptionPane.showConfirmDialog(new JFrame(), "Click YES to proceed", "Successed!", JOptionPane.YES_NO_OPTION);
-//        
-//        cd.setVisible(true);
-//        this.dispose();  
-//         }
+                 if("".equals(ipmtf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "IPM ID is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(companytf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Company Name is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(stat.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Status is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(inquirytf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Inquiry Date is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(servicetf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Service Type is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }else{
+        cd.ipmidtf.setText(ipmtf.getText());
+        cd.statustf.setText(stat.getText());
+        cd.datetf.setText(inquirytf.getText());
+        cd.companyytf.setText(companytf.getText());
+        
+        JOptionPane.showConfirmDialog(new JFrame(), "Click YES to proceed", "Successed!", JOptionPane.YES_NO_OPTION);
+        
+        cd.setVisible(true);
+        this.dispose();  
+         }
     }//GEN-LAST:event_nextActionPerformed
 
     private void dayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dayActionPerformed
@@ -783,10 +786,7 @@ try {
     }//GEN-LAST:event_searchActionPerformed
 
     private void searchtfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchtfKeyReleased
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-        TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
-        table.setRowSorter(obj);
-        obj.setRowFilter(RowFilter.regexFilter(searchtf.getText()));
+
     }//GEN-LAST:event_searchtfKeyReleased
 
     private void searchtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchtfActionPerformed
@@ -858,7 +858,7 @@ try {
     private javax.swing.JButton Delete;
     private javax.swing.JButton add;
     private javax.swing.ButtonGroup btng;
-    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup btng2;
     public static javax.swing.JTextField companytf;
     private javax.swing.JComboBox<String> day;
     public static javax.swing.JTextField inquirytf;

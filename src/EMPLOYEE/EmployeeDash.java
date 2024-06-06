@@ -19,7 +19,7 @@ public class EmployeeDash extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        records = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
@@ -49,15 +49,15 @@ public class EmployeeDash extends javax.swing.JFrame {
         jPanel1.add(jButton2);
         jButton2.setBounds(40, 130, 299, 120);
 
-        jButton4.setFont(new java.awt.Font("STZhongsong", 1, 24)); // NOI18N
-        jButton4.setText("Records");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        records.setFont(new java.awt.Font("STZhongsong", 1, 24)); // NOI18N
+        records.setText("Records");
+        records.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                recordsActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4);
-        jButton4.setBounds(40, 300, 299, 120);
+        jPanel1.add(records);
+        records.setBounds(40, 300, 299, 120);
 
         jButton3.setText("Logout");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -108,9 +108,11 @@ public class EmployeeDash extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void recordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recordsActionPerformed
+
+        new empRecords().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_recordsActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -149,8 +151,8 @@ public class EmployeeDash extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton records;
     // End of variables declaration//GEN-END:variables
 }

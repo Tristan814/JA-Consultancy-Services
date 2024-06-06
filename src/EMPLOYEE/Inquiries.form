@@ -22,7 +22,7 @@
         <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="Inquiries_buttonGroup1"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
+    <Component class="javax.swing.ButtonGroup" name="btng2">
     </Component>
   </NonVisualComponents>
   <Properties>
@@ -435,7 +435,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="16" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Clear"/>
+            <Property name="text" type="java.lang.String" value="Reset"/>
             <Property name="alignmentX" type="float" value="0.5"/>
           </Properties>
           <Events>

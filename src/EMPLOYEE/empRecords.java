@@ -7,6 +7,10 @@ package EMPLOYEE;
 
 import ADMIN.*;
 import java.awt.Window;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -20,9 +24,37 @@ public class empRecords extends javax.swing.JFrame {
     /**
      * Creates new form Reports
      */
+    Connection con;
+    PreparedStatement pst;
+    ResultSet rs;
+    int q, i, id, deleteItem;
     public empRecords() {
         initComponents();
-
+    String SUrl,Suser, Spass;
+    SUrl = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+    Suser = "root";
+    Spass = "";
+    String query = "";
+//    String query = "SELECT r.*, iap.Company_Name, p.Tota_Amount, s.No_of_Days"
+//            + "FROM r"
+//            +"INNER JOIN inquiry_and_proposal iap ON r.inquiry_and_proposal_id = iap.inquiry_and_proposal_id"
+//            +"INNER JOIN Payment_table p ON r.payment_table_id = p.payment_table_id"
+//            +"INNER JOIN Scheduling_table s ON r.scheduling_id_id = s.scheduling_id_id";
+            
+//            "SELECT Report_ID, Company_Name, Inquiry_Date, Status, Service_Type, Total_Amount, No_of_Days, Duration"
+//            + "FROM report_table JOIN Company_Name";
+    
+    try{
+             con = DriverManager.getConnection(SUrl,Suser,Spass);
+             pst = con.prepareStatement(query);
+             rs = pst.executeQuery();
+             DefaultTableModel model = (DefaultTableModel)(table.getModel());    
+             while(rs.next()){
+                 model.addRow(new String[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8)});
+             }
+    }catch (Exception ex){
+        System.out.println("Error : " + ex.getMessage());
+    }
     }
 
     /**

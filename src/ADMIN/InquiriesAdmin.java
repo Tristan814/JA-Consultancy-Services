@@ -56,6 +56,11 @@ public class InquiriesAdmin extends javax.swing.JFrame {
     btng.add(rb2);
     btng.add(rb3);
     
+    
+    
+    servicetf.setEditable(false);
+    inquirytf.setEditable(false);
+    stat.setEditable(false);
     }
     
     public void upDateDB() throws SQLException, ClassNotFoundException
@@ -460,10 +465,7 @@ public class InquiriesAdmin extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
                             companytf.setEditable(true);
-                            stat.setEditable(true);
-                            inquirytf.setEditable(true);
-                            servicetf.setEditable(true); 
-                            ipmtf.setEditable(true);// TODO add your handling code here:
+
         
 
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -666,6 +668,7 @@ public class InquiriesAdmin extends javax.swing.JFrame {
                             stat.setEditable(false);
                             inquirytf.setEditable(false);
                             servicetf.setEditable(false);
+                            ipmtf.setEditable(false);
                             
                         }
                 

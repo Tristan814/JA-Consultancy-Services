@@ -8,7 +8,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -45,7 +47,7 @@ try {
     ResultSet rs = pst.executeQuery();
 
     // Assuming reporttable is your JTable and model is its DefaultTableModel
-    DefaultTableModel model = (DefaultTableModel) reporttable.getModel();
+    DefaultTableModel model = (DefaultTableModel) table.getModel();
     
     // Clear the existing rows in the model
     model.setRowCount(0);
@@ -75,7 +77,7 @@ try {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        reporttable = new javax.swing.JTable();
+        table = new javax.swing.JTable();
         searchtf = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -86,7 +88,7 @@ try {
 
         jPanel1.setLayout(null);
 
-        reporttable.setModel(new javax.swing.table.DefaultTableModel(
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -94,12 +96,17 @@ try {
                 "Transaction ID", "Total Amount", "Service Type", "Client ID"
             }
         ));
-        jScrollPane1.setViewportView(reporttable);
+        jScrollPane1.setViewportView(table);
 
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(60, 150, 980, 490);
 
         searchtf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        searchtf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchtfActionPerformed(evt);
+            }
+        });
         jPanel1.add(searchtf);
         searchtf.setBounds(710, 90, 200, 40);
 
@@ -107,6 +114,11 @@ try {
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Search");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1);
         jButton1.setBounds(920, 90, 110, 40);
 
@@ -142,6 +154,17 @@ try {
         dispose();
         
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
+        table.setRowSorter(obj);
+        obj.setRowFilter(RowFilter.regexFilter(searchtf.getText()));
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void searchtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchtfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchtfActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,7 +207,7 @@ try {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable reporttable;
     private javax.swing.JTextField searchtf;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

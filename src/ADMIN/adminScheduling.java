@@ -310,10 +310,7 @@ public class adminScheduling extends javax.swing.JFrame {
     }//GEN-LAST:event_searchtfActionPerformed
 
     private void searchtfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchtfKeyReleased
-        DefaultTableModel model = (DefaultTableModel) tablee.getModel();
-        TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
-        tablee.setRowSorter(obj);
-        obj.setRowFilter(RowFilter.regexFilter(searchtf.getText()));
+
     }//GEN-LAST:event_searchtfKeyReleased
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed

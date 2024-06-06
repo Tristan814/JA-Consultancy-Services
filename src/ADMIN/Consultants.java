@@ -253,6 +253,11 @@ public class Consultants extends javax.swing.JFrame {
         jButton2.setBounds(30, 630, 110, 30);
 
         searchtf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        searchtf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchtfActionPerformed(evt);
+            }
+        });
         searchtf.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 searchtfKeyReleased(evt);
@@ -478,6 +483,10 @@ public class Consultants extends javax.swing.JFrame {
             Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_addActionPerformed
+
+    private void searchtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchtfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchtfActionPerformed
 
     /**
      * @param args the command line arguments

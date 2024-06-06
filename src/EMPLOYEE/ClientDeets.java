@@ -197,9 +197,7 @@ public class ClientDeets extends javax.swing.JFrame {
     }//GEN-LAST:event_backActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new Scheduling().setVisible(true);
-        dispose();
-        
+
         String ipm, cid, contactno, email, address, query;
         Scheduling cd = new Scheduling();
        
