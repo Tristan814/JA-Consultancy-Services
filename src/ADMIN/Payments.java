@@ -27,6 +27,10 @@ import javax.swing.table.TableRowSorter;
  * @author Admin
  */
 public class Payments extends javax.swing.JFrame {
+        Connection con;
+
+    ResultSet rs;
+    int q, i, id, deleteItem;
     
 PreparedStatement pst;
     public Payments() {
@@ -280,37 +284,40 @@ PreparedStatement pst;
     }//GEN-LAST:event_clienttfActionPerformed
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
-    String SUrl = "jdbc:MYSQL://localhost:3306/ja consultancy services";
-    String Suser = "root";
-    String Spass = "";
-         
-        try{
-            Connection con = DriverManager.getConnection(SUrl,Suser,Spass);
-    pst = con.prepareStatement("update payment_table set  total amount =?, client_id =? where payment_id=?");
+       try{
+            String SUrl,Suser, Spass;
+    SUrl = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+    Suser = "root";
+    Spass = "";
+           con = DriverManager.getConnection(SUrl,Suser,Spass);
+   
+    pst = con.prepareStatement("UPDATE payment_table SET Total_Amount =?, Client_ID =? where Payment_ID=?");
     pst.setString(1,totalamounttf.getText());
     pst.setString(2,clienttf.getText());
-     pst.setString(3,paymenttf.getText());
+    pst.setString(3,paymenttf.getText());
+
+    
+    
     int rowsAffected = pst.executeUpdate(); 
+    
     if (rowsAffected > 0 ){
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         int selectedRowIndex = table.getSelectedRow();
         
-       
+        model.setValueAt(paymenttf.getText(), selectedRowIndex, 0);
         model.setValueAt(totalamounttf.getText(), selectedRowIndex, 1);
         model.setValueAt(clienttf.getText(), selectedRowIndex, 2);
-         model.setValueAt(paymenttf.getText(), selectedRowIndex, 3);
-       
+
         
        JOptionPane.showMessageDialog(new JFrame(), "Updated Successfully", "Successed!", JOptionPane.OK_CANCEL_OPTION);
-       con.close();
+
     } else{
         JOptionPane.showMessageDialog(new JFrame(), "Update Failed", "Warning!", JOptionPane.ERROR_MESSAGE);
-       con.close();
     }
 
        
 } catch (SQLException ex) {
-            Logger.getLogger(Payments.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(adminScheduling.class.getName()).log(Level.SEVERE, null, ex);
        
 }
     }//GEN-LAST:event_saveActionPerformed
