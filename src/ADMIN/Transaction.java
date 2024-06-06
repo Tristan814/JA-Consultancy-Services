@@ -172,10 +172,13 @@ public class Transaction extends javax.swing.JFrame {
     }//GEN-LAST:event_searchtfActionPerformed
 
     private void searchtfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchtfKeyReleased
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        if (searchtf.getText().equals("")){
+                   DefaultTableModel model = (DefaultTableModel) table.getModel();
         TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
         table.setRowSorter(obj);
-        obj.setRowFilter(RowFilter.regexFilter(searchtf.getText()));
+        obj.setRowFilter(RowFilter.regexFilter("")); 
+        }
+
     }//GEN-LAST:event_searchtfKeyReleased
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed

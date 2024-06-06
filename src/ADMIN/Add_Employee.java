@@ -103,6 +103,7 @@ public class Add_Employee extends javax.swing.JFrame {
         editbtn = new javax.swing.JButton();
         searchtxt = new javax.swing.JTextField();
         searchbtn = new javax.swing.JButton();
+        delete = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -153,7 +154,7 @@ public class Add_Employee extends javax.swing.JFrame {
             }
         });
         jPanel2.add(clearbtn);
-        clearbtn.setBounds(300, 580, 120, 47);
+        clearbtn.setBounds(40, 580, 120, 47);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Employee ID");
@@ -390,6 +391,17 @@ public class Add_Employee extends javax.swing.JFrame {
         jPanel2.add(searchbtn);
         searchbtn.setBounds(1470, 90, 110, 37);
 
+        delete.setBackground(new java.awt.Color(204, 204, 204));
+        delete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        delete.setText("DELETE");
+        delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteActionPerformed(evt);
+            }
+        });
+        jPanel2.add(delete);
+        delete.setBounds(300, 580, 120, 47);
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ADMIN/add emp bg.png"))); // NOI18N
         jPanel2.add(jLabel1);
         jLabel1.setBounds(0, 0, 1600, 680);
@@ -500,7 +512,7 @@ try{
      
        st.execute(query);
         DefaultTableModel model = (DefaultTableModel) emptable.getModel();
-        model.addRow(new Object[] {empID.getText(),lastname.getText(),firstname.getText(),emppass.getText(),cellno.getText(), address.getText(), dateofb.getText(),age.getText(),email.getText()});
+        model.addRow(new Object[] {empID.getText(),lastname.getText(),firstname.getText(),cellno.getText(),address.getText(), dateofb.getText(), email.getText(),age.getText(),emppass.getText()});
         
         empID.setText("");
        lastname.setText("");
@@ -765,6 +777,52 @@ try{
     }
     }//GEN-LAST:event_searchtxtKeyReleased
 
+    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
+     DefaultTableModel model = (DefaultTableModel) emptable.getModel();
+        int selectedRowIndex = emptable.getSelectedRow();
+//    DELETE FROM `inquiry_and_proposal` WHERE 0
+try {
+    
+         id = Integer.parseInt(model.getValueAt(selectedRowIndex, 0).toString());
+        
+        int delete = JOptionPane.showConfirmDialog(null,"Confirm if you want to delete item","Warning",JOptionPane.YES_NO_OPTION);
+        
+        if (delete ==JOptionPane.YES_NO_OPTION) {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+           
+         String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+         String user = "jaroot";
+         String pass = "";
+         Connection con = DriverManager.getConnection(url,user,pass);
+         String sql = "DELETE FROM `Employee_table` WHERE Employee_ID=?";
+         pst = con.prepareStatement(sql);
+         pst.setInt(1,id);
+         pst.executeUpdate(); 
+        model.removeRow(selectedRowIndex);
+        JOptionPane.showMessageDialog(new JFrame(), "Row Deleted Successfully", "Success!", JOptionPane.CANCEL_OPTION);
+        lastname.setText("");
+        firstname.setText("");
+        age.setText("");
+        cellno.setText("");
+        address.setText("");
+        dateofb.setText("");
+        email.setText("");
+        empID.setText("");
+        empID.setText("");
+        emppass.setText("");
+       
+        
+        
+
+    } else {
+        JOptionPane.showMessageDialog(new JFrame(), "No Row Selected", "Warning!", JOptionPane.WARNING_MESSAGE);
+    }
+} catch (Exception ex) {
+    Logger.getLogger(InquiriesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+    JOptionPane.showMessageDialog(new JFrame(), "Deletion Failed", "Error!", JOptionPane.ERROR_MESSAGE);
+}
+    }//GEN-LAST:event_deleteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -812,6 +870,7 @@ try{
     private javax.swing.JButton clearbtn;
     private javax.swing.JTextField dateofb;
     private javax.swing.JComboBox<String> day;
+    private javax.swing.JButton delete;
     private javax.swing.JButton editbtn;
     private javax.swing.JTextField email;
     private javax.swing.JTextField empID;

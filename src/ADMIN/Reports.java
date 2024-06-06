@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -42,6 +43,7 @@ String query =
 "LEFT JOIN Client_Table ON Transaction_Table.client_id = Client_Table.client_id\n"+
 "LEFT JOIN Inquiry_and_Proposal ON Inquiry_and_Proposal.IPM_ID = Client_Table.IPM_ID\n" +
 "\n" ;
+
 
 try {
     Connection con = DriverManager.getConnection(SUrl, Suser, Spass);
@@ -86,10 +88,50 @@ try {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error fetching data", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        
+        
+//               String url1 = "jdbc:mysql://localhost:3306/ja consultancy services";
+//        String user1 = "root";
+//        String password1 = "";
+//
+//        String query2 = "SELECT p.service_type, SUM(p.total_amount) AS total_amount_sum \" +\n" +
+//"                \"FROM payment_table p \" +\n" +
+//"                \"JOIN inquiry_and_proposal i ON p.service_type = i.service_type \" +\n" +
+//"                \"WHERE i.service_type = 'Consultancy' \" +\n" +
+//"                \"GROUP BY p.service_type";
 
+// try (Connection con = DriverManager.getConnection(url1, user, password);
+//     Statement stmt = con.createStatement();
+//     ResultSet rs = stmt.executeQuery(query2)) {
+//
+//    // Assuming you have a JTextField or similar for each service type
+//    JTextField consultancySumTF = new JTextField();
+//    JTextField auditSumTF = new JTextField();
+//    JTextField otherServiceSumTF = new JTextField();
+
+//    while (rs.next()) {
+//        String serviceType = rs.getString("service_type");
+//        double totalAmountSum = rs.getDouble("total_amount_sum");
+//        String formattedSum = "₱" + String.valueOf(totalAmountSum);
+//
+////        switch (serviceType) {
+////            case "Consultancy":
+////                consultancySumTF.setText(formattedSum);
+////                break;
+////            case "Audit":
+////                auditSumTF.setText(formattedSum);
+////                break;
+////            default:
+////                otherServiceSumTF.setText(formattedSum);
+////                break;
+////        }
+//    }
+
+//} catch (SQLException e) {
+//    e.printStackTrace();
+//    JOptionPane.showMessageDialog(this, "Error fetching data", "Error", JOptionPane.ERROR_MESSAGE);
+//}
     }
-
-
  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -103,6 +145,8 @@ try {
         jButton2 = new javax.swing.JButton();
         sumtf = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        cons = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -128,6 +172,11 @@ try {
         searchtf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchtfActionPerformed(evt);
+            }
+        });
+        searchtf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                searchtfKeyPressed(evt);
             }
         });
         jPanel1.add(searchtf);
@@ -162,12 +211,27 @@ try {
             }
         });
         jPanel1.add(sumtf);
-        sumtf.setBounds(790, 662, 250, 40);
+        sumtf.setBounds(280, 660, 250, 40);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel2.setText("Total Billing:");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(680, 670, 100, 20);
+        jLabel2.setBounds(180, 660, 100, 20);
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel3.setText("Total in Consultancy:");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(560, 660, 180, 20);
+
+        cons.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cons.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        cons.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cons);
+        cons.setBounds(730, 660, 250, 40);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ADMIN/Reports bg.png"))); // NOI18N
         jPanel1.add(jLabel1);
@@ -208,6 +272,19 @@ try {
         // TODO add your handling code here:
     }//GEN-LAST:event_sumtfActionPerformed
 
+    private void consActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_consActionPerformed
+
+    private void searchtfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchtfKeyPressed
+       if(searchtf.getText().equals("")){
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+        TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
+        table.setRowSorter(obj);
+        obj.setRowFilter(RowFilter.regexFilter(""));
+       }
+    }//GEN-LAST:event_searchtfKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -244,10 +321,12 @@ try {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField cons;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField searchtf;

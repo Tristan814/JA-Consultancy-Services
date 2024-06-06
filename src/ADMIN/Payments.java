@@ -10,7 +10,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -25,7 +28,7 @@ import javax.swing.table.TableRowSorter;
  */
 public class Payments extends javax.swing.JFrame {
     
-
+PreparedStatement pst;
     public Payments() {
         initComponents();
   
@@ -96,11 +99,11 @@ public class Payments extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Payment_ID", "Total_Amount", "Client_ID", "Company_Name"
+                "Payment_ID", "Total_Amount", "Client_ID"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -117,7 +120,6 @@ public class Payments extends javax.swing.JFrame {
             table.getColumnModel().getColumn(0).setResizable(false);
             table.getColumnModel().getColumn(1).setResizable(false);
             table.getColumnModel().getColumn(2).setResizable(false);
-            table.getColumnModel().getColumn(3).setResizable(false);
         }
 
         jPanel2.add(jScrollPane2);
@@ -135,6 +137,11 @@ public class Payments extends javax.swing.JFrame {
         delete.setBackground(new java.awt.Color(255, 204, 204));
         delete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         delete.setText("Delete");
+        delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteActionPerformed(evt);
+            }
+        });
         jPanel2.add(delete);
         delete.setBounds(980, 560, 110, 40);
 
@@ -273,7 +280,39 @@ public class Payments extends javax.swing.JFrame {
     }//GEN-LAST:event_clienttfActionPerformed
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
-        // TODO add your handling code here:
+    String SUrl = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+    String Suser = "root";
+    String Spass = "";
+         
+        try{
+            Connection con = DriverManager.getConnection(SUrl,Suser,Spass);
+    pst = con.prepareStatement("update payment_table set  total amount =?, client_id =? where payment_id=?");
+    pst.setString(1,totalamounttf.getText());
+    pst.setString(2,clienttf.getText());
+     pst.setString(3,paymenttf.getText());
+    int rowsAffected = pst.executeUpdate(); 
+    if (rowsAffected > 0 ){
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        int selectedRowIndex = table.getSelectedRow();
+        
+       
+        model.setValueAt(totalamounttf.getText(), selectedRowIndex, 1);
+        model.setValueAt(clienttf.getText(), selectedRowIndex, 2);
+         model.setValueAt(paymenttf.getText(), selectedRowIndex, 3);
+       
+        
+       JOptionPane.showMessageDialog(new JFrame(), "Updated Successfully", "Successed!", JOptionPane.OK_CANCEL_OPTION);
+       con.close();
+    } else{
+        JOptionPane.showMessageDialog(new JFrame(), "Update Failed", "Warning!", JOptionPane.ERROR_MESSAGE);
+       con.close();
+    }
+
+       
+} catch (SQLException ex) {
+            Logger.getLogger(Payments.class.getName()).log(Level.SEVERE, null, ex);
+       
+}
     }//GEN-LAST:event_saveActionPerformed
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
@@ -284,7 +323,10 @@ public class Payments extends javax.swing.JFrame {
     }//GEN-LAST:event_editActionPerformed
 
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
-        // TODO add your handling code here:
+      
+        paymenttf.setText("");
+        totalamounttf.setText("");
+        clienttf.setText("");
     }//GEN-LAST:event_clearActionPerformed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
@@ -322,7 +364,12 @@ public class Payments extends javax.swing.JFrame {
     }//GEN-LAST:event_searchtfActionPerformed
 
     private void searchtfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchtfKeyReleased
-
+            if(searchtf.getText().equals("")){
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
+        TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
+        table.setRowSorter(obj);
+        obj.setRowFilter(RowFilter.regexFilter(""));
+            }
     }//GEN-LAST:event_searchtfKeyReleased
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
@@ -336,6 +383,44 @@ public class Payments extends javax.swing.JFrame {
     private void paymenttfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymenttfActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_paymenttfActionPerformed
+
+    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
+      DefaultTableModel model = (DefaultTableModel) table.getModel();
+        int selectedRowIndex = table.getSelectedRow();
+//    DELETE FROM `inquiry_and_proposal` WHERE 0
+try {
+    
+         int id = Integer.parseInt(model.getValueAt(selectedRowIndex, 0).toString());
+        
+        int delete = JOptionPane.showConfirmDialog(null,"Confirm if you want to delete item","Warning",JOptionPane.YES_NO_OPTION);
+        
+        if (delete ==JOptionPane.YES_NO_OPTION) {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+           
+         String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+         String user = "jaroot";
+         String pass = "";
+         Connection con = DriverManager.getConnection(url,user,pass);
+         String sql = "DELETE FROM `payment_table` WHERE Payment_ID=?";
+         pst = con.prepareStatement(sql);
+         pst.setInt(1,id);
+         pst.executeUpdate(); 
+        model.removeRow(selectedRowIndex);
+        JOptionPane.showMessageDialog(new JFrame(), "Row Deleted Successfully", "Success!", JOptionPane.CANCEL_OPTION);
+        
+        paymenttf.setText("");
+        totalamounttf.setText("");
+        clienttf.setText("");
+        
+
+    } else {
+        JOptionPane.showMessageDialog(new JFrame(), "No Row Selected", "Warning!", JOptionPane.WARNING_MESSAGE);
+    }
+} catch (Exception ex) {
+    Logger.getLogger(InquiriesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+    JOptionPane.showMessageDialog(new JFrame(), "Deletion Failed", "Error!", JOptionPane.ERROR_MESSAGE);
+}
+    }//GEN-LAST:event_deleteActionPerformed
 
     /**
      * @param args the command line arguments

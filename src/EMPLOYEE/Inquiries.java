@@ -771,6 +771,7 @@ Scheduling sc = new Scheduling();
                             stat.setEditable(false);
                             inquirytf.setEditable(false);
                             servicetf.setEditable(false);
+                            ipmtf.setEditable(false);
                             
                         }
                 
@@ -782,13 +783,35 @@ Scheduling sc = new Scheduling();
     }//GEN-LAST:event_tableMouseClicked
 
     private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
+       DefaultTableModel model = (DefaultTableModel) table.getModel();
+        int selectedRowIndex = table.getSelectedRow();
+//    DELETE FROM `inquiry_and_proposal` WHERE 0
 try {
-    DefaultTableModel model = (DefaultTableModel) table.getModel();
-    int selectedRowIndex = table.getSelectedRow();
-
-    if (selectedRowIndex != -1) {
+    
+         id = Integer.parseInt(model.getValueAt(selectedRowIndex, 0).toString());
+        
+        int delete = JOptionPane.showConfirmDialog(null,"Confirm if you want to delete item","Warning",JOptionPane.YES_NO_OPTION);
+        
+        if (delete ==JOptionPane.YES_NO_OPTION) {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+           
+         String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+         String user = "jaroot";
+         String pass = "";
+         Connection con = DriverManager.getConnection(url,user,pass);
+         String sql = "DELETE FROM `inquiry_and_proposal` WHERE IPM_ID=?";
+         pst = con.prepareStatement(sql);
+         pst.setInt(1,id);
+         pst.executeUpdate(); 
         model.removeRow(selectedRowIndex);
         JOptionPane.showMessageDialog(new JFrame(), "Row Deleted Successfully", "Success!", JOptionPane.CANCEL_OPTION);
+        ipmtf.setText("");
+        companytf.setText("");
+        inquirytf.setText("");
+        servicetf.setText("");
+        stat.setText("");
+        
+
     } else {
         JOptionPane.showMessageDialog(new JFrame(), "No Row Selected", "Warning!", JOptionPane.WARNING_MESSAGE);
     }

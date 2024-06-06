@@ -403,6 +403,7 @@ public class Consultants extends javax.swing.JFrame {
             firstntf.setText("");
             contactnotf.setText("");
             emailtf.setText("");
+            constf.setEditable(true);
 
         } catch (SQLException ex) {
             Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE, null, ex);

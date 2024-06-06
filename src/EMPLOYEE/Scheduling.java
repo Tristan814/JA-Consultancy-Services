@@ -27,6 +27,7 @@ public class Scheduling extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         
         clientid.setEditable(false);
+        servetf.setEditable(false);
         servetf.setText(Inquiries.sc);
     }
 
