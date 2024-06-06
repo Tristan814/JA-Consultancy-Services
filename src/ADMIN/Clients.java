@@ -36,6 +36,7 @@ public class Clients extends javax.swing.JFrame {
     PreparedStatement pst;
     ResultSet rs;
     int q, i, id, deleteItem;
+    
     public Clients() {
         initComponents();
           initComponents();
@@ -89,8 +90,8 @@ public class Clients extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         save = new javax.swing.JButton();
         deletebtn = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        edit = new javax.swing.JButton();
+        resetbtn = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -226,28 +227,28 @@ public class Clients extends javax.swing.JFrame {
         jPanel1.add(deletebtn);
         deletebtn.setBounds(1300, 620, 100, 40);
 
-        jButton4.setBackground(new java.awt.Color(48, 54, 66));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Edit");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        edit.setBackground(new java.awt.Color(48, 54, 66));
+        edit.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        edit.setForeground(new java.awt.Color(255, 255, 255));
+        edit.setText("Edit");
+        edit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                editActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4);
-        jButton4.setBounds(940, 620, 100, 40);
+        jPanel1.add(edit);
+        edit.setBounds(940, 620, 100, 40);
 
-        jButton6.setBackground(new java.awt.Color(204, 204, 204));
-        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jButton6.setText("Reset");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        resetbtn.setBackground(new java.awt.Color(204, 204, 204));
+        resetbtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        resetbtn.setText("Reset");
+        resetbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                resetbtnActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton6);
-        jButton6.setBounds(1180, 620, 100, 40);
+        jPanel1.add(resetbtn);
+        resetbtn.setBounds(1180, 620, 100, 40);
 
         jButton7.setText("Back");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -294,7 +295,39 @@ public class Clients extends javax.swing.JFrame {
     }//GEN-LAST:event_searchtfActionPerformed
 
     private void deletebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebtnActionPerformed
-
+  DefaultTableModel model = (DefaultTableModel) table.getModel();
+    int selectedRowIndex = table.getSelectedRow();
+    try {
+         id = Integer.parseInt(model.getValueAt(selectedRowIndex, 0).toString());
+        int delete = JOptionPane.showConfirmDialog(null,"Confirm if you want to delete item","Warning",JOptionPane.YES_NO_OPTION);
+        if (delete ==JOptionPane.YES_NO_OPTION) {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+         String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+         String user = "jaroot";
+         String pass = "";
+         Connection con = DriverManager.getConnection(url,user,pass);
+         String sql = "DELETE FROM `client_table` WHERE Client_ID=?";
+         pst = con.prepareStatement(sql);
+         pst.setInt(1,id);
+         pst.executeUpdate(); 
+        model.removeRow(selectedRowIndex);
+        JOptionPane.showMessageDialog(new JFrame(), "Row Deleted Successfully", "Success!", JOptionPane.CANCEL_OPTION);
+        clientidtf.setText("");
+        comptf.setText("");
+        contacttf.setText("");
+        emailtf.setText("");
+        addresstf.setText("");   
+    } else {
+        JOptionPane.showMessageDialog(new JFrame(), "No Row Selected", "Warning!", JOptionPane.WARNING_MESSAGE);
+    }
+} catch (Exception ex) {
+    Logger.getLogger(InquiriesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+    JOptionPane.showMessageDialog(new JFrame(), "Deletion Failed", "Error!", JOptionPane.ERROR_MESSAGE);
+}
+        
+        
+        
+        
     }//GEN-LAST:event_deletebtnActionPerformed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
@@ -333,19 +366,19 @@ public class Clients extends javax.swing.JFrame {
         
     }//GEN-LAST:event_tableMouseClicked
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
                         
-                            contacttf.setEditable(false);
-                            emailtf.setEditable(false);
-                            addresstf.setEditable(false);
-    }//GEN-LAST:event_jButton4ActionPerformed
+                            contacttf.setEditable(true);
+                            emailtf.setEditable(true);
+                            addresstf.setEditable(true);
+    }//GEN-LAST:event_editActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void resetbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetbtnActionPerformed
                         
                             contacttf.setText("");
                             emailtf.setText("");
                             addresstf.setText("");
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_resetbtnActionPerformed
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         
@@ -426,11 +459,10 @@ public class Clients extends javax.swing.JFrame {
     private javax.swing.JTextField comptf;
     private javax.swing.JTextField contacttf;
     private javax.swing.JButton deletebtn;
+    private javax.swing.JButton edit;
     private javax.swing.JTextField emailtf;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -440,6 +472,7 @@ public class Clients extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton resetbtn;
     private javax.swing.JButton save;
     private javax.swing.JTextField searchtf;
     private javax.swing.JTable table;
