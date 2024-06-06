@@ -89,10 +89,11 @@ public class Consultants extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(null);
 
         save.setBackground(new java.awt.Color(0, 153, 102));
-        save.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        save.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         save.setForeground(new java.awt.Color(255, 255, 255));
         save.setText("Save");
         save.addActionListener(new java.awt.event.ActionListener() {
@@ -208,7 +209,7 @@ public class Consultants extends javax.swing.JFrame {
         jLabel6.setBounds(800, 240, 90, 20);
 
         add.setBackground(new java.awt.Color(153, 0, 0));
-        add.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        add.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         add.setForeground(new java.awt.Color(255, 255, 255));
         add.setText("Add");
         add.addActionListener(new java.awt.event.ActionListener() {
@@ -219,8 +220,8 @@ public class Consultants extends javax.swing.JFrame {
         jPanel2.add(add);
         add.setBounds(780, 530, 110, 50);
 
-        edit.setBackground(new java.awt.Color(0, 204, 204));
-        edit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        edit.setBackground(new java.awt.Color(48, 54, 66));
+        edit.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         edit.setForeground(new java.awt.Color(255, 255, 255));
         edit.setText("Edit");
         edit.addActionListener(new java.awt.event.ActionListener() {
@@ -231,9 +232,8 @@ public class Consultants extends javax.swing.JFrame {
         jPanel2.add(edit);
         edit.setBounds(900, 530, 110, 50);
 
-        reset.setBackground(new java.awt.Color(204, 204, 0));
-        reset.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        reset.setForeground(new java.awt.Color(255, 255, 255));
+        reset.setBackground(new java.awt.Color(204, 204, 204));
+        reset.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         reset.setText("Reset");
         reset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -252,6 +252,7 @@ public class Consultants extends javax.swing.JFrame {
         jPanel2.add(jButton2);
         jButton2.setBounds(30, 630, 110, 30);
 
+        searchtf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         searchtf.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 searchtfKeyReleased(evt);
@@ -284,155 +285,12 @@ public class Consultants extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void lastntfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastntfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lastntfActionPerformed
-
-    private void firstntfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstntfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_firstntfActionPerformed
-
-    private void emailtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailtfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emailtfActionPerformed
-
-    private void constfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_constfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_constfActionPerformed
-
-    private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
-    try{
-    pst = con.prepareStatement("update consultant_table set Last_Name =?, First_Name =?, Contact_No =?, Email =? where Cons_ID=?");
-    pst.setString(1,lastntf.getText());
-    pst.setString(2,firstntf.getText());
-    pst.setString(3,contactnotf.getText());
-    pst.setString(4,emailtf.getText());
-    pst.setString(5,constf.getText());
-    
-        
-    int rowsAffected = pst.executeUpdate(); 
-    
-    if (rowsAffected > 0 ){
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-        int selectedRowIndex = table.getSelectedRow();
-        
-        model.setValueAt(constf.getText(), selectedRowIndex, 0);
-        model.setValueAt(lastntf.getText(), selectedRowIndex, 1);
-        model.setValueAt(firstntf.getText(), selectedRowIndex, 2);
-        model.setValueAt(contactnotf.getText(), selectedRowIndex, 3);
-        model.setValueAt(emailtf.getText(), selectedRowIndex, 4);
-        
-       JOptionPane.showMessageDialog(new JFrame(), "Updated Successfully", "Successed!", JOptionPane.OK_CANCEL_OPTION);
-       con.close();
-    } else{
-        JOptionPane.showMessageDialog(new JFrame(), "Update Failed", "Warning!", JOptionPane.ERROR_MESSAGE);
-       con.close();
-    }
-       
-               
-       constf.setText("");
-       lastntf.setText("");
-       firstntf.setText("");
-       contactnotf.setText("");
-       emailtf.setText("");
-       
-} catch (SQLException ex) {
-            Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE, null, ex);
-       
-}
-                      
-                              
-    }//GEN-LAST:event_saveActionPerformed
-
-    private void contactnotfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contactnotfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_contactnotfActionPerformed
-
-    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
-    String ipm, cn, stats, inq, serv, query;
-       
-       try{
-           Class.forName("com.mysql.cj.jdbc.Driver");
-           
-         String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
-         String user = "jaroot";
-         String pass = "";
-         
-         Connection con = DriverManager.getConnection(url,user,pass);
-         Statement st = con.createStatement();
-
-         if("".equals(lastntf.getText())){
-             JOptionPane.showMessageDialog(new JFrame(), "Last Name is required", "Error", JOptionPane.ERROR_MESSAGE);
-         }
-         else if("".equals(emailtf.getText())){
-             JOptionPane.showMessageDialog(new JFrame(), "Email is required", "Error", JOptionPane.ERROR_MESSAGE);
-         }
-         else if("".equals(firstntf.getText())){
-             JOptionPane.showMessageDialog(new JFrame(), "First Name is required", "Error", JOptionPane.ERROR_MESSAGE);
-         }
-         else if("".equals(contactnotf.getText())){
-             JOptionPane.showMessageDialog(new JFrame(), "Contact Number is required", "Error", JOptionPane.ERROR_MESSAGE);
-         }
-         else if("".equals(constf.getText())){
-             JOptionPane.showMessageDialog(new JFrame(), "Consultant ID is required", "Error", JOptionPane.ERROR_MESSAGE);
-         }
-         else{
-       cn = lastntf.getText();
-       stats = emailtf.getText();
-       inq =  firstntf.getText();
-       serv =  contactnotf.getText();
-       ipm = constf.getText();
-       query = "INSERT INTO consultant_table(Cons_ID, Last_Name, First_Name, Contact_No, Email)"
-               + "VALUES('"+ipm+"','"+cn+"','"+inq+"','"+serv+"','"+stats+"')";
-         
-       
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-        model.addRow(new Object[] {constf.getText(),lastntf.getText(),firstntf.getText(),emailtf.getText(),contactnotf.getText()});
-
-
-       st.executeUpdate(query);
-       emailtf.setText("");
-       firstntf.setText("");
-       contactnotf.setText("");
-       constf.setText("");
-       lastntf.setText("");
-       JOptionPane.showMessageDialog(new JFrame(), "Successfuly Registered", "Successed!", JOptionPane.OK_OPTION);
-       con.close();
-       
-
-         }
-        
-       }catch (ClassNotFoundException ex){
-           Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE,null,ex);
-       //    System.out.println("Error" + ex.getMessage());
-       } catch (SQLException ex) {
-            Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_addActionPerformed
-
-    private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
-    lastntf.setEditable(true);
-    emailtf.setEditable(true);
-    firstntf.setEditable(true);
-    contactnotf.setEditable(true);
-    }//GEN-LAST:event_editActionPerformed
-
-    private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
-        
-       emailtf.setText("");
-       firstntf.setText("");
-       contactnotf.setText("");
-       constf.setText("");
-       lastntf.setText("");
-
-    }//GEN-LAST:event_resetActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         new FileMaintenance().setVisible(true);
@@ -484,6 +342,142 @@ public class Consultants extends javax.swing.JFrame {
         table.setRowSorter(obj);
         obj.setRowFilter(RowFilter.regexFilter(searchtf.getText()));
     }//GEN-LAST:event_searchtfKeyReleased
+
+    private void contactnotfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contactnotfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_contactnotfActionPerformed
+
+    private void constfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_constfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_constfActionPerformed
+
+    private void lastntfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastntfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lastntfActionPerformed
+
+    private void firstntfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstntfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_firstntfActionPerformed
+
+    private void emailtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailtfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailtfActionPerformed
+
+    private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
+        try{
+            pst = con.prepareStatement("update consultant_table set Last_Name =?, First_Name =?, Contact_No =?, Email =? where Cons_ID=?");
+            pst.setString(1,lastntf.getText());
+            pst.setString(2,firstntf.getText());
+            pst.setString(3,contactnotf.getText());
+            pst.setString(4,emailtf.getText());
+            pst.setString(5,constf.getText());
+
+            int rowsAffected = pst.executeUpdate();
+
+            if (rowsAffected > 0 ){
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
+                int selectedRowIndex = table.getSelectedRow();
+
+                model.setValueAt(constf.getText(), selectedRowIndex, 0);
+                model.setValueAt(lastntf.getText(), selectedRowIndex, 1);
+                model.setValueAt(firstntf.getText(), selectedRowIndex, 2);
+                model.setValueAt(contactnotf.getText(), selectedRowIndex, 3);
+                model.setValueAt(emailtf.getText(), selectedRowIndex, 4);
+
+                JOptionPane.showMessageDialog(new JFrame(), "Updated Successfully", "Successed!", JOptionPane.OK_CANCEL_OPTION);
+                con.close();
+            } else{
+                JOptionPane.showMessageDialog(new JFrame(), "Update Failed", "Warning!", JOptionPane.ERROR_MESSAGE);
+                con.close();
+            }
+
+            constf.setText("");
+            lastntf.setText("");
+            firstntf.setText("");
+            contactnotf.setText("");
+            emailtf.setText("");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+    }//GEN-LAST:event_saveActionPerformed
+
+    private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
+
+        emailtf.setText("");
+        firstntf.setText("");
+        contactnotf.setText("");
+        constf.setText("");
+        lastntf.setText("");
+    }//GEN-LAST:event_resetActionPerformed
+
+    private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
+        lastntf.setEditable(true);
+        emailtf.setEditable(true);
+        firstntf.setEditable(true);
+        contactnotf.setEditable(true);
+    }//GEN-LAST:event_editActionPerformed
+
+    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
+        String ipm, cn, stats, inq, serv, query;
+
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+            String user = "jaroot";
+            String pass = "";
+
+            Connection con = DriverManager.getConnection(url,user,pass);
+            Statement st = con.createStatement();
+
+            if("".equals(lastntf.getText())){
+                JOptionPane.showMessageDialog(new JFrame(), "Last Name is required", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else if("".equals(emailtf.getText())){
+                JOptionPane.showMessageDialog(new JFrame(), "Email is required", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else if("".equals(firstntf.getText())){
+                JOptionPane.showMessageDialog(new JFrame(), "First Name is required", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else if("".equals(contactnotf.getText())){
+                JOptionPane.showMessageDialog(new JFrame(), "Contact Number is required", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else if("".equals(constf.getText())){
+                JOptionPane.showMessageDialog(new JFrame(), "Consultant ID is required", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                cn = lastntf.getText();
+                stats = emailtf.getText();
+                inq =  firstntf.getText();
+                serv =  contactnotf.getText();
+                ipm = constf.getText();
+                query = "INSERT INTO consultant_table(Cons_ID, Last_Name, First_Name, Contact_No, Email)"
+                + "VALUES('"+ipm+"','"+cn+"','"+inq+"','"+serv+"','"+stats+"')";
+
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
+                model.addRow(new Object[] {constf.getText(),lastntf.getText(),firstntf.getText(),emailtf.getText(),contactnotf.getText()});
+
+                st.executeUpdate(query);
+                emailtf.setText("");
+                firstntf.setText("");
+                contactnotf.setText("");
+                constf.setText("");
+                lastntf.setText("");
+                JOptionPane.showMessageDialog(new JFrame(), "Successfuly Registered", "Successed!", JOptionPane.OK_OPTION);
+                con.close();
+
+            }
+
+        }catch (ClassNotFoundException ex){
+            Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE,null,ex);
+            //    System.out.println("Error" + ex.getMessage());
+        } catch (SQLException ex) {
+            Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_addActionPerformed
 
     /**
      * @param args the command line arguments

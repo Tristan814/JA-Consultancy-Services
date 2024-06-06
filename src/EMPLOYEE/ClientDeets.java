@@ -57,15 +57,25 @@ public class ClientDeets extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
+
+        addresstf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel1.add(addresstf);
         addresstf.setBounds(340, 390, 250, 40);
+
+        emailtf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel1.add(emailtf);
         emailtf.setBounds(340, 500, 250, 40);
+
+        statustf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel1.add(statustf);
         statustf.setBounds(340, 160, 250, 40);
+
+        contactnotf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel1.add(contactnotf);
         contactnotf.setBounds(50, 500, 250, 40);
 
+        back.setBackground(new java.awt.Color(204, 204, 204));
+        back.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         back.setText("Back");
         back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,7 +83,7 @@ public class ClientDeets extends javax.swing.JFrame {
             }
         });
         jPanel1.add(back);
-        back.setBounds(40, 650, 110, 40);
+        back.setBounds(60, 680, 110, 40);
 
         jLabel2.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -99,6 +109,9 @@ public class ClientDeets extends javax.swing.JFrame {
         jPanel1.add(jLabel5);
         jLabel5.setBounds(430, 550, 70, 18);
 
+        jButton1.setBackground(new java.awt.Color(153, 0, 0));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Next");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,14 +119,21 @@ public class ClientDeets extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(485, 650, 100, 40);
+        jButton1.setBounds(490, 680, 100, 40);
+
+        clienidtf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel1.add(clienidtf);
         clienidtf.setBounds(50, 390, 250, 40);
+
+        datetf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel1.add(datetf);
         datetf.setBounds(50, 270, 250, 40);
+
+        companyytf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel1.add(companyytf);
         companyytf.setBounds(340, 270, 250, 40);
 
+        ipmidtf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ipmidtf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ipmidtfActionPerformed(evt);
@@ -177,8 +197,11 @@ public class ClientDeets extends javax.swing.JFrame {
     }//GEN-LAST:event_backActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
- String ipm, cid, contactno, email, address, query;
- Scheduling cd = new Scheduling();
+        new Scheduling().setVisible(true);
+        dispose();
+        
+        String ipm, cid, contactno, email, address, query;
+        Scheduling cd = new Scheduling();
        
        try{
            Class.forName("com.mysql.cj.jdbc.Driver");

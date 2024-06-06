@@ -66,28 +66,31 @@ public class Scheduling extends javax.swing.JFrame {
 
         jPanel1.setPreferredSize(new java.awt.Dimension(680, 740));
         jPanel1.setLayout(null);
-        jPanel1.add(sched);
-        sched.setBounds(400, 120, 250, 47);
 
+        sched.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel1.add(sched);
+        sched.setBounds(400, 130, 250, 40);
+
+        transtf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         transtf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 transtfActionPerformed(evt);
             }
         });
         jPanel1.add(transtf);
-        transtf.setBounds(10, 490, 250, 50);
+        transtf.setBounds(30, 460, 230, 40);
 
+        clientid.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         clientid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clientidActionPerformed(evt);
             }
         });
         jPanel1.add(clientid);
-        clientid.setBounds(10, 360, 250, 47);
+        clientid.setBounds(30, 350, 230, 40);
 
-        jButton1.setBackground(new java.awt.Color(51, 51, 51));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setBackground(new java.awt.Color(249, 249, 249));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setText("BACK");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,25 +98,25 @@ public class Scheduling extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(320, 690, 160, 40);
+        jButton1.setBounds(30, 690, 100, 40);
 
-        jLabel7.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel7.setText("SCHED ID");
+        jLabel7.setText("SCHED ID:");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(470, 90, 90, 18);
+        jLabel7.setBounds(400, 100, 90, 18);
 
-        jLabel8.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel8.setText("NO. OF DAYS:");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(460, 210, 111, 18);
+        jLabel8.setBounds(400, 208, 110, 20);
 
-        jLabel9.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel9.setText("TOTAL AMOUNT");
+        jLabel9.setText("TOTAL AMOUNT:");
         jPanel1.add(jLabel9);
-        jLabel9.setBounds(60, 210, 140, 18);
+        jLabel9.setBounds(30, 210, 140, 18);
 
         jButton2.setBackground(new java.awt.Color(153, 0, 0));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -125,32 +128,40 @@ public class Scheduling extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(490, 690, 170, 40);
+        jButton2.setBounds(550, 690, 110, 40);
 
-        jLabel10.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel10.setText("CLIENT ID");
+        jLabel10.setText("CLIENT ID:");
         jPanel1.add(jLabel10);
-        jLabel10.setBounds(70, 340, 90, 18);
-        jPanel1.add(totalamount);
-        totalamount.setBounds(10, 240, 250, 47);
-        jPanel1.add(payment);
-        payment.setBounds(10, 120, 250, 47);
+        jLabel10.setBounds(30, 320, 90, 20);
 
-        jLabel11.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        totalamount.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel1.add(totalamount);
+        totalamount.setBounds(30, 240, 230, 40);
+
+        payment.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel1.add(payment);
+        payment.setBounds(30, 130, 230, 40);
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel11.setText("PAYMENT ID");
+        jLabel11.setText("PAYMENT ID:");
         jPanel1.add(jLabel11);
-        jLabel11.setBounds(70, 90, 140, 18);
+        jLabel11.setBounds(30, 100, 140, 20);
+
+        noofdays.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel1.add(noofdays);
-        noofdays.setBounds(400, 240, 250, 47);
+        noofdays.setBounds(400, 240, 250, 40);
 
         jLabel12.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel12.setText("FOR TRANSACTION ID:");
         jPanel1.add(jLabel12);
-        jLabel12.setBounds(40, 470, 190, 20);
+        jLabel12.setBounds(30, 430, 190, 20);
 
+        jButton3.setBackground(new java.awt.Color(204, 204, 204));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton3.setText("Reset");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,43 +169,47 @@ public class Scheduling extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton3);
-        jButton3.setBounds(190, 690, 120, 40);
-        jPanel1.add(duration1);
-        duration1.setBounds(400, 360, 250, 50);
+        jButton3.setBounds(410, 690, 120, 40);
 
-        jLabel13.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        duration1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel1.add(duration1);
+        duration1.setBounds(400, 350, 250, 40);
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel13.setText("DURATION:");
         jPanel1.add(jLabel13);
-        jLabel13.setBounds(470, 340, 110, 18);
+        jLabel13.setBounds(400, 320, 110, 18);
 
         jLabel14.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel14.setText("FOR REPORT ID:");
         jPanel1.add(jLabel14);
-        jLabel14.setBounds(50, 590, 160, 18);
+        jLabel14.setBounds(30, 540, 160, 18);
 
+        reporttf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         reporttf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 reporttfActionPerformed(evt);
             }
         });
         jPanel1.add(reporttf);
-        reporttf.setBounds(10, 610, 250, 50);
+        reporttf.setBounds(30, 570, 230, 40);
 
+        constf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         constf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 constfActionPerformed(evt);
             }
         });
         jPanel1.add(constf);
-        constf.setBounds(400, 490, 250, 50);
+        constf.setBounds(400, 460, 250, 40);
 
-        jLabel15.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel15.setText("CONSULTANT ID:");
         jPanel1.add(jLabel15);
-        jLabel15.setBounds(450, 470, 160, 18);
+        jLabel15.setBounds(400, 430, 160, 18);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EMPLOYEE/scheduling bg.png"))); // NOI18N
         jPanel1.add(jLabel1);

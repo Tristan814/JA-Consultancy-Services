@@ -131,7 +131,6 @@ public class InquiriesAdmin extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         save = new javax.swing.JButton();
         next = new javax.swing.JButton();
-        add = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         month = new javax.swing.JComboBox<>();
@@ -234,7 +233,7 @@ public class InquiriesAdmin extends javax.swing.JFrame {
             }
         });
         jPanel1.add(save);
-        save.setBounds(1000, 650, 100, 40);
+        save.setBounds(1020, 650, 100, 40);
 
         next.setText("next");
         next.addActionListener(new java.awt.event.ActionListener() {
@@ -244,19 +243,6 @@ public class InquiriesAdmin extends javax.swing.JFrame {
         });
         jPanel1.add(next);
         next.setBounds(1390, 760, 75, 23);
-
-        add.setBackground(new java.awt.Color(118, 8, 8));
-        add.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        add.setForeground(new java.awt.Color(255, 255, 255));
-        add.setText("Add");
-        add.setAlignmentX(0.5F);
-        add.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addActionPerformed(evt);
-            }
-        });
-        jPanel1.add(add);
-        add.setBounds(890, 650, 100, 40);
 
         jButton5.setText("Back");
         jButton5.setAlignmentX(0.5F);
@@ -279,7 +265,7 @@ public class InquiriesAdmin extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton6);
-        jButton6.setBounds(1110, 650, 100, 40);
+        jButton6.setBounds(890, 650, 100, 40);
 
         month.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Month", "January", "February", "March ", "April", "May", "June", "July ", "August ", "September", "October", "November", "December" }));
         month.addActionListener(new java.awt.event.ActionListener() {
@@ -310,7 +296,7 @@ public class InquiriesAdmin extends javax.swing.JFrame {
 
         jButton7.setBackground(new java.awt.Color(204, 204, 204));
         jButton7.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jButton7.setText("Clear");
+        jButton7.setText("Reset");
         jButton7.setAlignmentX(0.5F);
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -318,7 +304,7 @@ public class InquiriesAdmin extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton7);
-        jButton7.setBounds(1220, 650, 100, 40);
+        jButton7.setBounds(1150, 650, 100, 40);
 
         servicetf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         servicetf.addActionListener(new java.awt.event.ActionListener() {
@@ -377,7 +363,7 @@ public class InquiriesAdmin extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Delete);
-        Delete.setBounds(1330, 650, 100, 40);
+        Delete.setBounds(1280, 650, 100, 40);
 
         searchtf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         searchtf.addActionListener(new java.awt.event.ActionListener() {
@@ -554,71 +540,6 @@ public class InquiriesAdmin extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
- String ipm, cn, stats, inq, serv, query1;
-       
-       try{
-           Class.forName("com.mysql.cj.jdbc.Driver");
-           
-         String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
-         String user = "jaroot";
-         String pass = "";
-         
-         Connection con = DriverManager.getConnection(url,user,pass);
-         Statement st1 = con.createStatement();
-         Statement st2 = con.createStatement();
-
-         if("".equals(ipmtf.getText())){
-             JOptionPane.showMessageDialog(new JFrame(), "IPM ID is required", "Error", JOptionPane.ERROR_MESSAGE);
-         }
-         else if("".equals(companytf.getText())){
-             JOptionPane.showMessageDialog(new JFrame(), "Company Name is required", "Error", JOptionPane.ERROR_MESSAGE);
-         }
-         else if("".equals(stat.getText())){
-             JOptionPane.showMessageDialog(new JFrame(), "Status is required", "Error", JOptionPane.ERROR_MESSAGE);
-         }
-         else if("".equals(inquirytf.getText())){
-             JOptionPane.showMessageDialog(new JFrame(), "Inquiry Date is required", "Error", JOptionPane.ERROR_MESSAGE);
-         }
-         else if("".equals(servicetf.getText())){
-             JOptionPane.showMessageDialog(new JFrame(), "Service Type is required", "Error", JOptionPane.ERROR_MESSAGE);
-         }
-         else{
-       ipm = ipmtf.getText();
-       cn = companytf.getText();
-       stats =  stat.getText();
-       inq =  inquirytf.getText();
-       serv = servicetf.getText();
-       
-
-       
-       query1 = "INSERT INTO inquiry_and_proposal(IPM_ID, Company_Name, Inquiry_Date, Service_Type, Status)"
-               + "VALUES('"+ipm+"','"+cn+"','"+inq+"','"+serv+"','"+stats+"')";
-         
-//       query2 = "INSERT INTO transaction_table (Trans_ID, Cons_ID, Client_ID, Payment_ID, Schedule_ID)"
-//               + "VALUES(?,'"+cons+"',?,?,?)";
-       
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-        model.addRow(new Object[] {ipmtf.getText(),companytf.getText(),inquirytf.getText(),servicetf.getText(),stat.getText()});
-
-
-       st1.executeUpdate(query1);
-
-       JOptionPane.showMessageDialog(new JFrame(), "Successfuly Registered", "Successed!", JOptionPane.OK_OPTION);
-       con.close();
-       
-
-         }
-        
-       }catch (ClassNotFoundException ex){
-           Logger.getLogger(InquiriesAdmin.class.getName()).log(Level.SEVERE,null,ex);
-       //    System.out.println("Error" + ex.getMessage());
-       } catch (SQLException ex) {
-            Logger.getLogger(InquiriesAdmin.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }//GEN-LAST:event_addActionPerformed
 
     private void monthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthActionPerformed
       String a;
@@ -858,7 +779,6 @@ try {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Delete;
-    private javax.swing.JButton add;
     private javax.swing.ButtonGroup btng;
     private javax.swing.ButtonGroup buttonGroup1;
     public static javax.swing.JTextField companytf;

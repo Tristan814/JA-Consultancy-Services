@@ -3,12 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ADMIN;
+package EMPLOYEE;
 
+import EMPLOYEE.Inquiries;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -17,27 +24,22 @@ import javax.swing.table.TableRowSorter;
  *
  * @author Admin
  */
-public class Transaction extends javax.swing.JFrame {
+public class Consultants extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Transaction
-     */
-    
-
-    public Transaction() {
-        initComponents();
-        
     Connection con;
     PreparedStatement pst;
     ResultSet rs;
     int q, i, id, deleteItem;
-    
-            String SUrl,Suser, Spass;
-    SUrl = "jdbc:MYSQL://localhost:3306/ja consultancy services";
-    Suser = "root";
-    Spass = "";
-    String query = "SELECT * FROM transaction_table";
-    
+
+    public Consultants() {
+        initComponents();
+
+        String SUrl, Suser, Spass;
+        SUrl = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+        Suser = "root";
+        Spass = "";
+        String query = "SELECT * FROM consultant_table";
+        
     try{
              con = DriverManager.getConnection(SUrl,Suser,Spass);
              pst = con.prepareStatement(query);
@@ -49,6 +51,9 @@ public class Transaction extends javax.swing.JFrame {
     }catch (Exception ex){
         System.out.println("Error : " + ex.getMessage());
     }
+    
+    
+    
     }
 
     /**
@@ -60,41 +65,39 @@ public class Transaction extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        back = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
         searchtf = new javax.swing.JTextField();
-        search = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        searchbtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-
-        back.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        back.setText("<-- Back");
-        back.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                backMouseClicked(evt);
-            }
-        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(null);
 
+        table.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "TRANS_ID", "CONS_ID", "CLIENT_ID", "PAYMENT_ID", "SCHEDULE_ID"
+                "CONSULTANT ID", "LAST NAME", "FIRST NAME", "CONTACT NO.", "EMAIL"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(table);
@@ -103,73 +106,104 @@ public class Transaction extends javax.swing.JFrame {
             table.getColumnModel().getColumn(1).setResizable(false);
             table.getColumnModel().getColumn(2).setResizable(false);
             table.getColumnModel().getColumn(3).setResizable(false);
+            table.getColumnModel().getColumn(4).setResizable(false);
         }
 
         jPanel2.add(jScrollPane2);
-        jScrollPane2.setBounds(70, 140, 769, 489);
+        jScrollPane2.setBounds(30, 140, 720, 470);
 
-        searchtf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        searchtf.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setText("Back");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchtfActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
+        jPanel2.add(jButton2);
+        jButton2.setBounds(30, 630, 110, 30);
+
+        searchtf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         searchtf.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 searchtfKeyReleased(evt);
             }
         });
         jPanel2.add(searchtf);
-        searchtf.setBounds(510, 80, 210, 40);
+        searchtf.setBounds(440, 80, 220, 40);
 
-        search.setBackground(new java.awt.Color(0, 51, 102));
-        search.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        search.setForeground(new java.awt.Color(255, 255, 255));
-        search.setText("Search");
-        search.addActionListener(new java.awt.event.ActionListener() {
+        searchbtn.setBackground(new java.awt.Color(0, 102, 102));
+        searchbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        searchbtn.setForeground(new java.awt.Color(255, 255, 255));
+        searchbtn.setText("Search");
+        searchbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchActionPerformed(evt);
+                searchbtnActionPerformed(evt);
             }
         });
-        jPanel2.add(search);
-        search.setBounds(730, 80, 110, 40);
+        jPanel2.add(searchbtn);
+        searchbtn.setBounds(670, 80, 80, 40);
 
-        jButton1.setText("Back");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton1);
-        jButton1.setBounds(20, 640, 72, 30);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ADMIN/transactions bg.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EMPLOYEE/emp consultant bg.png"))); // NOI18N
         jPanel2.add(jLabel1);
-        jLabel1.setBounds(0, 0, 900, 680);
+        jLabel1.setBounds(0, 0, 780, 670);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseClicked
-        new FileMaintenance().setVisible(true);
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        new EmployeeDash().setVisible(true);
         dispose();
-    }//GEN-LAST:event_backMouseClicked
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void searchtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchtfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchtfActionPerformed
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+//        int id = Integer.parseInt(table.getValueAt(table.getSelectedRow(),0).toString());
+//        try{
+//               Class.forName("com.mysql.cj.jdbc.Driver");
+//           
+//         String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+//         String user = "jaroot";
+//         String pass = "";
+//         
+//         Connection con = DriverManager.getConnection(url,user,pass);
+//         Statement st = con.createStatement();
+//         ResultSet res =st.executeQuery("select * from consultant_table where Cons_ID ="+id);
+//                        while(res.next()){
+//                            constf.setText(res.getString("Cons_ID"));
+//                            lastntf.setText(res.getString("Last_Name"));
+//                            firstntf.setText(res.getString("First_Name"));
+//                            contactnotf.setText(res.getString("Contact_No"));
+//                             emailtf.setText(res.getString("Email"));
+//                             
+//                             constf.setEditable(false);
+//                            lastntf.setEditable(false);
+//                            firstntf.setEditable(false);
+//                            contactnotf.setEditable(false);
+//                            emailtf.setEditable(false);
+//                        }
+//                
+//        }
+//        catch(Exception e){
+//            e.printStackTrace();
+//        }
+    }//GEN-LAST:event_tableMouseClicked
+
+    private void searchbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchbtnActionPerformed
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
+        table.setRowSorter(obj);
+        obj.setRowFilter(RowFilter.regexFilter(searchtf.getText()));
+    }//GEN-LAST:event_searchbtnActionPerformed
 
     private void searchtfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchtfKeyReleased
         DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -177,18 +211,6 @@ public class Transaction extends javax.swing.JFrame {
         table.setRowSorter(obj);
         obj.setRowFilter(RowFilter.regexFilter(searchtf.getText()));
     }//GEN-LAST:event_searchtfKeyReleased
-
-    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-        TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
-        table.setRowSorter(obj);
-        obj.setRowFilter(RowFilter.regexFilter(searchtf.getText()));
-    }//GEN-LAST:event_searchActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new FileMaintenance().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,31 +229,31 @@ public class Transaction extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Transaction.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Consultants.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Transaction.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Consultants.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Transaction.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Consultants.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Transaction.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Consultants.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Transaction().setVisible(true);
+                new Consultants().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel back;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JButton search;
+    private javax.swing.JButton searchbtn;
     private javax.swing.JTextField searchtf;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables

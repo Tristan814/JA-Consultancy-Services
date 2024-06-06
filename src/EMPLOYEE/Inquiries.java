@@ -390,7 +390,7 @@ public class Inquiries extends javax.swing.JFrame {
             }
         });
         jPanel1.add(searchtf);
-        searchtf.setBounds(40, 130, 220, 40);
+        searchtf.setBounds(40, 120, 220, 40);
 
         search.setBackground(new java.awt.Color(204, 0, 0));
         search.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -402,7 +402,7 @@ public class Inquiries extends javax.swing.JFrame {
             }
         });
         jPanel1.add(search);
-        search.setBounds(280, 130, 100, 40);
+        search.setBounds(280, 120, 100, 40);
 
         rb11.setBackground(new java.awt.Color(255, 255, 255));
         rb11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -482,33 +482,36 @@ public class Inquiries extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-        ClientDeets cd = new ClientDeets();
+        new ClientDeets().setVisible(true);
+        dispose();
         
-                 if("".equals(ipmtf.getText())){
-             JOptionPane.showMessageDialog(new JFrame(), "IPM ID is required", "Error", JOptionPane.ERROR_MESSAGE);
-         }
-         else if("".equals(companytf.getText())){
-             JOptionPane.showMessageDialog(new JFrame(), "Company Name is required", "Error", JOptionPane.ERROR_MESSAGE);
-         }
-         else if("".equals(stat.getText())){
-             JOptionPane.showMessageDialog(new JFrame(), "Status is required", "Error", JOptionPane.ERROR_MESSAGE);
-         }
-         else if("".equals(inquirytf.getText())){
-             JOptionPane.showMessageDialog(new JFrame(), "Inquiry Date is required", "Error", JOptionPane.ERROR_MESSAGE);
-         }
-         else if("".equals(servicetf.getText())){
-             JOptionPane.showMessageDialog(new JFrame(), "Service Type is required", "Error", JOptionPane.ERROR_MESSAGE);
-         }else{
-        cd.ipmidtf.setText(ipmtf.getText());
-        cd.statustf.setText(stat.getText());
-        cd.datetf.setText(inquirytf.getText());
-        cd.companyytf.setText(companytf.getText());
-        
-        JOptionPane.showConfirmDialog(new JFrame(), "Click YES to proceed", "Successed!", JOptionPane.YES_NO_OPTION);
-        
-        cd.setVisible(true);
-        this.dispose();  
-         }
+//        ClientDeets cd = new ClientDeets();
+//        
+//                 if("".equals(ipmtf.getText())){
+//             JOptionPane.showMessageDialog(new JFrame(), "IPM ID is required", "Error", JOptionPane.ERROR_MESSAGE);
+//         }
+//         else if("".equals(companytf.getText())){
+//             JOptionPane.showMessageDialog(new JFrame(), "Company Name is required", "Error", JOptionPane.ERROR_MESSAGE);
+//         }
+//         else if("".equals(stat.getText())){
+//             JOptionPane.showMessageDialog(new JFrame(), "Status is required", "Error", JOptionPane.ERROR_MESSAGE);
+//         }
+//         else if("".equals(inquirytf.getText())){
+//             JOptionPane.showMessageDialog(new JFrame(), "Inquiry Date is required", "Error", JOptionPane.ERROR_MESSAGE);
+//         }
+//         else if("".equals(servicetf.getText())){
+//             JOptionPane.showMessageDialog(new JFrame(), "Service Type is required", "Error", JOptionPane.ERROR_MESSAGE);
+//         }else{
+//        cd.ipmidtf.setText(ipmtf.getText());
+//        cd.statustf.setText(stat.getText());
+//        cd.datetf.setText(inquirytf.getText());
+//        cd.companyytf.setText(companytf.getText());
+//        
+//        JOptionPane.showConfirmDialog(new JFrame(), "Click YES to proceed", "Successed!", JOptionPane.YES_NO_OPTION);
+//        
+//        cd.setVisible(true);
+//        this.dispose();  
+//         }
     }//GEN-LAST:event_nextActionPerformed
 
     private void dayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dayActionPerformed

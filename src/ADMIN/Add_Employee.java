@@ -338,12 +338,12 @@ public class Add_Employee extends javax.swing.JFrame {
         }
 
         jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(710, 140, 870, 510);
+        jScrollPane1.setBounds(710, 130, 870, 510);
 
         updatebtn.setBackground(new java.awt.Color(0, 153, 102));
         updatebtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         updatebtn.setForeground(new java.awt.Color(255, 255, 255));
-        updatebtn.setText("UPDATE");
+        updatebtn.setText("SAVE");
         updatebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updatebtnActionPerformed(evt);
@@ -363,7 +363,7 @@ public class Add_Employee extends javax.swing.JFrame {
             }
         });
         jPanel2.add(editbtn);
-        editbtn.setBounds(170, 580, 120, 50);
+        editbtn.setBounds(170, 580, 120, 47);
 
         searchtxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

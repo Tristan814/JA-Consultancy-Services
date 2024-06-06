@@ -106,10 +106,7 @@ public class Records extends javax.swing.JFrame {
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Report_ID", "Company_Name", "Inquiry_Date", "Status", "Service_Type", "Total_Amount", "No_of_Days", "Duration"

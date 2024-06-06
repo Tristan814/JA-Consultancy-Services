@@ -21,6 +21,7 @@ public class FileMaintenance extends javax.swing.JFrame {
         schedulingbtn = new javax.swing.JButton();
         standardsbtn = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        standardsbtn2 = new javax.swing.JButton();
         standardsbtn1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
 
@@ -39,7 +40,7 @@ public class FileMaintenance extends javax.swing.JFrame {
             }
         });
         jPanel3.add(ipmbtn);
-        ipmbtn.setBounds(60, 585, 343, 93);
+        ipmbtn.setBounds(60, 540, 343, 93);
 
         reportbtn.setBackground(new java.awt.Color(255, 153, 153));
         reportbtn.setFont(new java.awt.Font("STZhongsong", 1, 24)); // NOI18N
@@ -50,7 +51,7 @@ public class FileMaintenance extends javax.swing.JFrame {
             }
         });
         jPanel3.add(reportbtn);
-        reportbtn.setBounds(60, 140, 343, 93);
+        reportbtn.setBounds(60, 120, 343, 93);
 
         paymentbtn.setBackground(new java.awt.Color(153, 153, 255));
         paymentbtn.setFont(new java.awt.Font("STZhongsong", 1, 24)); // NOI18N
@@ -61,7 +62,7 @@ public class FileMaintenance extends javax.swing.JFrame {
             }
         });
         jPanel3.add(paymentbtn);
-        paymentbtn.setBounds(60, 290, 343, 93);
+        paymentbtn.setBounds(60, 260, 343, 93);
 
         consultantsbtn.setBackground(new java.awt.Color(255, 153, 255));
         consultantsbtn.setFont(new java.awt.Font("STZhongsong", 1, 24)); // NOI18N
@@ -72,7 +73,7 @@ public class FileMaintenance extends javax.swing.JFrame {
             }
         });
         jPanel3.add(consultantsbtn);
-        consultantsbtn.setBounds(60, 440, 343, 93);
+        consultantsbtn.setBounds(60, 400, 343, 93);
 
         transactionbtn.setBackground(new java.awt.Color(153, 255, 204));
         transactionbtn.setFont(new java.awt.Font("STZhongsong", 1, 24)); // NOI18N
@@ -83,7 +84,7 @@ public class FileMaintenance extends javax.swing.JFrame {
             }
         });
         jPanel3.add(transactionbtn);
-        transactionbtn.setBounds(520, 140, 343, 93);
+        transactionbtn.setBounds(520, 120, 343, 93);
 
         schedulingbtn.setBackground(new java.awt.Color(255, 255, 153));
         schedulingbtn.setFont(new java.awt.Font("STZhongsong", 1, 24)); // NOI18N
@@ -94,18 +95,18 @@ public class FileMaintenance extends javax.swing.JFrame {
             }
         });
         jPanel3.add(schedulingbtn);
-        schedulingbtn.setBounds(520, 290, 343, 93);
+        schedulingbtn.setBounds(520, 260, 343, 93);
 
-        standardsbtn.setBackground(new java.awt.Color(102, 255, 204));
+        standardsbtn.setBackground(new java.awt.Color(255, 204, 153));
         standardsbtn.setFont(new java.awt.Font("STZhongsong", 1, 24)); // NOI18N
-        standardsbtn.setText("Reports");
+        standardsbtn.setText("Clients");
         standardsbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 standardsbtnActionPerformed(evt);
             }
         });
         jPanel3.add(standardsbtn);
-        standardsbtn.setBounds(520, 580, 343, 93);
+        standardsbtn.setBounds(290, 680, 343, 93);
 
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -114,7 +115,18 @@ public class FileMaintenance extends javax.swing.JFrame {
             }
         });
         jPanel3.add(jButton1);
-        jButton1.setBounds(20, 720, 72, 23);
+        jButton1.setBounds(20, 760, 72, 23);
+
+        standardsbtn2.setBackground(new java.awt.Color(255, 204, 204));
+        standardsbtn2.setFont(new java.awt.Font("STZhongsong", 1, 24)); // NOI18N
+        standardsbtn2.setText("Reports");
+        standardsbtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                standardsbtn2ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(standardsbtn2);
+        standardsbtn2.setBounds(520, 540, 343, 93);
 
         standardsbtn1.setBackground(new java.awt.Color(153, 204, 255));
         standardsbtn1.setFont(new java.awt.Font("STZhongsong", 1, 24)); // NOI18N
@@ -125,21 +137,21 @@ public class FileMaintenance extends javax.swing.JFrame {
             }
         });
         jPanel3.add(standardsbtn1);
-        standardsbtn1.setBounds(520, 440, 343, 93);
+        standardsbtn1.setBounds(520, 400, 343, 93);
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ADMIN/FileMaintenance bg.png"))); // NOI18N
         jPanel3.add(jLabel5);
-        jLabel5.setBounds(0, 0, 940, 760);
+        jLabel5.setBounds(0, 0, 940, 800);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 937, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 938, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 754, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -147,7 +159,7 @@ public class FileMaintenance extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void standardsbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_standardsbtnActionPerformed
-        new Reports().setVisible(true);
+        new Clients().setVisible(true);
         dispose();
     }//GEN-LAST:event_standardsbtnActionPerformed
 
@@ -190,6 +202,10 @@ public class FileMaintenance extends javax.swing.JFrame {
         new System_Standards().setVisible(true);
         dispose();
     }//GEN-LAST:event_standardsbtn1ActionPerformed
+
+    private void standardsbtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_standardsbtn2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_standardsbtn2ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -235,6 +251,7 @@ public class FileMaintenance extends javax.swing.JFrame {
     private javax.swing.JButton schedulingbtn;
     private javax.swing.JButton standardsbtn;
     private javax.swing.JButton standardsbtn1;
+    private javax.swing.JButton standardsbtn2;
     private javax.swing.JButton transactionbtn;
     // End of variables declaration//GEN-END:variables
 }
