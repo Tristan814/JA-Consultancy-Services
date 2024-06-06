@@ -33,7 +33,8 @@ public class Payments extends javax.swing.JFrame {
     PreparedStatement pst;
     ResultSet rs;
    
-    
+    clienttf.setEditable(false);
+    paymenttf.setEditable(false);
     
             String SUrl,Suser, Spass;
     SUrl = "jdbc:MYSQL://localhost:3306/ja consultancy services";
@@ -71,10 +72,8 @@ public class Payments extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        companyntf = new javax.swing.JTextField();
         delete = new javax.swing.JButton();
         edit = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         totalamounttf = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         clienttf = new javax.swing.JTextField();
@@ -133,20 +132,11 @@ public class Payments extends javax.swing.JFrame {
         jPanel2.add(jButton1);
         jButton1.setBounds(20, 660, 80, 30);
 
-        companyntf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        companyntf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                companyntfActionPerformed(evt);
-            }
-        });
-        jPanel2.add(companyntf);
-        companyntf.setBounds(730, 180, 200, 40);
-
         delete.setBackground(new java.awt.Color(255, 204, 204));
         delete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         delete.setText("Delete");
         jPanel2.add(delete);
-        delete.setBounds(890, 560, 110, 40);
+        delete.setBounds(980, 560, 110, 40);
 
         edit.setBackground(new java.awt.Color(153, 0, 0));
         edit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -158,12 +148,7 @@ public class Payments extends javax.swing.JFrame {
             }
         });
         jPanel2.add(edit);
-        edit.setBounds(740, 480, 110, 40);
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jLabel2.setText("Company Name:");
-        jPanel2.add(jLabel2);
-        jLabel2.setBounds(730, 140, 150, 25);
+        edit.setBounds(980, 490, 110, 40);
 
         totalamounttf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         totalamounttf.addActionListener(new java.awt.event.ActionListener() {
@@ -172,12 +157,12 @@ public class Payments extends javax.swing.JFrame {
             }
         });
         jPanel2.add(totalamounttf);
-        totalamounttf.setBounds(970, 310, 200, 40);
+        totalamounttf.setBounds(850, 250, 200, 40);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel3.setText("Total Amount:");
         jPanel2.add(jLabel3);
-        jLabel3.setBounds(970, 270, 140, 25);
+        jLabel3.setBounds(910, 220, 140, 25);
 
         clienttf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         clienttf.addActionListener(new java.awt.event.ActionListener() {
@@ -186,12 +171,12 @@ public class Payments extends javax.swing.JFrame {
             }
         });
         jPanel2.add(clienttf);
-        clienttf.setBounds(970, 180, 200, 40);
+        clienttf.setBounds(850, 370, 200, 40);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel4.setText("Client ID:");
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(970, 140, 130, 25);
+        jLabel4.setBounds(910, 340, 130, 25);
 
         clear.setBackground(new java.awt.Color(204, 204, 204));
         clear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -202,7 +187,7 @@ public class Payments extends javax.swing.JFrame {
             }
         });
         jPanel2.add(clear);
-        clear.setBounds(1040, 480, 110, 40);
+        clear.setBounds(830, 560, 110, 40);
 
         save.setBackground(new java.awt.Color(0, 153, 102));
         save.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -214,7 +199,7 @@ public class Payments extends javax.swing.JFrame {
             }
         });
         jPanel2.add(save);
-        save.setBounds(890, 480, 110, 40);
+        save.setBounds(830, 490, 110, 40);
 
         searchtf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -248,12 +233,12 @@ public class Payments extends javax.swing.JFrame {
             }
         });
         jPanel2.add(paymenttf);
-        paymenttf.setBounds(730, 310, 200, 40);
+        paymenttf.setBounds(850, 130, 200, 40);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel5.setText("Payment ID:");
         jPanel2.add(jLabel5);
-        jLabel5.setBounds(730, 270, 130, 25);
+        jLabel5.setBounds(910, 100, 130, 25);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ADMIN/payments bg.png"))); // NOI18N
         jPanel2.add(jLabel1);
@@ -279,10 +264,6 @@ public class Payments extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void companyntfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_companyntfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_companyntfActionPerformed
-
     private void totalamounttfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalamounttfActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_totalamounttfActionPerformed
@@ -296,7 +277,10 @@ public class Payments extends javax.swing.JFrame {
     }//GEN-LAST:event_saveActionPerformed
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
-
+                            
+                            
+                           
+                            totalamounttf.setEditable(true);
     }//GEN-LAST:event_editActionPerformed
 
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
@@ -304,36 +288,33 @@ public class Payments extends javax.swing.JFrame {
     }//GEN-LAST:event_clearActionPerformed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
-
-//      int id = Integer.parseInt(table.getValueAt(table.getSelectedRow(),0).toString());
-//      
-//    
-//        try{
-//               Class.forName("com.mysql.cj.jdbc.Driver");
-//           
-//         String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
-//         String user = "jaroot";
-//         String pass = "";
-//         
-//         Connection con = DriverManager.getConnection(url,user,pass);
-//         Statement st = con.createStatement();
-//         ResultSet res =st.executeQuery("select * from payment_table where Payment_ID ="+id +"INNER JOIN client_table c ON p.client_id = c.client_id" +"INNER JOIN inquiry_and_proposal iap ON c.IPM_ID = iap.IPM_ID;");
-//                        while(res.next()){
-//                            companyntf.setText(res.getString("Payment_ID"));
-//                            clienttf.setText(res.getString("Total_Amount"));
-//                            paymenttf.setText(res.getString("Client_ID"));
-//                            totalamounttf.setText(res.getString("Company_Name"));
-//                             
-//                             companyntf.setEditable(false);
-//                             clienttf.setEditable(false);
-//                             paymenttf.setEditable(false);
-//                             totalamounttf.setEditable(false);
-//
-//                        }
-//                        }
-//        catch(Exception e){
-//            e.printStackTrace();
-//        }
+        int id = Integer.parseInt(table.getValueAt(table.getSelectedRow(),0).toString());
+        try{
+               Class.forName("com.mysql.cj.jdbc.Driver");
+           
+         String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+         String user = "jaroot";
+         String pass = "";
+         
+         Connection con = DriverManager.getConnection(url,user,pass);
+         Statement st = con.createStatement();
+         ResultSet res =st.executeQuery("select * from payment_table where Payment_ID ="+id);
+                        while(res.next()){
+                            paymenttf.setText(res.getString("Payment_ID"));
+                            totalamounttf.setText(res.getString("Total_Amount"));
+                            clienttf.setText(res.getString("Client_ID"));
+                            
+                            
+                             
+                             
+                            
+                            totalamounttf.setEditable(false);
+                        }
+                
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_tableMouseClicked
 
     private void searchtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchtfActionPerformed
@@ -341,10 +322,7 @@ public class Payments extends javax.swing.JFrame {
     }//GEN-LAST:event_searchtfActionPerformed
 
     private void searchtfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchtfKeyReleased
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-        TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
-        table.setRowSorter(obj);
-        obj.setRowFilter(RowFilter.regexFilter(searchtf.getText()));
+
     }//GEN-LAST:event_searchtfKeyReleased
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
@@ -397,12 +375,10 @@ public class Payments extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clear;
     private javax.swing.JTextField clienttf;
-    private javax.swing.JTextField companyntf;
     private javax.swing.JButton delete;
     private javax.swing.JButton edit;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

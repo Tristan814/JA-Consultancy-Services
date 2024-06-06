@@ -21,7 +21,7 @@ public class FileMaintenance extends javax.swing.JFrame {
         schedulingbtn = new javax.swing.JButton();
         standardsbtn = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        standardsbtn2 = new javax.swing.JButton();
+        reportsbtn = new javax.swing.JButton();
         standardsbtn1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
 
@@ -117,16 +117,16 @@ public class FileMaintenance extends javax.swing.JFrame {
         jPanel3.add(jButton1);
         jButton1.setBounds(20, 760, 72, 23);
 
-        standardsbtn2.setBackground(new java.awt.Color(255, 204, 204));
-        standardsbtn2.setFont(new java.awt.Font("STZhongsong", 1, 24)); // NOI18N
-        standardsbtn2.setText("Reports");
-        standardsbtn2.addActionListener(new java.awt.event.ActionListener() {
+        reportsbtn.setBackground(new java.awt.Color(255, 204, 204));
+        reportsbtn.setFont(new java.awt.Font("STZhongsong", 1, 24)); // NOI18N
+        reportsbtn.setText("Reports");
+        reportsbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                standardsbtn2ActionPerformed(evt);
+                reportsbtnActionPerformed(evt);
             }
         });
-        jPanel3.add(standardsbtn2);
-        standardsbtn2.setBounds(520, 540, 343, 93);
+        jPanel3.add(reportsbtn);
+        reportsbtn.setBounds(520, 540, 343, 93);
 
         standardsbtn1.setBackground(new java.awt.Color(153, 204, 255));
         standardsbtn1.setFont(new java.awt.Font("STZhongsong", 1, 24)); // NOI18N
@@ -203,9 +203,10 @@ public class FileMaintenance extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_standardsbtn1ActionPerformed
 
-    private void standardsbtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_standardsbtn2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_standardsbtn2ActionPerformed
+    private void reportsbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportsbtnActionPerformed
+       new Reports().setVisible(true);
+       dispose();
+    }//GEN-LAST:event_reportsbtnActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -248,10 +249,10 @@ public class FileMaintenance extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JButton paymentbtn;
     private javax.swing.JButton reportbtn;
+    private javax.swing.JButton reportsbtn;
     private javax.swing.JButton schedulingbtn;
     private javax.swing.JButton standardsbtn;
     private javax.swing.JButton standardsbtn1;
-    private javax.swing.JButton standardsbtn2;
     private javax.swing.JButton transactionbtn;
     // End of variables declaration//GEN-END:variables
 }

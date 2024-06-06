@@ -4,6 +4,12 @@
  */
 package ADMIN;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Henreizh Nathan
@@ -16,6 +22,46 @@ public class Reports extends javax.swing.JFrame {
     public Reports() {
         initComponents();
         this.setLocationRelativeTo(null);
+        String SUrl, Suser, Spass;
+SUrl = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+Suser = "root";
+Spass = "";
+
+// Correctly formatted SQL query
+String query = 
+    "SELECT Transaction_Table.trans_ID, Payment_Table.Total_Amount, Inquiry_and_Proposal.Service_Type, Client_Table.Client_ID\n" +
+"FROM Transaction_Table\n" +
+"\n" +
+"LEFT JOIN Payment_Table ON  Transaction_Table.trans_ID = Payment_Table.client_ID\n" +
+"\n" +
+"LEFT JOIN Inquiry_and_Proposal ON Inquiry_and_Proposal.IPM_ID = Client_Table.IPM_ID\n" +
+"\n" +
+"LEFT JOIN Client_Table ON Transaction_Table.client_id = Client_Table.client_id\n" +
+"";
+
+try {
+    Connection con = DriverManager.getConnection(SUrl, Suser, Spass);
+    PreparedStatement pst = con.prepareStatement(query);
+    ResultSet rs = pst.executeQuery();
+
+    // Assuming reporttable is your JTable and model is its DefaultTableModel
+    DefaultTableModel model = (DefaultTableModel) reporttable.getModel();
+    
+    // Clear the existing rows in the model
+    model.setRowCount(0);
+
+    while (rs.next()) {
+        // Add a row to the model with the data from the result set
+        model.addRow(new Object[]{rs.getString("transaction_id"), rs.getString("total_amount"), rs.getString("service_type"), rs.getString("client_id")});
+    }
+    
+    // Close resources
+    rs.close();
+    pst.close();
+    con.close();
+} catch (Exception ex) {
+    System.out.println("Error: " + ex.getMessage());
+}
     }
 
     /**
@@ -29,7 +75,7 @@ public class Reports extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        reporttable = new javax.swing.JTable();
         searchtf = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -40,7 +86,7 @@ public class Reports extends javax.swing.JFrame {
 
         jPanel1.setLayout(null);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        reporttable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -48,7 +94,7 @@ public class Reports extends javax.swing.JFrame {
                 "Transaction ID", "Total Amount", "Service Type", "Client ID"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(reporttable);
 
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(60, 150, 980, 490);
@@ -94,12 +140,13 @@ public class Reports extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         new FileMaintenance().setVisible(true);
         dispose();
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) {    
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -137,7 +184,7 @@ public class Reports extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable reporttable;
     private javax.swing.JTextField searchtf;
     // End of variables declaration//GEN-END:variables
 }

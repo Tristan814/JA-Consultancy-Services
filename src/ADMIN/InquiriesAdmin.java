@@ -688,7 +688,7 @@ try {
         JOptionPane.showMessageDialog(new JFrame(), "No Row Selected", "Warning!", JOptionPane.WARNING_MESSAGE);
     }
 } catch (Exception ex) {
-    Logger.getLogger(Inquiries_Admin.class.getName()).log(Level.SEVERE, null, ex);
+    Logger.getLogger(InquiriesAdmin.class.getName()).log(Level.SEVERE, null, ex);
     JOptionPane.showMessageDialog(new JFrame(), "Deletion Failed", "Error!", JOptionPane.ERROR_MESSAGE);
 }
     }//GEN-LAST:event_DeleteActionPerformed

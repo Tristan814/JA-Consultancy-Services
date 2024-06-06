@@ -674,7 +674,7 @@ try{
        emppass.setText("");
        
 } catch (SQLException ex) {
-            Logger.getLogger(Inquiries_Admin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InquiriesAdmin.class.getName()).log(Level.SEVERE, null, ex);
        
 }
     }//GEN-LAST:event_updatebtnActionPerformed
