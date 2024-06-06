@@ -1,10 +1,5 @@
 package EMPLOYEE;
 
-import ADMIN.*;
-import static EMPLOYEE.Inquiries.companytf;
-import static EMPLOYEE.Inquiries.inquirytf;
-import static EMPLOYEE.Inquiries.servicetf;
-import static EMPLOYEE.Inquiries.stat;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -24,7 +19,7 @@ public class ClientDeets extends javax.swing.JFrame {
         ipmidtf.setEditable(false);
         statustf.setEditable(false);
         datetf.setEditable(false);
-        companytf.setEditable(false);
+        companyytf.setEditable(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -197,7 +192,8 @@ public class ClientDeets extends javax.swing.JFrame {
     }//GEN-LAST:event_backActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        
+        
         String ipm, cid, contactno, email, address, query;
         Scheduling cd = new Scheduling();
        

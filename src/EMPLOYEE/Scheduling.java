@@ -27,6 +27,7 @@ public class Scheduling extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         
         clientid.setEditable(false);
+        servetf.setText(Inquiries.sc);
     }
 
     /**
@@ -54,12 +55,14 @@ public class Scheduling extends javax.swing.JFrame {
         noofdays = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
-        duration1 = new javax.swing.JTextField();
+        duration = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         reporttf = new javax.swing.JTextField();
         constf = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
+        servetf = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -171,15 +174,15 @@ public class Scheduling extends javax.swing.JFrame {
         jPanel1.add(jButton3);
         jButton3.setBounds(410, 690, 120, 40);
 
-        duration1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jPanel1.add(duration1);
-        duration1.setBounds(400, 350, 250, 40);
+        duration.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel1.add(duration);
+        duration.setBounds(400, 460, 250, 40);
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel13.setText("DURATION:");
         jPanel1.add(jLabel13);
-        jLabel13.setBounds(400, 320, 110, 18);
+        jLabel13.setBounds(400, 430, 110, 18);
 
         jLabel14.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -203,13 +206,23 @@ public class Scheduling extends javax.swing.JFrame {
             }
         });
         jPanel1.add(constf);
-        constf.setBounds(400, 460, 250, 40);
+        constf.setBounds(400, 570, 250, 40);
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel15.setText("CONSULTANT ID:");
         jPanel1.add(jLabel15);
-        jLabel15.setBounds(400, 430, 160, 18);
+        jLabel15.setBounds(400, 540, 160, 18);
+
+        servetf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel1.add(servetf);
+        servetf.setBounds(400, 350, 250, 40);
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel16.setText("SERVICE TYPE");
+        jPanel1.add(jLabel16);
+        jLabel16.setBounds(400, 320, 110, 18);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EMPLOYEE/scheduling bg.png"))); // NOI18N
         jPanel1.add(jLabel1);
@@ -236,7 +249,7 @@ public class Scheduling extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
  
- String client, pay, tot, sche, nod, dura, trans, cons, query1, query2, query3, query4;
+ String client, ser, pay, tot, sche, nod, dura, trans, cons, query1, query2, query3, query4;
 
        
        try{
@@ -281,6 +294,7 @@ public class Scheduling extends javax.swing.JFrame {
        dura = transtf.getText();
        trans = transtf.getText();
        cons = constf.getText();
+       ser = servetf.getText();
        
        query1 = "INSERT INTO payment_table (Payment_ID, Total_Amount, Client_ID)"
                + "VALUES(?,?,?)";
@@ -291,7 +305,7 @@ public class Scheduling extends javax.swing.JFrame {
         query3 = "INSERT INTO transaction_table (Trans_ID, Cons_ID, Client_ID, Payment_ID, Schedule_ID)"
                + "VALUES(?,?,?,?,?)";
         query4 = "INSERT INTO realreport (Trans_ID, Total_Amount, Service_Type, Client_ID)"
-               + "VALUES(?,?,?,?,?)";
+               + "VALUES(?,?,?,?)";
        
        
        PreparedStatement preparedStatement1 = con.prepareStatement(query1);
@@ -313,15 +327,16 @@ public class Scheduling extends javax.swing.JFrame {
        preparedStatement3.setString(5,sche);
        
        PreparedStatement preparedStatement4 = con.prepareStatement(query4);
-       preparedStatement3.setString(1,trans);
-       preparedStatement3.setString(2,tot);
-       preparedStatement3.setString(3,client);
-       preparedStatement3.setString(4,client);
+       preparedStatement4.setString(1,trans);
+       preparedStatement4.setString(2,tot);
+       preparedStatement4.setString(3,ser);
+       preparedStatement4.setString(4,client);
        
        
         preparedStatement1.executeUpdate();
         preparedStatement2.executeUpdate();
         preparedStatement3.executeUpdate();
+        preparedStatement4.executeUpdate();
        
 //            st.executeUpdate(query1);
 //            st.executeUpdate(query2);
@@ -388,7 +403,7 @@ public class Scheduling extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTextField clientid;
     private javax.swing.JTextField constf;
-    private javax.swing.JTextField duration1;
+    public javax.swing.JTextField duration;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -399,6 +414,7 @@ public class Scheduling extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -407,6 +423,7 @@ public class Scheduling extends javax.swing.JFrame {
     private javax.swing.JTextField payment;
     private javax.swing.JTextField reporttf;
     private javax.swing.JTextField sched;
+    public static javax.swing.JTextField servetf;
     private javax.swing.JTextField totalamount;
     private javax.swing.JTextField transtf;
     // End of variables declaration//GEN-END:variables

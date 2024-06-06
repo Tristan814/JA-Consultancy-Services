@@ -206,10 +206,7 @@ public class Consultants extends javax.swing.JFrame {
     }//GEN-LAST:event_searchbtnActionPerformed
 
     private void searchtfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchtfKeyReleased
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-        TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
-        table.setRowSorter(obj);
-        obj.setRowFilter(RowFilter.regexFilter(searchtf.getText()));
+
     }//GEN-LAST:event_searchtfKeyReleased
 
     /**

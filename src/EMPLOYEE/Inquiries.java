@@ -29,6 +29,8 @@ public class Inquiries extends javax.swing.JFrame {
     ResultSet rs;
     int q, i, id, deleteItem;
     
+    public static String sc;
+    
     public Inquiries() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -59,7 +61,7 @@ public class Inquiries extends javax.swing.JFrame {
     btng2.add(rb22);
     btng2.add(rb33);
     
-    ipmtf.setEditable(false);
+//    ipmtf.setEditable(false);
     inquirytf.setEditable(false);
     stat.setEditable(false);
     servicetf.setEditable(false);
@@ -489,6 +491,7 @@ public class Inquiries extends javax.swing.JFrame {
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
 
         ClientDeets cd = new ClientDeets();
+//        Scheduling sc = new Scheduling();
         
                  if("".equals(ipmtf.getText())){
              JOptionPane.showMessageDialog(new JFrame(), "IPM ID is required", "Error", JOptionPane.ERROR_MESSAGE);
@@ -509,6 +512,8 @@ public class Inquiries extends javax.swing.JFrame {
         cd.statustf.setText(stat.getText());
         cd.datetf.setText(inquirytf.getText());
         cd.companyytf.setText(companytf.getText());
+        
+        sc = servicetf.getText();
         
         JOptionPane.showConfirmDialog(new JFrame(), "Click YES to proceed", "Successed!", JOptionPane.YES_NO_OPTION);
         
@@ -668,21 +673,37 @@ public class Inquiries extends javax.swing.JFrame {
     }//GEN-LAST:event_inquirytfActionPerformed
 
     private void rb3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb3ActionPerformed
-        if (rb3.isSelected()){
+
+Scheduling sc = new Scheduling();
+        
+            if (rb3.isSelected()){
         servicetf.setText(rb3.getText());
+          sc.servetf.setText(servicetf.getText());
     }
     }//GEN-LAST:event_rb3ActionPerformed
 
     private void rb1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb1ActionPerformed
      
+        
+        Scheduling sc = new Scheduling();
+      
+        ;
+       
         if (rb1.isSelected()){
         servicetf.setText(rb1.getText());
+        sc.servetf.setText(servicetf.getText());
+        
+        
     }
     }//GEN-LAST:event_rb1ActionPerformed
 
     private void rb2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb2ActionPerformed
+Scheduling sc = new Scheduling();
+      
+
         if (rb2.isSelected()){
         servicetf.setText(rb2.getText());
+          sc.servetf.setText(servicetf.getText());
     }
     }//GEN-LAST:event_rb2ActionPerformed
 
