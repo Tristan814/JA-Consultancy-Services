@@ -45,6 +45,7 @@ public class Clients extends javax.swing.JFrame {
     public Clients() {
         initComponents();
         this.setLocationRelativeTo(null);
+        savebtn.setEnabled(false);
 
     String SUrl = "jdbc:MYSQL://localhost:3306/ja consultancy services";
         String Suser = "root";
@@ -100,9 +101,9 @@ public class Clients extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         addresstf = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        save = new javax.swing.JButton();
+        savebtn = new javax.swing.JButton();
         deletebtn = new javax.swing.JButton();
-        edit = new javax.swing.JButton();
+        editbtn = new javax.swing.JButton();
         resetbtn = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -231,17 +232,17 @@ public class Clients extends javax.swing.JFrame {
         jPanel1.add(jLabel12);
         jLabel12.setBounds(940, 500, 180, 20);
 
-        save.setBackground(new java.awt.Color(0, 153, 102));
-        save.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        save.setForeground(new java.awt.Color(255, 255, 255));
-        save.setText("Save");
-        save.addActionListener(new java.awt.event.ActionListener() {
+        savebtn.setBackground(new java.awt.Color(0, 153, 102));
+        savebtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        savebtn.setForeground(new java.awt.Color(255, 255, 255));
+        savebtn.setText("Save");
+        savebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveActionPerformed(evt);
+                savebtnActionPerformed(evt);
             }
         });
-        jPanel1.add(save);
-        save.setBounds(1060, 620, 100, 40);
+        jPanel1.add(savebtn);
+        savebtn.setBounds(1060, 620, 100, 40);
 
         deletebtn.setBackground(new java.awt.Color(255, 204, 204));
         deletebtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -254,17 +255,17 @@ public class Clients extends javax.swing.JFrame {
         jPanel1.add(deletebtn);
         deletebtn.setBounds(1300, 620, 100, 40);
 
-        edit.setBackground(new java.awt.Color(48, 54, 66));
-        edit.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        edit.setForeground(new java.awt.Color(255, 255, 255));
-        edit.setText("Edit");
-        edit.addActionListener(new java.awt.event.ActionListener() {
+        editbtn.setBackground(new java.awt.Color(48, 54, 66));
+        editbtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        editbtn.setForeground(new java.awt.Color(255, 255, 255));
+        editbtn.setText("Edit");
+        editbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editActionPerformed(evt);
+                editbtnActionPerformed(evt);
             }
         });
-        jPanel1.add(edit);
-        edit.setBounds(940, 620, 100, 40);
+        jPanel1.add(editbtn);
+        editbtn.setBounds(940, 620, 100, 40);
 
         resetbtn.setBackground(new java.awt.Color(204, 204, 204));
         resetbtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -422,12 +423,19 @@ try {
         
     }//GEN-LAST:event_deletebtnActionPerformed
 
-    private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
-                        
-                            contacttf.setEditable(true);
-                            emailtf.setEditable(true);
-                            addresstf.setEditable(true);
-    }//GEN-LAST:event_editActionPerformed
+    private void editbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editbtnActionPerformed
+if(table.getSelectedRow() <0){
+        JOptionPane.showMessageDialog(null, "Please select an account!");
+        
+        }else{
+            contacttf.setEditable(true);
+            emailtf.setEditable(true);
+            addresstf.setEditable(true);
+            
+            savebtn.setEnabled(true);
+}                                
+                            
+    }//GEN-LAST:event_editbtnActionPerformed
 
     private void resetbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetbtnActionPerformed
                         
@@ -436,7 +444,7 @@ try {
                             addresstf.setText("");
     }//GEN-LAST:event_resetbtnActionPerformed
 
-    private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
+    private void savebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savebtnActionPerformed
         
 //    try{
 //    pst = con.prepareStatement("update client_table set IPM_ID =?, Contact_No =?, Email =?, Address =? where Client_ID=?");
@@ -491,6 +499,13 @@ try {
         
        JOptionPane.showMessageDialog(new JFrame(), "Updated Successfully", "Successed!", JOptionPane.OK_CANCEL_OPTION);
 
+       savebtn.setEnabled(false);
+       clientidtf.setText("");
+       ipmtf.setText("");
+       contacttf.setText("");
+       addresstf.setText("");
+       emailtf.setText("");
+       
     } else{
         JOptionPane.showMessageDialog(new JFrame(), "Update Failed", "Warning!", JOptionPane.ERROR_MESSAGE);
     }
@@ -525,7 +540,7 @@ try {
 //            Logger.getLogger(InquiriesAdmin.class.getName()).log(Level.SEVERE, null, ex);
 //       
 //}
-    }//GEN-LAST:event_saveActionPerformed
+    }//GEN-LAST:event_savebtnActionPerformed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
       int id = Integer.parseInt(table.getValueAt(table.getSelectedRow(),0).toString());
@@ -649,7 +664,7 @@ try {
     private javax.swing.JTextField clientidtf;
     private javax.swing.JTextField contacttf;
     private javax.swing.JButton deletebtn;
-    private javax.swing.JButton edit;
+    private javax.swing.JButton editbtn;
     private javax.swing.JTextField emailtf;
     private javax.swing.JTextField ipmtf;
     private javax.swing.JButton jButton1;
@@ -664,7 +679,7 @@ try {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton resetbtn;
-    private javax.swing.JButton save;
+    private javax.swing.JButton savebtn;
     private javax.swing.JTextField searchtf;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
