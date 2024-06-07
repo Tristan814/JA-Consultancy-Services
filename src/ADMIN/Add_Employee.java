@@ -20,6 +20,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import javax.swing.text.PlainDocument;
 
 
 /**
@@ -196,6 +197,7 @@ public class Add_Employee extends javax.swing.JFrame {
         firstname.setBounds(30, 220, 220, 37);
 
         cellno.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cellno.setMaximumSize(new java.awt.Dimension(11, 11));
         cellno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cellnoActionPerformed(evt);
@@ -470,6 +472,7 @@ try{
     Class.forName("com.mysql.cj.jdbc.Driver");
     Connection con = DriverManager.getConnection(SUrl,Suser,Spass);
     Statement st =con.createStatement();
+      int length =cellno.getText().length();
     if("".equals(lastname.getText())){
         JOptionPane.showMessageDialog(new JFrame(),"Last Name is Required","Error",JOptionPane.ERROR_MESSAGE);      
     }
@@ -484,7 +487,13 @@ try{
    }
    else if("".equals(cellno.getText())){
         JOptionPane.showMessageDialog(new JFrame(),"Contact No.  is Required","Error",JOptionPane.ERROR_MESSAGE);
-   }
+   }    
+   else if(length <11){
+                 JOptionPane.showMessageDialog(new JFrame(), "Cell No. should contain 11 numbers", "Error!", JOptionPane.ERROR_MESSAGE);
+            }
+    else if(length >11){
+                 JOptionPane.showMessageDialog(new JFrame(), "Cell No. should contain 11 numbers only.", "Error!", JOptionPane.ERROR_MESSAGE);
+            }
    else if("".equals(address.getText())){
         JOptionPane.showMessageDialog(new JFrame(),"Employee ID  is Required","Error",JOptionPane.ERROR_MESSAGE);
    }
@@ -497,6 +506,7 @@ try{
       else if("".equals(email.getText())){
         JOptionPane.showMessageDialog(new JFrame(),"Email  is Required","Error",JOptionPane.ERROR_MESSAGE);
    }
+      
    else{
        lname = lastname.getText();
        fname = firstname.getText();
@@ -643,7 +653,8 @@ try{
     }//GEN-LAST:event_backbtnActionPerformed
 
     private void savebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savebtnActionPerformed
-if("".equals(lastname.getText())){
+        int length =cellno.getText().length();
+        if("".equals(lastname.getText())){
         JOptionPane.showMessageDialog(new JFrame(),"Last Name is Required","Error",JOptionPane.ERROR_MESSAGE);      
     }
     else if("".equals(firstname.getText())){
@@ -658,6 +669,12 @@ if("".equals(lastname.getText())){
    else if("".equals(cellno.getText())){
         JOptionPane.showMessageDialog(new JFrame(),"Contact No.  is Required","Error",JOptionPane.ERROR_MESSAGE);
    }
+    else if(length <11){
+                 JOptionPane.showMessageDialog(new JFrame(), "Cell No. should contain 11 numbers", "Error!", JOptionPane.ERROR_MESSAGE);
+            }
+    else if(length >11){
+                 JOptionPane.showMessageDialog(new JFrame(), "Cell No. should contain 11 numbers only.", "Error!", JOptionPane.ERROR_MESSAGE);
+            }
    else if("".equals(address.getText())){
         JOptionPane.showMessageDialog(new JFrame(),"Employee ID  is Required","Error",JOptionPane.ERROR_MESSAGE);
    }
@@ -874,8 +891,11 @@ try {
 
     private void cellnoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cellnoKeyTyped
         char enter = evt.getKeyChar();
+        
         if(!(Character.isDigit(enter))){
             evt.consume();
+            
+           
         }
     }//GEN-LAST:event_cellnoKeyTyped
 

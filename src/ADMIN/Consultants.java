@@ -402,7 +402,7 @@ public class Consultants extends javax.swing.JFrame {
     }//GEN-LAST:event_emailtfActionPerformed
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
-        
+            int length = contactnotf.getText().length();
             if("".equals(lastntf.getText())){
                 JOptionPane.showMessageDialog(new JFrame(), "Last Name is required", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -414,6 +414,12 @@ public class Consultants extends javax.swing.JFrame {
             }
             else if("".equals(contactnotf.getText())){
                 JOptionPane.showMessageDialog(new JFrame(), "Contact Number is required", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+              else if(length <11){
+                 JOptionPane.showMessageDialog(new JFrame(), "Cell No. should contain 11 numbers", "Error!", JOptionPane.ERROR_MESSAGE);
+            }
+                else if(length >11){
+                 JOptionPane.showMessageDialog(new JFrame(), "Cell No. should contain 11 numbers only.", "Error!", JOptionPane.ERROR_MESSAGE);
             }
             else if("".equals(constf.getText())){
                 JOptionPane.showMessageDialog(new JFrame(), "Consultant ID is required", "Error", JOptionPane.ERROR_MESSAGE);
@@ -505,6 +511,7 @@ public class Consultants extends javax.swing.JFrame {
 
             Connection con = DriverManager.getConnection(url,user,pass);
             Statement st = con.createStatement();
+            int length = contactnotf.getText().length();
 
             if("".equals(lastntf.getText())){
                 JOptionPane.showMessageDialog(new JFrame(), "Last Name is required", "Error", JOptionPane.ERROR_MESSAGE);
@@ -517,6 +524,12 @@ public class Consultants extends javax.swing.JFrame {
             }
             else if("".equals(contactnotf.getText())){
                 JOptionPane.showMessageDialog(new JFrame(), "Contact Number is required", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+              else if(length <11){
+                 JOptionPane.showMessageDialog(new JFrame(), "Cell No. should contain 11 numbers", "Error!", JOptionPane.ERROR_MESSAGE);
+            }
+            else if(length >11){
+                 JOptionPane.showMessageDialog(new JFrame(), "Cell No. should contain 11 numbers only.", "Error!", JOptionPane.ERROR_MESSAGE);
             }
             else if("".equals(constf.getText())){
                 JOptionPane.showMessageDialog(new JFrame(), "Consultant ID is required", "Error", JOptionPane.ERROR_MESSAGE);

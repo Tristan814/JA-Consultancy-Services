@@ -414,10 +414,16 @@ if(table.getSelectedRow() <0){
 
     private void savebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savebtnActionPerformed
             
-    
+    int length =contacttf.getText().length();
      if("".equals(contacttf.getText())){
          JOptionPane.showMessageDialog(new JFrame(), "Contact Number is required", "Error", JOptionPane.ERROR_MESSAGE);
-     }
+     }  
+        else if(length <11){
+                 JOptionPane.showMessageDialog(new JFrame(), "Cell No. should contain 11 numbers", "Error!", JOptionPane.ERROR_MESSAGE);
+            }
+    else if(length >11){
+                 JOptionPane.showMessageDialog(new JFrame(), "Cell No. should contain 11 numbers only.", "Error!", JOptionPane.ERROR_MESSAGE);
+            }
      else if("".equals(emailtf.getText())){
          JOptionPane.showMessageDialog(new JFrame(), "Email is required", "Error", JOptionPane.ERROR_MESSAGE);
      }
