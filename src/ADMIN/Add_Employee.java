@@ -701,10 +701,10 @@ if("".equals(lastname.getText())){
         model.setValueAt(emppass.getText(), selectedRowIndex, 8);
         
        JOptionPane.showMessageDialog(new JFrame(), "Updated Successfully", "Successed!", JOptionPane.OK_CANCEL_OPTION);
-       con.close();
+//       con.close();
     } else{
         JOptionPane.showMessageDialog(new JFrame(), "Update Failed", "Warning!", JOptionPane.ERROR_MESSAGE);
-       con.close();
+//       con.close();
     }
        
                
@@ -828,7 +828,7 @@ if("".equals(lastname.getText())){
     }//GEN-LAST:event_searchtxtKeyReleased
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
-     DefaultTableModel model = (DefaultTableModel) emptable.getModel();
+        DefaultTableModel model = (DefaultTableModel) emptable.getModel();
         int selectedRowIndex = emptable.getSelectedRow();
 //    DELETE FROM `inquiry_and_proposal` WHERE 0
 try {
@@ -844,24 +844,23 @@ try {
          String user = "jaroot";
          String pass = "";
          Connection con = DriverManager.getConnection(url,user,pass);
-         String sql = "DELETE FROM `Employee_table` WHERE Employee_ID=?";
-         pst = con.prepareStatement(sql);
-         pst.setInt(1,id);
-         pst.executeUpdate(); 
+         
+        String sqlemployee = "DELETE FROM `employee_table` WHERE `employee_id`=?";
+        PreparedStatement pstemployee = con.prepareStatement(sqlemployee);
+        pstemployee.setInt(1, id);
+        pstemployee.executeUpdate();
+        
         model.removeRow(selectedRowIndex);
         JOptionPane.showMessageDialog(new JFrame(), "Row Deleted Successfully", "Success!", JOptionPane.CANCEL_OPTION);
         lastname.setText("");
         firstname.setText("");
         age.setText("");
         cellno.setText("");
-        address.setText("");
-        dateofb.setText("");
-        email.setText("");
-        empID.setText("");
-        empID.setText("");
-        emppass.setText("");
-       
-        
+        address.setText("");  
+        dateofb.setText("");  
+        email.setText("");  
+        empID.setText("");  
+        emppass.setText("");  
         
 
     } else {

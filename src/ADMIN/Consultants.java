@@ -82,6 +82,7 @@ public class Consultants extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         searchtf = new javax.swing.JTextField();
         searchbtn = new javax.swing.JButton();
+        Delete = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -99,7 +100,7 @@ public class Consultants extends javax.swing.JFrame {
             }
         });
         jPanel2.add(save);
-        save.setBounds(1140, 530, 110, 50);
+        save.setBounds(1100, 530, 110, 50);
 
         constf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         constf.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -236,7 +237,7 @@ public class Consultants extends javax.swing.JFrame {
             }
         });
         jPanel2.add(add);
-        add.setBounds(780, 530, 110, 50);
+        add.setBounds(890, 460, 110, 50);
 
         edit.setBackground(new java.awt.Color(48, 54, 66));
         edit.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -248,7 +249,7 @@ public class Consultants extends javax.swing.JFrame {
             }
         });
         jPanel2.add(edit);
-        edit.setBounds(900, 530, 110, 50);
+        edit.setBounds(1030, 460, 110, 50);
 
         reset.setBackground(new java.awt.Color(204, 204, 204));
         reset.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -259,7 +260,7 @@ public class Consultants extends javax.swing.JFrame {
             }
         });
         jPanel2.add(reset);
-        reset.setBounds(1020, 530, 110, 50);
+        reset.setBounds(960, 530, 110, 50);
 
         jButton2.setText("Back");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -295,6 +296,18 @@ public class Consultants extends javax.swing.JFrame {
         });
         jPanel2.add(searchbtn);
         searchbtn.setBounds(260, 90, 80, 40);
+
+        Delete.setBackground(new java.awt.Color(51, 51, 0));
+        Delete.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        Delete.setForeground(new java.awt.Color(255, 255, 255));
+        Delete.setText("Delete");
+        Delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Delete);
+        Delete.setBounds(820, 530, 110, 50);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ADMIN/Consultant bg.png"))); // NOI18N
         jPanel2.add(jLabel1);
@@ -558,6 +571,53 @@ public class Consultants extends javax.swing.JFrame {
         
     }//GEN-LAST:event_contactnotfKeyReleased
 
+    private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
+
+       DefaultTableModel model = (DefaultTableModel) table.getModel();
+        int selectedRowIndex = table.getSelectedRow();
+//    DELETE FROM `inquiry_and_proposal` WHERE 0
+try {
+    
+         id = Integer.parseInt(model.getValueAt(selectedRowIndex, 0).toString());
+        
+        int delete = JOptionPane.showConfirmDialog(null,"Confirm if you want to delete item","Warning",JOptionPane.YES_NO_OPTION);
+        
+        if (delete ==JOptionPane.YES_NO_OPTION) {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+           
+         String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+         String user = "jaroot";
+         String pass = "";
+         Connection con = DriverManager.getConnection(url,user,pass);
+         
+        String sqlConsultant = "DELETE FROM `consultant_table` WHERE `Cons_ID`=?";
+        PreparedStatement consPayment = con.prepareStatement(sqlConsultant);
+        consPayment.setInt(1, id);
+        consPayment.executeUpdate();
+        
+        String sqltransaction = "DELETE FROM `transaction_table` WHERE `Cons_ID`=?";
+        PreparedStatement pstTransaction = con.prepareStatement(sqltransaction);
+        pstTransaction.setInt(1, id);
+        pstTransaction.executeUpdate();
+
+        model.removeRow(selectedRowIndex);
+        JOptionPane.showMessageDialog(new JFrame(), "Row Deleted Successfully", "Success!", JOptionPane.CANCEL_OPTION);
+        lastntf.setText("");
+        firstntf.setText("");
+        emailtf.setText("");
+        contactnotf.setText("");
+        constf.setText("");  
+        
+
+    } else {
+        JOptionPane.showMessageDialog(new JFrame(), "No Row Selected", "Warning!", JOptionPane.WARNING_MESSAGE);
+    }
+} catch (Exception ex) {
+    Logger.getLogger(InquiriesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+    JOptionPane.showMessageDialog(new JFrame(), "Deletion Failed", "Error!", JOptionPane.ERROR_MESSAGE);
+}
+    }//GEN-LAST:event_DeleteActionPerformed
+
     private void contactnotfKeyTyped(java.awt.event.KeyEvent evt){
     char enter = evt.getKeyChar();
         if(!(Character.isDigit(enter))){
@@ -604,6 +664,7 @@ public class Consultants extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Delete;
     private javax.swing.JButton add;
     private javax.swing.JTextField constf;
     private javax.swing.JTextField contactnotf;

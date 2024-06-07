@@ -803,6 +803,11 @@ try {
          pst = con.prepareStatement(sql);
          pst.setInt(1,id);
          pst.executeUpdate(); 
+        String sqlClient = "DELETE FROM `client_table` WHERE `IPM_ID`=?";
+        PreparedStatement pstClient = con.prepareStatement(sqlClient);
+        pstClient.setInt(1, id);
+        pstClient.executeUpdate();
+        
         model.removeRow(selectedRowIndex);
         JOptionPane.showMessageDialog(new JFrame(), "Row Deleted Successfully", "Success!", JOptionPane.CANCEL_OPTION);
         ipmtf.setText("");
