@@ -437,6 +437,11 @@ try {
          pst = con.prepareStatement(sql);
          pst.setInt(1,id);
          pst.executeUpdate(); 
+         
+        String sqlTrans = "DELETE FROM `transaction_table` WHERE `Payment_ID`=?";
+        PreparedStatement psttrans = con.prepareStatement(sqlTrans);
+        psttrans.setInt(1, id);
+        psttrans.executeUpdate();
         model.removeRow(selectedRowIndex);
         JOptionPane.showMessageDialog(new JFrame(), "Row Deleted Successfully", "Success!", JOptionPane.CANCEL_OPTION);
         

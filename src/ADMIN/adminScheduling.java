@@ -404,6 +404,12 @@ try {
          pst = con.prepareStatement(sql);
          pst.setInt(1,id);
          pst.executeUpdate(); 
+         
+        String sqlTrans = "DELETE FROM `transaction_table` WHERE `Sched_ID`=?";
+        PreparedStatement pstSched = con.prepareStatement(sqlTrans);
+        pstSched.setInt(1, id);
+        pstSched.executeUpdate();
+        
         model.removeRow(selectedRowIndex);
         JOptionPane.showMessageDialog(new JFrame(), "Row Deleted Successfully", "Success!", JOptionPane.CANCEL_OPTION);
         sched.setText("");

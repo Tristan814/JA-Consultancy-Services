@@ -90,47 +90,33 @@ try {
         }
         
         
-//               String url1 = "jdbc:mysql://localhost:3306/ja consultancy services";
-//        String user1 = "root";
-//        String password1 = "";
-//
-//        String query2 = "SELECT p.service_type, SUM(p.total_amount) AS total_amount_sum \" +\n" +
-//"                \"FROM payment_table p \" +\n" +
-//"                \"JOIN inquiry_and_proposal i ON p.service_type = i.service_type \" +\n" +
-//"                \"WHERE i.service_type = 'Consultancy' \" +\n" +
-//"                \"GROUP BY p.service_type";
 
-// try (Connection con = DriverManager.getConnection(url1, user, password);
-//     Statement stmt = con.createStatement();
-//     ResultSet rs = stmt.executeQuery(query2)) {
-//
-//    // Assuming you have a JTextField or similar for each service type
-//    JTextField consultancySumTF = new JTextField();
-//    JTextField auditSumTF = new JTextField();
-//    JTextField otherServiceSumTF = new JTextField();
+        
+      String url1 = "jdbc:mysql://localhost:3306/ja consultancy services";
+        String user2 = "root";
+        String password1 = ""; 
 
-//    while (rs.next()) {
-//        String serviceType = rs.getString("service_type");
-//        double totalAmountSum = rs.getDouble("total_amount_sum");
-//        String formattedSum = "₱" + String.valueOf(totalAmountSum);
-//
-////        switch (serviceType) {
-////            case "Consultancy":
-////                consultancySumTF.setText(formattedSum);
-////                break;
-////            case "Audit":
-////                auditSumTF.setText(formattedSum);
-////                break;
-////            default:
-////                otherServiceSumTF.setText(formattedSum);
-////                break;
-////        }
-//    }
+        String query2 = "SELECT SUM(Total_Amount) AS total_amount_sum " +
+                "FROM realreport " +
+                "WHERE Service_Type = 'Consultancy'";
 
-//} catch (SQLException e) {
-//    e.printStackTrace();
-//    JOptionPane.showMessageDialog(this, "Error fetching data", "Error", JOptionPane.ERROR_MESSAGE);
-//}
+        try (Connection con = DriverManager.getConnection(url, user, password);
+             Statement stmt = con.createStatement();
+             ResultSet rs = stmt.executeQuery(query2)) {
+
+            if (rs.next()) {
+                double totalBilling = rs.getDouble(1);
+                cons.setText("₱"+String.valueOf(totalBilling));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error fetching data", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+      
+        
+      
     }
  
     @SuppressWarnings("unchecked")

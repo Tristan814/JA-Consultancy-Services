@@ -361,6 +361,11 @@ try {
         pstsched.setInt(1, id);
         pstsched.executeUpdate();
         
+        String sqlreport = "DELETE FROM `realreport` WHERE `Client_ID`=?";
+        PreparedStatement pstreport = con.prepareStatement(sqlreport);
+        pstreport.setInt(1, id);
+        pstreport.executeUpdate();
+        
          String sqlClient = "DELETE FROM `client_table` WHERE `Client_ID`=?";
         PreparedStatement pstClient = con.prepareStatement(sqlClient);
         pstClient.setInt(1, id);
@@ -383,44 +388,7 @@ try {
     JOptionPane.showMessageDialog(new JFrame(), "Deletion Failed", "Error!", JOptionPane.ERROR_MESSAGE);
 }
 
-
-
-
-
-//  DefaultTableModel model = (DefaultTableModel) table.getModel();
-//    int selectedRowIndex = table.getSelectedRow();
-//    try {
-//         id = Integer.parseInt(model.getValueAt(selectedRowIndex, 0).toString());
-//        int delete = JOptionPane.showConfirmDialog(null,"Confirm if you want to delete item","Warning",JOptionPane.YES_NO_OPTION);
-//        if (delete ==JOptionPane.YES_NO_OPTION) {
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-//            
-//         String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
-//         String user = "jaroot";
-//         String pass = "";
-//         Connection con = DriverManager.getConnection(url,user,pass);
-//         String sql = "DELETE FROM `client_table` WHERE Client_ID=?";
-//         pst = con.prepareStatement(sql);
-//         pst.setInt(1,id);
-//         pst.executeUpdate(); 
-//        model.removeRow(selectedRowIndex);
-//        JOptionPane.showMessageDialog(new JFrame(), "Row Deleted Successfully", "Success!", JOptionPane.CANCEL_OPTION);
-//        clientidtf.setText("");
-//        ipmtf.setText("");
-//        contacttf.setText("");
-//        emailtf.setText("");
-//        addresstf.setText("");   
-//    } else {
-//        JOptionPane.showMessageDialog(new JFrame(), "No Row Selected", "Warning!", JOptionPane.WARNING_MESSAGE);
-//    }
-//} catch (Exception ex) {
-//    Logger.getLogger(InquiriesAdmin.class.getName()).log(Level.SEVERE, null, ex);
-//    JOptionPane.showMessageDialog(new JFrame(), "Deletion Failed", "Error!", JOptionPane.ERROR_MESSAGE);
-//}
-//        
-//        
-//        
-        
+   
     }//GEN-LAST:event_deletebtnActionPerformed
 
     private void editbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editbtnActionPerformed
@@ -445,18 +413,7 @@ if(table.getSelectedRow() <0){
     }//GEN-LAST:event_resetbtnActionPerformed
 
     private void savebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savebtnActionPerformed
-        
-//    try{
-//    pst = con.prepareStatement("update client_table set IPM_ID =?, Contact_No =?, Email =?, Address =? where Client_ID=?");
-//    pst.setString(1,ipmtf.getText());
-//    pst.setString(2,contacttf.getText());
-//    pst.setString(3,emailtf.getText());
-//    pst.setString(4,addresstf.getText());
-//    pst.setString(5,clientidtf.getText());
-//   
-//    
-        
-//    int rowsAffected = pst.executeUpdate(); 
+            
     
      if("".equals(contacttf.getText())){
          JOptionPane.showMessageDialog(new JFrame(), "Contact Number is required", "Error", JOptionPane.ERROR_MESSAGE);
@@ -516,30 +473,7 @@ if(table.getSelectedRow() <0){
        
 }
         }
-//            if (rowsAffected > 0 ){
-//               DefaultTableModel model = (DefaultTableModel) table.getModel();
-//               int selectedRowIndex = table.getSelectedRow();
-//
-//               model.setValueAt(clientidtf.getText(), selectedRowIndex, 0);
-//               model.setValueAt(ipmtf.getText(), selectedRowIndex, 1);
-//               model.setValueAt(contacttf.getText(), selectedRowIndex, 2);
-//               model.setValueAt(emailtf.getText(), selectedRowIndex, 3);
-//               model.setValueAt(addresstf.getText(), selectedRowIndex, 4);
-//
-//              JOptionPane.showMessageDialog(new JFrame(), "Updated Successfully", "Successed!", JOptionPane.OK_CANCEL_OPTION);
-//              con.close();
-//           } else{
-//               JOptionPane.showMessageDialog(new JFrame(), "Update Failed", "Warning!", JOptionPane.ERROR_MESSAGE);
-//              con.close();
-//           }
-//     }
-//    
-//
-//       
-//} catch (SQLException ex) {
-//            Logger.getLogger(InquiriesAdmin.class.getName()).log(Level.SEVERE, null, ex);
-//       
-//}
+
     }//GEN-LAST:event_savebtnActionPerformed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked

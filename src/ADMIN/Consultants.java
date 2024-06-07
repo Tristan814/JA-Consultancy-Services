@@ -439,11 +439,11 @@ public class Consultants extends javax.swing.JFrame {
                 model.setValueAt(contactnotf.getText(), selectedRowIndex, 3);
                 model.setValueAt(emailtf.getText(), selectedRowIndex, 4);
 
-                JOptionPane.showMessageDialog(new JFrame(), "Updated Successfully", "Successed!", JOptionPane.OK_CANCEL_OPTION);
-                con.close();
+                JOptionPane.showMessageDialog(new JFrame(), "Updated Successfully", "Successed!", 2);
+                
             } else{
                 JOptionPane.showMessageDialog(new JFrame(), "Update Failed", "Warning!", JOptionPane.ERROR_MESSAGE);
-                con.close();
+            
             }
 
             constf.setText("");
@@ -531,7 +531,7 @@ public class Consultants extends javax.swing.JFrame {
                 + "VALUES('"+ipm+"','"+cn+"','"+inq+"','"+serv+"','"+stats+"')";
 
                 DefaultTableModel model = (DefaultTableModel) table.getModel();
-                model.addRow(new Object[] {constf.getText(),lastntf.getText(),firstntf.getText(),emailtf.getText(),contactnotf.getText()});
+                model.addRow(new Object[] {constf.getText(),lastntf.getText(),firstntf.getText(),contactnotf.getText(),emailtf.getText()});
 
                 st.executeUpdate(query);
                 emailtf.setText("");

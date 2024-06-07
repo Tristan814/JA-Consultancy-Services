@@ -357,7 +357,7 @@ public class Scheduling extends javax.swing.JFrame {
        query2 = "INSERT INTO scheduling_id (Sched_ID, No_of_Days, Duration, Client_ID)"
                + "VALUES(?,?,?,?)";
        //('"+sche+"','"+nod+"','"+dura+"','"+client+"')
-        query3 = "INSERT INTO transaction_table (Trans_ID, Cons_ID, Client_ID, Payment_ID, Schedule_ID)"
+        query3 = "INSERT INTO transaction_table (Trans_ID, Cons_ID, Client_ID, Payment_ID, Sched_ID)"
                + "VALUES(?,?,?,?,?)";
         query4 = "INSERT INTO realreport (Trans_ID, Total_Amount, Service_Type, Client_ID)"
                + "VALUES(?,?,?,?)";
