@@ -346,7 +346,7 @@ public class Scheduling extends javax.swing.JFrame {
        tot =  totalamount.getText();
        sche =  sched.getText();
        nod = noofdays.getText();
-       dura = transtf.getText();
+       dura = duration.getText();
        trans = transtf.getText();
        cons = constf.getText();
        ser = servetf.getText();
@@ -485,10 +485,7 @@ public class Scheduling extends javax.swing.JFrame {
     }//GEN-LAST:event_noofdaysKeyTyped
 
     private void durationKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_durationKeyTyped
-        char enter = evt.getKeyChar();
-        if(!(Character.isDigit(enter))){
-            evt.consume();
-        }
+
     }//GEN-LAST:event_durationKeyTyped
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked

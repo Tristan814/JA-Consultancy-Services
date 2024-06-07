@@ -114,8 +114,50 @@ try {
             JOptionPane.showMessageDialog(this, "Error fetching data", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
-      
+            String url11 = "jdbc:mysql://localhost:3306/ja consultancy services";
+        String user11 = "root";
+        String password11 = ""; 
+
+        String query3 = "SELECT SUM(Total_Amount) AS total_amount_sum " +
+                "FROM realreport " +
+                "WHERE Service_Type = 'Audit'";
+
+        try (Connection con = DriverManager.getConnection(url, user, password);
+             Statement stmt = con.createStatement();
+             ResultSet rs = stmt.executeQuery(query3)) {
+
+            if (rs.next()) {
+                double totalBilling = rs.getDouble(1);
+                audit.setText("₱"+String.valueOf(totalBilling));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error fetching data", "Error", JOptionPane.ERROR_MESSAGE);
+        }
         
+        
+        String url111 = "jdbc:mysql://localhost:3306/ja consultancy services";
+        String user111 = "root";
+        String password111 = ""; 
+
+        String query4 = "SELECT SUM(Total_Amount) AS total_amount_sum " +
+                "FROM realreport " +
+                "WHERE Service_Type = 'Training'";
+
+        try (Connection con = DriverManager.getConnection(url, user, password);
+             Statement stmt = con.createStatement();
+             ResultSet rs = stmt.executeQuery(query4)) {
+
+            if (rs.next()) {
+                double totalBilling = rs.getDouble(1);
+                train.setText("₱"+String.valueOf(totalBilling));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error fetching data", "Error", JOptionPane.ERROR_MESSAGE);
+        }
       
     }
  
@@ -131,8 +173,12 @@ try {
         jButton2 = new javax.swing.JButton();
         sumtf = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        constxt = new javax.swing.JLabel();
         cons = new javax.swing.JTextField();
+        train = new javax.swing.JTextField();
+        audit = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -166,7 +212,7 @@ try {
         }
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(60, 150, 980, 490);
+        jScrollPane1.setBounds(300, 140, 780, 490);
 
         searchtf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         searchtf.addActionListener(new java.awt.event.ActionListener() {
@@ -201,7 +247,7 @@ try {
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(20, 690, 75, 23);
+        jButton2.setBounds(20, 670, 75, 23);
 
         sumtf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         sumtf.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -211,17 +257,18 @@ try {
             }
         });
         jPanel1.add(sumtf);
-        sumtf.setBounds(280, 660, 250, 40);
+        sumtf.setBounds(20, 530, 250, 40);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel2.setText("Total Billing:");
+        jLabel2.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel2.setText("TOTAL BILLING: ");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(180, 660, 100, 20);
+        jLabel2.setBounds(90, 510, 150, 20);
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel3.setText("Total in Consultancy:");
-        jPanel1.add(jLabel3);
-        jLabel3.setBounds(560, 660, 180, 20);
+        constxt.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        constxt.setText("TOTAL (CONSULTANCY)");
+        jPanel1.add(constxt);
+        constxt.setBounds(50, 130, 230, 20);
 
         cons.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cons.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -231,7 +278,37 @@ try {
             }
         });
         jPanel1.add(cons);
-        cons.setBounds(730, 660, 250, 40);
+        cons.setBounds(20, 150, 250, 40);
+
+        train.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        train.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        train.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                trainActionPerformed(evt);
+            }
+        });
+        jPanel1.add(train);
+        train.setBounds(20, 260, 250, 40);
+
+        audit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        audit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        audit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                auditActionPerformed(evt);
+            }
+        });
+        jPanel1.add(audit);
+        audit.setBounds(20, 380, 250, 40);
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel4.setText("TOTAL (TRAINING)");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(80, 240, 180, 20);
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel5.setText("TOTAL (AUDIT)");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(90, 360, 130, 20);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ADMIN/Reports bg.png"))); // NOI18N
         jPanel1.add(jLabel1);
@@ -241,11 +318,15 @@ try {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1100, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1099, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 725, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -285,6 +366,14 @@ try {
        }
     }//GEN-LAST:event_searchtfKeyPressed
 
+    private void trainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trainActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_trainActionPerformed
+
+    private void auditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_auditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_auditActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -321,16 +410,20 @@ try {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField audit;
     private javax.swing.JTextField cons;
+    private javax.swing.JLabel constxt;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField searchtf;
     private javax.swing.JTextField sumtf;
     private javax.swing.JTable table;
+    private javax.swing.JTextField train;
     // End of variables declaration//GEN-END:variables
 }
