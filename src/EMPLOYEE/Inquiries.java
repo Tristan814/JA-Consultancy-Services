@@ -34,6 +34,7 @@ public class Inquiries extends javax.swing.JFrame {
     public Inquiries() {
         initComponents();
         this.setLocationRelativeTo(null);
+        savebtn.setEnabled(false);
 
     String SUrl,Suser, Spass;
     SUrl = "jdbc:MYSQL://localhost:3306/ja consultancy services";
@@ -57,9 +58,9 @@ public class Inquiries extends javax.swing.JFrame {
     btng.add(rb2);
     btng.add(rb3);
     
-    btng2.add(rb11);
-    btng2.add(rb22);
-    btng2.add(rb33);
+    btng2.add(rb4);
+    btng2.add(rb5);
+    btng2.add(rb6);
     
 //    ipmtf.setEditable(false);
     inquirytf.setEditable(false);
@@ -138,26 +139,26 @@ public class Inquiries extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        save = new javax.swing.JButton();
+        savebtn = new javax.swing.JButton();
         next = new javax.swing.JButton();
-        add = new javax.swing.JButton();
+        addbtn = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        editbtn = new javax.swing.JButton();
         month = new javax.swing.JComboBox<>();
         day = new javax.swing.JComboBox<>();
         year = new javax.swing.JComboBox<>();
-        jButton7 = new javax.swing.JButton();
+        resetbtn = new javax.swing.JButton();
         servicetf = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         rb1 = new javax.swing.JRadioButton();
         rb2 = new javax.swing.JRadioButton();
         rb3 = new javax.swing.JRadioButton();
-        Delete = new javax.swing.JButton();
+        deletebtn = new javax.swing.JButton();
         searchtf = new javax.swing.JTextField();
         search = new javax.swing.JButton();
-        rb11 = new javax.swing.JRadioButton();
-        rb33 = new javax.swing.JRadioButton();
-        rb22 = new javax.swing.JRadioButton();
+        rb4 = new javax.swing.JRadioButton();
+        rb6 = new javax.swing.JRadioButton();
+        rb5 = new javax.swing.JRadioButton();
         jLabel8 = new javax.swing.JLabel();
         ipmtf = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -232,18 +233,18 @@ public class Inquiries extends javax.swing.JFrame {
         jPanel1.add(jLabel5);
         jLabel5.setBounds(1210, 400, 110, 18);
 
-        save.setBackground(new java.awt.Color(0, 153, 102));
-        save.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        save.setForeground(new java.awt.Color(255, 255, 255));
-        save.setText("Save");
-        save.setAlignmentX(0.5F);
-        save.addActionListener(new java.awt.event.ActionListener() {
+        savebtn.setBackground(new java.awt.Color(0, 153, 102));
+        savebtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        savebtn.setForeground(new java.awt.Color(255, 255, 255));
+        savebtn.setText("Save");
+        savebtn.setAlignmentX(0.5F);
+        savebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveActionPerformed(evt);
+                savebtnActionPerformed(evt);
             }
         });
-        jPanel1.add(save);
-        save.setBounds(1000, 650, 100, 40);
+        jPanel1.add(savebtn);
+        savebtn.setBounds(1000, 650, 100, 40);
 
         next.setText("next");
         next.addActionListener(new java.awt.event.ActionListener() {
@@ -254,18 +255,18 @@ public class Inquiries extends javax.swing.JFrame {
         jPanel1.add(next);
         next.setBounds(1390, 760, 75, 23);
 
-        add.setBackground(new java.awt.Color(118, 8, 8));
-        add.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        add.setForeground(new java.awt.Color(255, 255, 255));
-        add.setText("Add");
-        add.setAlignmentX(0.5F);
-        add.addActionListener(new java.awt.event.ActionListener() {
+        addbtn.setBackground(new java.awt.Color(118, 8, 8));
+        addbtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        addbtn.setForeground(new java.awt.Color(255, 255, 255));
+        addbtn.setText("Add");
+        addbtn.setAlignmentX(0.5F);
+        addbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addActionPerformed(evt);
+                addbtnActionPerformed(evt);
             }
         });
-        jPanel1.add(add);
-        add.setBounds(890, 650, 100, 40);
+        jPanel1.add(addbtn);
+        addbtn.setBounds(890, 650, 100, 40);
 
         jButton5.setText("Back");
         jButton5.setAlignmentX(0.5F);
@@ -277,18 +278,18 @@ public class Inquiries extends javax.swing.JFrame {
         jPanel1.add(jButton5);
         jButton5.setBounds(40, 750, 70, 30);
 
-        jButton6.setBackground(new java.awt.Color(48, 54, 66));
-        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Edit");
-        jButton6.setAlignmentX(0.5F);
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        editbtn.setBackground(new java.awt.Color(48, 54, 66));
+        editbtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        editbtn.setForeground(new java.awt.Color(255, 255, 255));
+        editbtn.setText("Edit");
+        editbtn.setAlignmentX(0.5F);
+        editbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                editbtnActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton6);
-        jButton6.setBounds(1110, 650, 100, 40);
+        jPanel1.add(editbtn);
+        editbtn.setBounds(1110, 650, 100, 40);
 
         month.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Month", "January", "February", "March ", "April", "May", "June", "July ", "August ", "September", "October", "November", "December" }));
         month.addActionListener(new java.awt.event.ActionListener() {
@@ -317,17 +318,17 @@ public class Inquiries extends javax.swing.JFrame {
         jPanel1.add(year);
         year.setBounds(1080, 450, 70, 40);
 
-        jButton7.setBackground(new java.awt.Color(204, 204, 204));
-        jButton7.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jButton7.setText("Reset");
-        jButton7.setAlignmentX(0.5F);
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        resetbtn.setBackground(new java.awt.Color(204, 204, 204));
+        resetbtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        resetbtn.setText("Reset");
+        resetbtn.setAlignmentX(0.5F);
+        resetbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                resetbtnActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton7);
-        jButton7.setBounds(1220, 650, 100, 40);
+        jPanel1.add(resetbtn);
+        resetbtn.setBounds(1220, 650, 100, 40);
 
         servicetf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         servicetf.addActionListener(new java.awt.event.ActionListener() {
@@ -376,17 +377,17 @@ public class Inquiries extends javax.swing.JFrame {
         jPanel1.add(rb3);
         rb3.setBounds(1210, 285, 80, 30);
 
-        Delete.setBackground(new java.awt.Color(255, 204, 204));
-        Delete.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        Delete.setText("Delete");
-        Delete.setAlignmentX(0.5F);
-        Delete.addActionListener(new java.awt.event.ActionListener() {
+        deletebtn.setBackground(new java.awt.Color(255, 204, 204));
+        deletebtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        deletebtn.setText("Delete");
+        deletebtn.setAlignmentX(0.5F);
+        deletebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DeleteActionPerformed(evt);
+                deletebtnActionPerformed(evt);
             }
         });
-        jPanel1.add(Delete);
-        Delete.setBounds(1330, 650, 100, 40);
+        jPanel1.add(deletebtn);
+        deletebtn.setBounds(1330, 650, 100, 40);
 
         searchtf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         searchtf.addActionListener(new java.awt.event.ActionListener() {
@@ -414,38 +415,38 @@ public class Inquiries extends javax.swing.JFrame {
         jPanel1.add(search);
         search.setBounds(280, 120, 100, 40);
 
-        rb11.setBackground(new java.awt.Color(255, 255, 255));
-        rb11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        rb11.setText("Approved");
-        rb11.addActionListener(new java.awt.event.ActionListener() {
+        rb4.setBackground(new java.awt.Color(255, 255, 255));
+        rb4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rb4.setText("Approved");
+        rb4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rb11ActionPerformed(evt);
+                rb4ActionPerformed(evt);
             }
         });
-        jPanel1.add(rb11);
-        rb11.setBounds(1210, 430, 90, 25);
+        jPanel1.add(rb4);
+        rb4.setBounds(1210, 430, 90, 25);
 
-        rb33.setBackground(new java.awt.Color(255, 255, 255));
-        rb33.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        rb33.setText("Declined");
-        rb33.addActionListener(new java.awt.event.ActionListener() {
+        rb6.setBackground(new java.awt.Color(255, 255, 255));
+        rb6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rb6.setText("Declined");
+        rb6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rb33ActionPerformed(evt);
+                rb6ActionPerformed(evt);
             }
         });
-        jPanel1.add(rb33);
-        rb33.setBounds(1210, 490, 80, 25);
+        jPanel1.add(rb6);
+        rb6.setBounds(1210, 490, 80, 25);
 
-        rb22.setBackground(new java.awt.Color(255, 255, 255));
-        rb22.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        rb22.setText("Pending");
-        rb22.addActionListener(new java.awt.event.ActionListener() {
+        rb5.setBackground(new java.awt.Color(255, 255, 255));
+        rb5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rb5.setText("Pending");
+        rb5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rb22ActionPerformed(evt);
+                rb5ActionPerformed(evt);
             }
         });
-        jPanel1.add(rb22);
-        rb22.setBounds(1210, 460, 80, 25);
+        jPanel1.add(rb5);
+        rb5.setBounds(1210, 460, 80, 25);
 
         jLabel8.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel8.setText("IPM ID:");
@@ -481,12 +482,37 @@ public class Inquiries extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-                            companytf.setEditable(true);
+    private void editbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editbtnActionPerformed
+        if(table.getSelectedRow() <0){
+        JOptionPane.showMessageDialog(null, "Please select an account!");
+        
+        }else{
+            companytf.setEditable(true);
+            month.setEnabled(true);
+            day.setEnabled(true);
+            year.setEnabled(true);
+            savebtn.setEnabled(true);
+            addbtn.setEnabled(false);
+            
+            ipmtf.setEditable(false);
+            servicetf.setEditable(false);
+            stat.setEditable(false);
+            
+
+            rb1.setEnabled(true);
+            rb2.setEnabled(true);
+            rb3.setEnabled(true);
+            rb4.setEnabled(true);
+            rb5.setEnabled(true);
+            rb6.setEnabled(true);
+}                                                            
+        
+        
+      
                            
         
 
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_editbtnActionPerformed
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
 
@@ -515,10 +541,12 @@ public class Inquiries extends javax.swing.JFrame {
         
         sc = servicetf.getText();
         
-        JOptionPane.showConfirmDialog(new JFrame(), "Click YES to proceed", "Successed!", JOptionPane.YES_NO_OPTION);
-        
+        int n = JOptionPane.showConfirmDialog(new JFrame(), "Click YES to proceed", "Successed!", JOptionPane.YES_NO_OPTION);
+        if(n == 0){
         cd.setVisible(true);
         this.dispose();  
+        }
+        
          }
     }//GEN-LAST:event_nextActionPerformed
 
@@ -546,7 +574,7 @@ public class Inquiries extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void resetbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetbtnActionPerformed
        
         
         ipmtf.setText("");
@@ -563,9 +591,9 @@ public class Inquiries extends javax.swing.JFrame {
         
 
 
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_resetbtnActionPerformed
 
-    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
+    private void addbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addbtnActionPerformed
  String ipm, cn, stats, inq, serv, query1;
        
        try{
@@ -628,7 +656,7 @@ public class Inquiries extends javax.swing.JFrame {
             Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }//GEN-LAST:event_addActionPerformed
+    }//GEN-LAST:event_addbtnActionPerformed
 
     private void monthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthActionPerformed
       String a;
@@ -707,9 +735,24 @@ Scheduling sc = new Scheduling();
     }
     }//GEN-LAST:event_rb2ActionPerformed
 
-    private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
-
-    try{
+    private void savebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savebtnActionPerformed
+            if("".equals(ipmtf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "IPM ID is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(companytf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Company Name is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(stat.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Status is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(inquirytf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Inquiry Date is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else if("".equals(servicetf.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Service Type is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+         else{
+             try{
     pst = con.prepareStatement("update inquiry_and_proposal set Company_Name =?, Inquiry_Date =?, Service_Type =?, Status =? where IPM_ID=?");
     pst.setString(1,companytf.getText());
     pst.setString(2,inquirytf.getText());
@@ -732,10 +775,25 @@ Scheduling sc = new Scheduling();
         model.setValueAt(stat.getText(), selectedRowIndex, 4);
         
        JOptionPane.showMessageDialog(new JFrame(), "Updated Successfully", "Successed!", JOptionPane.OK_CANCEL_OPTION);
-       con.close();
+       ipmtf.setText("");
+       companytf.setText("");
+       inquirytf.setText("");
+       servicetf.setText("");
+       stat.setText("");
+       
+       ipmtf.setEditable(true);
+       companytf.setEditable(true);
+       inquirytf.setEditable(true);
+       servicetf.setEditable(true);
+       stat.setEditable(true);
+       
+       savebtn.setEnabled(false);
+       addbtn.setEnabled(true);
+       
+//       con.close();
     } else{
         JOptionPane.showMessageDialog(new JFrame(), "Update Failed", "Warning!", JOptionPane.ERROR_MESSAGE);
-       con.close();
+//       con.close();
     }
 
        
@@ -743,11 +801,12 @@ Scheduling sc = new Scheduling();
             Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE, null, ex);
        
 }
+         }
+    
 
-    }//GEN-LAST:event_saveActionPerformed
+    }//GEN-LAST:event_savebtnActionPerformed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
-        
         int id = Integer.parseInt(table.getValueAt(table.getSelectedRow(),0).toString());
         try{
                Class.forName("com.mysql.cj.jdbc.Driver");
@@ -773,6 +832,18 @@ Scheduling sc = new Scheduling();
                             servicetf.setEditable(false);
                             ipmtf.setEditable(false);
                             
+                            month.setEnabled(false);
+                            day.setEnabled(false);
+                            year.setEnabled(false);
+                            
+                            rb1.setEnabled(false);
+                            rb2.setEnabled(false);
+                            rb3.setEnabled(false);
+                            rb4.setEnabled(false);
+                            rb5.setEnabled(false);
+                            rb6.setEnabled(false);
+                            
+                            addbtn.setEnabled(false);
                         }
                 
         }
@@ -782,7 +853,7 @@ Scheduling sc = new Scheduling();
         
     }//GEN-LAST:event_tableMouseClicked
 
-    private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
+    private void deletebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebtnActionPerformed
        DefaultTableModel model = (DefaultTableModel) table.getModel();
         int selectedRowIndex = table.getSelectedRow();
 //    DELETE FROM `inquiry_and_proposal` WHERE 0
@@ -824,7 +895,7 @@ try {
     Logger.getLogger(InquiriesAdmin.class.getName()).log(Level.SEVERE, null, ex);
     JOptionPane.showMessageDialog(new JFrame(), "Deletion Failed", "Error!", JOptionPane.ERROR_MESSAGE);
 }
-    }//GEN-LAST:event_DeleteActionPerformed
+    }//GEN-LAST:event_deletebtnActionPerformed
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -842,23 +913,23 @@ try {
         // TODO add your handling code here:
     }//GEN-LAST:event_searchtfActionPerformed
 
-    private void rb11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb11ActionPerformed
-        if (rb11.isSelected()){
-        stat.setText(rb11.getText());
+    private void rb4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb4ActionPerformed
+        if (rb4.isSelected()){
+        stat.setText(rb4.getText());
     }
-    }//GEN-LAST:event_rb11ActionPerformed
+    }//GEN-LAST:event_rb4ActionPerformed
 
-    private void rb33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb33ActionPerformed
-        if (rb33.isSelected()){
-        stat.setText(rb33.getText());
+    private void rb6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb6ActionPerformed
+        if (rb6.isSelected()){
+        stat.setText(rb6.getText());
         }
-    }//GEN-LAST:event_rb33ActionPerformed
+    }//GEN-LAST:event_rb6ActionPerformed
 
-    private void rb22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb22ActionPerformed
-        if (rb22.isSelected()){
-        stat.setText(rb22.getText());
+    private void rb5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb5ActionPerformed
+        if (rb5.isSelected()){
+        stat.setText(rb5.getText());
         }
-    }//GEN-LAST:event_rb22ActionPerformed
+    }//GEN-LAST:event_rb5ActionPerformed
 
     private void ipmtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ipmtfActionPerformed
         // TODO add your handling code here:
@@ -904,18 +975,17 @@ try {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Delete;
-    private javax.swing.JButton add;
+    private javax.swing.JButton addbtn;
     private javax.swing.ButtonGroup btng;
     private javax.swing.ButtonGroup btng2;
     public static javax.swing.JTextField companytf;
     private javax.swing.JComboBox<String> day;
+    private javax.swing.JButton deletebtn;
+    private javax.swing.JButton editbtn;
     public static javax.swing.JTextField inquirytf;
     public static javax.swing.JTextField ipmtf;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -927,12 +997,13 @@ try {
     private javax.swing.JComboBox<String> month;
     public static javax.swing.JButton next;
     private javax.swing.JRadioButton rb1;
-    private javax.swing.JRadioButton rb11;
     private javax.swing.JRadioButton rb2;
-    private javax.swing.JRadioButton rb22;
     private javax.swing.JRadioButton rb3;
-    private javax.swing.JRadioButton rb33;
-    private javax.swing.JButton save;
+    private javax.swing.JRadioButton rb4;
+    private javax.swing.JRadioButton rb5;
+    private javax.swing.JRadioButton rb6;
+    private javax.swing.JButton resetbtn;
+    private javax.swing.JButton savebtn;
     private javax.swing.JButton search;
     private javax.swing.JTextField searchtf;
     public static javax.swing.JTextField servicetf;

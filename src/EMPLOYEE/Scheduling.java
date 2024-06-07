@@ -64,6 +64,7 @@ public class Scheduling extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         servetf = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -72,6 +73,11 @@ public class Scheduling extends javax.swing.JFrame {
         jPanel1.setLayout(null);
 
         sched.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        sched.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                schedKeyTyped(evt);
+            }
+        });
         jPanel1.add(sched);
         sched.setBounds(400, 130, 250, 40);
 
@@ -79,6 +85,11 @@ public class Scheduling extends javax.swing.JFrame {
         transtf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 transtfActionPerformed(evt);
+            }
+        });
+        transtf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                transtfKeyTyped(evt);
             }
         });
         jPanel1.add(transtf);
@@ -141,10 +152,20 @@ public class Scheduling extends javax.swing.JFrame {
         jLabel10.setBounds(30, 320, 90, 20);
 
         totalamount.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        totalamount.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                totalamountKeyTyped(evt);
+            }
+        });
         jPanel1.add(totalamount);
         totalamount.setBounds(30, 240, 230, 40);
 
         payment.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        payment.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                paymentKeyTyped(evt);
+            }
+        });
         jPanel1.add(payment);
         payment.setBounds(30, 130, 230, 40);
 
@@ -155,6 +176,11 @@ public class Scheduling extends javax.swing.JFrame {
         jLabel11.setBounds(30, 100, 140, 20);
 
         noofdays.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        noofdays.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                noofdaysKeyTyped(evt);
+            }
+        });
         jPanel1.add(noofdays);
         noofdays.setBounds(400, 240, 250, 40);
 
@@ -176,6 +202,11 @@ public class Scheduling extends javax.swing.JFrame {
         jButton3.setBounds(410, 690, 120, 40);
 
         duration.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        duration.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                durationKeyTyped(evt);
+            }
+        });
         jPanel1.add(duration);
         duration.setBounds(400, 460, 250, 40);
 
@@ -197,6 +228,11 @@ public class Scheduling extends javax.swing.JFrame {
                 reporttfActionPerformed(evt);
             }
         });
+        reporttf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                reporttfKeyTyped(evt);
+            }
+        });
         jPanel1.add(reporttf);
         reporttf.setBounds(30, 570, 230, 40);
 
@@ -204,6 +240,11 @@ public class Scheduling extends javax.swing.JFrame {
         constf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 constfActionPerformed(evt);
+            }
+        });
+        constf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                constfKeyTyped(evt);
             }
         });
         jPanel1.add(constf);
@@ -224,6 +265,16 @@ public class Scheduling extends javax.swing.JFrame {
         jLabel16.setText("SERVICE TYPE");
         jPanel1.add(jLabel16);
         jLabel16.setBounds(400, 320, 110, 18);
+
+        jLabel2.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel2.setText("Check Consultants >>");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(530, 542, 140, 16);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EMPLOYEE/scheduling bg.png"))); // NOI18N
         jPanel1.add(jLabel1);
@@ -282,6 +333,9 @@ public class Scheduling extends javax.swing.JFrame {
          else if("".equals(transtf.getText())){
              JOptionPane.showMessageDialog(new JFrame(), "Duration is required", "Error", JOptionPane.ERROR_MESSAGE);
          }
+         else if ("".equals(constf.getText())) {
+                JOptionPane.showMessageDialog(new JFrame(), "Duration is Consultant ID", "Error", JOptionPane.ERROR_MESSAGE);
+           }
 
          else{
         
@@ -381,6 +435,66 @@ public class Scheduling extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_constfActionPerformed
 
+    private void transtfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_transtfKeyTyped
+        char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_transtfKeyTyped
+
+    private void reporttfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_reporttfKeyTyped
+        char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_reporttfKeyTyped
+
+    private void constfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_constfKeyTyped
+        char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_constfKeyTyped
+
+    private void paymentKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_paymentKeyTyped
+        char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_paymentKeyTyped
+
+    private void totalamountKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_totalamountKeyTyped
+        char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_totalamountKeyTyped
+
+    private void schedKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_schedKeyTyped
+        char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_schedKeyTyped
+
+    private void noofdaysKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_noofdaysKeyTyped
+        char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_noofdaysKeyTyped
+
+    private void durationKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_durationKeyTyped
+        char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_durationKeyTyped
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        new Consultants().setVisible(true);
+    }//GEN-LAST:event_jLabel2MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -416,6 +530,7 @@ public class Scheduling extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;

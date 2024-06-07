@@ -2,6 +2,7 @@ package EMPLOYEE;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -54,18 +55,27 @@ public class ClientDeets extends javax.swing.JFrame {
         jPanel1.setLayout(null);
 
         addresstf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        addresstf.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jPanel1.add(addresstf);
         addresstf.setBounds(340, 390, 250, 40);
 
         emailtf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        emailtf.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jPanel1.add(emailtf);
         emailtf.setBounds(340, 500, 250, 40);
 
         statustf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        statustf.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jPanel1.add(statustf);
         statustf.setBounds(340, 160, 250, 40);
 
         contactnotf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        contactnotf.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        contactnotf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                contactnotfKeyTyped(evt);
+            }
+        });
         jPanel1.add(contactnotf);
         contactnotf.setBounds(50, 500, 250, 40);
 
@@ -117,18 +127,27 @@ public class ClientDeets extends javax.swing.JFrame {
         jButton1.setBounds(490, 680, 100, 40);
 
         clienidtf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        clienidtf.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        clienidtf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                clienidtfKeyTyped(evt);
+            }
+        });
         jPanel1.add(clienidtf);
         clienidtf.setBounds(50, 390, 250, 40);
 
         datetf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        datetf.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jPanel1.add(datetf);
         datetf.setBounds(50, 270, 250, 40);
 
         companyytf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        companyytf.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jPanel1.add(companyytf);
         companyytf.setBounds(340, 270, 250, 40);
 
         ipmidtf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ipmidtf.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         ipmidtf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ipmidtfActionPerformed(evt);
@@ -192,22 +211,11 @@ public class ClientDeets extends javax.swing.JFrame {
     }//GEN-LAST:event_backActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        
-        String ipm, cid, contactno, email, address, query;
-        Scheduling cd = new Scheduling();
-       
-       try{
-           Class.forName("com.mysql.cj.jdbc.Driver");
-           
-         String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
-         String user = "jaroot";
-         String pass = "";
-         
-         Connection con = DriverManager.getConnection(url,user,pass);
-         Statement st = con.createStatement();
-
-         if("".equals(clienidtf.getText())){
+               int n = JOptionPane.showConfirmDialog(new JFrame(), "Click YES to proceed", "Successed!", JOptionPane.YES_NO_OPTION);
+                String ipm, cid, contactno, email, address, query;
+        if(n == 0){
+      
+        if("".equals(clienidtf.getText())){
              JOptionPane.showMessageDialog(new JFrame(), "Client ID is required", "Error", JOptionPane.ERROR_MESSAGE);
          }
          else if("".equals(addresstf.getText())){
@@ -217,13 +225,23 @@ public class ClientDeets extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(new JFrame(), "Contact Number is required", "Error", JOptionPane.ERROR_MESSAGE);
          }
          else if("".equals(emailtf.getText())){
-             JOptionPane.showMessageDialog(new JFrame(), "Email Date is required", "Error", JOptionPane.ERROR_MESSAGE);
-         }
+             JOptionPane.showMessageDialog(new JFrame(), "Email is required", "Error", JOptionPane.ERROR_MESSAGE);
+         }   
+        else{
+         try{
+              Class.forName("com.mysql.cj.jdbc.Driver");
+           
+         String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+         String user = "jaroot";
+         String pass = "";
+         
+         Connection con = DriverManager.getConnection(url,user,pass);
+         Statement st = con.createStatement();
 
-         else{
-        
+         
+          Scheduling cd = new Scheduling();
         cd.clientid.setText(clienidtf.getText());
- 
+
        ipm = ipmidtf.getText();
        cid = clienidtf.getText();
        contactno =  contactnotf.getText();
@@ -232,25 +250,38 @@ public class ClientDeets extends javax.swing.JFrame {
        query = "INSERT INTO client_table (Client_ID, IPM_ID, Contact_No, Email, Address)"
                + "VALUES('"+cid+"','"+ipm+"','"+contactno+"','"+email+"','"+address+"')";
          
-            st.executeUpdate(query);
-        JOptionPane.showConfirmDialog(new JFrame(), "Click YES to proceed", "Successed!", JOptionPane.YES_NO_OPTION);
-        
-        cd.setVisible(true);
-        this.dispose();  
-
-         }
-        
-       }catch (ClassNotFoundException ex){
+        st.executeUpdate(query);
+                cd.setVisible(true);
+        this.dispose() ; 
+     
+       }catch (ClassNotFoundException | SQLException ex){
            Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE,null,ex);
-       //    System.out.println("Error" + ex.getMessage());
-       } catch (SQLException ex) {
-            Logger.getLogger(Inquiries.class.getName()).log(Level.SEVERE, null, ex);
+           System.out.println("Error" + ex.getMessage());
+           JOptionPane.showMessageDialog(null, "SQL Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+       }
         }
+         
+        }else{ 
+            //do nothing
+        }
+        
+        
+       
 
+         
+        
+        
+
+         
+      
+
+         
+       
 
  
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    
     private void ipmidtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ipmidtfActionPerformed
       //  Inquiries.ipmtf.getText();
                 
@@ -260,6 +291,20 @@ public class ClientDeets extends javax.swing.JFrame {
 //       inq =  inquirytf.getText();
 //       serv = servicetf.getText();
     }//GEN-LAST:event_ipmidtfActionPerformed
+
+    private void contactnotfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contactnotfKeyTyped
+        char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_contactnotfKeyTyped
+
+    private void clienidtfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_clienidtfKeyTyped
+        char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_clienidtfKeyTyped
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
