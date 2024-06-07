@@ -40,6 +40,7 @@ public class Add_Employee extends javax.swing.JFrame {
         initComponents();
         
         this.setLocationRelativeTo(null);
+        savebtn.setEnabled(false);
         
             String SUrl,Suser, Spass;
     SUrl = "jdbc:MYSQL://localhost:3306/ja consultancy services";
@@ -99,7 +100,7 @@ public class Add_Employee extends javax.swing.JFrame {
         backbtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         emptable = new javax.swing.JTable();
-        updatebtn = new javax.swing.JButton();
+        savebtn = new javax.swing.JButton();
         editbtn = new javax.swing.JButton();
         searchtxt = new javax.swing.JTextField();
         searchbtn = new javax.swing.JButton();
@@ -198,6 +199,11 @@ public class Add_Employee extends javax.swing.JFrame {
         cellno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cellnoActionPerformed(evt);
+            }
+        });
+        cellno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cellnoKeyTyped(evt);
             }
         });
         jPanel2.add(cellno);
@@ -341,17 +347,17 @@ public class Add_Employee extends javax.swing.JFrame {
         jPanel2.add(jScrollPane1);
         jScrollPane1.setBounds(710, 130, 870, 510);
 
-        updatebtn.setBackground(new java.awt.Color(0, 153, 102));
-        updatebtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        updatebtn.setForeground(new java.awt.Color(255, 255, 255));
-        updatebtn.setText("SAVE");
-        updatebtn.addActionListener(new java.awt.event.ActionListener() {
+        savebtn.setBackground(new java.awt.Color(0, 153, 102));
+        savebtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        savebtn.setForeground(new java.awt.Color(255, 255, 255));
+        savebtn.setText("SAVE");
+        savebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updatebtnActionPerformed(evt);
+                savebtnActionPerformed(evt);
             }
         });
-        jPanel2.add(updatebtn);
-        updatebtn.setBounds(430, 580, 120, 47);
+        jPanel2.add(savebtn);
+        savebtn.setBounds(430, 580, 120, 47);
 
         editbtn.setBackground(new java.awt.Color(48, 54, 66));
         editbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -465,7 +471,7 @@ try{
     Connection con = DriverManager.getConnection(SUrl,Suser,Spass);
     Statement st =con.createStatement();
     if("".equals(lastname.getText())){
-        JOptionPane.showMessageDialog(new JFrame(),"sfsfd","Error",JOptionPane.ERROR_MESSAGE);      
+        JOptionPane.showMessageDialog(new JFrame(),"Last Name is Required","Error",JOptionPane.ERROR_MESSAGE);      
     }
     else if("".equals(firstname.getText())){
         JOptionPane.showMessageDialog(new JFrame(),"First  Name is Required","Error",JOptionPane.ERROR_MESSAGE);
@@ -636,9 +642,36 @@ try{
         dispose();
     }//GEN-LAST:event_backbtnActionPerformed
 
-    private void updatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatebtnActionPerformed
-     
-          try{
+    private void savebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savebtnActionPerformed
+if("".equals(lastname.getText())){
+        JOptionPane.showMessageDialog(new JFrame(),"Last Name is Required","Error",JOptionPane.ERROR_MESSAGE);      
+    }
+    else if("".equals(firstname.getText())){
+        JOptionPane.showMessageDialog(new JFrame(),"First  Name is Required","Error",JOptionPane.ERROR_MESSAGE);
+    }
+   else if("".equals(emppass.getText())){
+        JOptionPane.showMessageDialog(new JFrame(),"Password  is Required","Error",JOptionPane.ERROR_MESSAGE);
+    } 
+   else if("".equals(empID.getText())){
+        JOptionPane.showMessageDialog(new JFrame(),"Employee ID  is Required","Error",JOptionPane.ERROR_MESSAGE);
+   }
+   else if("".equals(cellno.getText())){
+        JOptionPane.showMessageDialog(new JFrame(),"Contact No.  is Required","Error",JOptionPane.ERROR_MESSAGE);
+   }
+   else if("".equals(address.getText())){
+        JOptionPane.showMessageDialog(new JFrame(),"Employee ID  is Required","Error",JOptionPane.ERROR_MESSAGE);
+   }
+    else if("".equals(dateofb.getText())){
+        JOptionPane.showMessageDialog(new JFrame(),"Date of Birth  is Required","Error",JOptionPane.ERROR_MESSAGE);
+   }
+     else if("".equals(age.getText())){
+        JOptionPane.showMessageDialog(new JFrame(),"Age  is Required","Error",JOptionPane.ERROR_MESSAGE);
+   }
+      else if("".equals(email.getText())){
+        JOptionPane.showMessageDialog(new JFrame(),"Email  is Required","Error",JOptionPane.ERROR_MESSAGE);
+   }
+   else{
+      try{
     pst = con.prepareStatement("update employee_table set Employee_LastName =?,Employee_FirstName =?,Cellphone_No =?,Address =?, Birthday =?, Email =?,Age =?,Password =? where Employee_ID=?");
     pst.setString(1,lastname.getText());
     pst.setString(2,firstname.getText());
@@ -685,25 +718,42 @@ try{
        empID.setText("");
        emppass.setText("");
        
+       addbtn.setEnabled(true);
+       savebtn.setEnabled(false);
+       
 } catch (SQLException ex) {
             Logger.getLogger(InquiriesAdmin.class.getName()).log(Level.SEVERE, null, ex);
        
 }
-    }//GEN-LAST:event_updatebtnActionPerformed
+      }     
+          
+    }//GEN-LAST:event_savebtnActionPerformed
 
     private void editbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editbtnActionPerformed
-    empID.setEditable(true);
-    lastname.setEditable(true);
-    firstname.setEditable(true);
-    cellno.setEditable(true);
-    address.setEditable(true);
-    dateofb.setEditable(false);
-    email.setEditable(true);
-    age.setEditable(true);
-    emppass.setEditable(true);
-    month.setEnabled(true);
-    day.setEnabled(true);
-    year.setEnabled(true);      // TODO add your handling code here:
+        if(emptable.getSelectedRow() <0){
+        JOptionPane.showMessageDialog(null, "Please select an account!");
+        
+        }else{
+        empID.setEditable(true);
+        lastname.setEditable(true);
+        firstname.setEditable(true);
+        cellno.setEditable(true);
+        address.setEditable(true);
+        dateofb.setEditable(false);
+        email.setEditable(true);
+        age.setEditable(true);
+        emppass.setEditable(true);
+        month.setEnabled(true);
+        day.setEnabled(true);
+        year.setEnabled(true); 
+
+
+        addbtn.setEnabled(false);
+        savebtn.setEnabled(true);
+        }
+        
+    
+// TODO add your handling code here:
 
     }//GEN-LAST:event_editbtnActionPerformed
 
@@ -823,6 +873,13 @@ try {
 }
     }//GEN-LAST:event_deleteActionPerformed
 
+    private void cellnoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cellnoKeyTyped
+        char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_cellnoKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -892,9 +949,9 @@ try {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField lastname;
     private javax.swing.JComboBox<String> month;
+    private javax.swing.JButton savebtn;
     private javax.swing.JButton searchbtn;
     private javax.swing.JTextField searchtxt;
-    private javax.swing.JButton updatebtn;
     private javax.swing.JComboBox<String> year;
     // End of variables declaration//GEN-END:variables
 }

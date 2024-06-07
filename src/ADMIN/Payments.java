@@ -36,6 +36,7 @@ PreparedStatement pst;
     public Payments() {
         initComponents();
   
+        savebtn.setEnabled(false);
     Connection con;
     PreparedStatement pst;
     ResultSet rs;
@@ -86,7 +87,7 @@ PreparedStatement pst;
         clienttf = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         clear = new javax.swing.JButton();
-        save = new javax.swing.JButton();
+        savebtn = new javax.swing.JButton();
         searchtf = new javax.swing.JTextField();
         search = new javax.swing.JButton();
         paymenttf = new javax.swing.JTextField();
@@ -147,7 +148,7 @@ PreparedStatement pst;
             }
         });
         jPanel2.add(delete);
-        delete.setBounds(980, 560, 110, 40);
+        delete.setBounds(1060, 570, 100, 40);
 
         edit.setBackground(new java.awt.Color(153, 0, 0));
         edit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -159,35 +160,39 @@ PreparedStatement pst;
             }
         });
         jPanel2.add(edit);
-        edit.setBounds(980, 490, 110, 40);
+        edit.setBounds(730, 570, 100, 40);
 
         totalamounttf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        totalamounttf.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         totalamounttf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 totalamounttfActionPerformed(evt);
             }
         });
         jPanel2.add(totalamounttf);
-        totalamounttf.setBounds(850, 250, 200, 40);
+        totalamounttf.setBounds(840, 320, 210, 40);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Total Amount:");
         jPanel2.add(jLabel3);
-        jLabel3.setBounds(910, 220, 140, 25);
+        jLabel3.setBounds(880, 290, 140, 25);
 
         clienttf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        clienttf.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         clienttf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clienttfActionPerformed(evt);
             }
         });
         jPanel2.add(clienttf);
-        clienttf.setBounds(850, 370, 200, 40);
+        clienttf.setBounds(840, 440, 210, 40);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Client ID:");
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(910, 340, 130, 25);
+        jLabel4.setBounds(880, 410, 130, 25);
 
         clear.setBackground(new java.awt.Color(204, 204, 204));
         clear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -198,19 +203,19 @@ PreparedStatement pst;
             }
         });
         jPanel2.add(clear);
-        clear.setBounds(830, 560, 110, 40);
+        clear.setBounds(950, 570, 100, 40);
 
-        save.setBackground(new java.awt.Color(0, 153, 102));
-        save.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        save.setForeground(new java.awt.Color(255, 255, 255));
-        save.setText("Save");
-        save.addActionListener(new java.awt.event.ActionListener() {
+        savebtn.setBackground(new java.awt.Color(0, 153, 102));
+        savebtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        savebtn.setForeground(new java.awt.Color(255, 255, 255));
+        savebtn.setText("Save");
+        savebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveActionPerformed(evt);
+                savebtnActionPerformed(evt);
             }
         });
-        jPanel2.add(save);
-        save.setBounds(830, 490, 110, 40);
+        jPanel2.add(savebtn);
+        savebtn.setBounds(840, 570, 100, 40);
 
         searchtf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,18 +243,20 @@ PreparedStatement pst;
         search.setBounds(310, 110, 100, 40);
 
         paymenttf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        paymenttf.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         paymenttf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 paymenttfActionPerformed(evt);
             }
         });
         jPanel2.add(paymenttf);
-        paymenttf.setBounds(850, 130, 200, 40);
+        paymenttf.setBounds(840, 200, 210, 40);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Payment ID:");
         jPanel2.add(jLabel5);
-        jLabel5.setBounds(910, 100, 130, 25);
+        jLabel5.setBounds(880, 170, 130, 25);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ADMIN/payments bg.png"))); // NOI18N
         jPanel2.add(jLabel1);
@@ -283,8 +290,12 @@ PreparedStatement pst;
         // TODO add your handling code here:
     }//GEN-LAST:event_clienttfActionPerformed
 
-    private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
-       try{
+    private void savebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savebtnActionPerformed
+
+        if("".equals(totalamounttf.getText())){
+        JOptionPane.showMessageDialog(new JFrame(),"Total Amount is Required","Error",JOptionPane.ERROR_MESSAGE);      
+    }else{
+        try{    
             String SUrl,Suser, Spass;
     SUrl = "jdbc:MYSQL://localhost:3306/ja consultancy services";
     Suser = "root";
@@ -295,7 +306,7 @@ PreparedStatement pst;
     pst.setString(1,totalamounttf.getText());
     pst.setString(2,clienttf.getText());
     pst.setString(3,paymenttf.getText());
-
+    
     
     
     int rowsAffected = pst.executeUpdate(); 
@@ -310,6 +321,12 @@ PreparedStatement pst;
 
         
        JOptionPane.showMessageDialog(new JFrame(), "Updated Successfully", "Successed!", JOptionPane.OK_CANCEL_OPTION);
+       
+       paymenttf.setText("");
+       totalamounttf.setText("");
+       clienttf.setText("");
+       
+       savebtn.setEnabled(false);
 
     } else{
         JOptionPane.showMessageDialog(new JFrame(), "Update Failed", "Warning!", JOptionPane.ERROR_MESSAGE);
@@ -320,13 +337,21 @@ PreparedStatement pst;
             Logger.getLogger(adminScheduling.class.getName()).log(Level.SEVERE, null, ex);
        
 }
-    }//GEN-LAST:event_saveActionPerformed
+        }
+        
+    }//GEN-LAST:event_savebtnActionPerformed
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
-                            
+          if(table.getSelectedRow() <0){
+        JOptionPane.showMessageDialog(null, "Please select an account!");
+        
+        }else{
+          totalamounttf.setEditable(true);
+          savebtn.setEnabled(true);
+        }                          
                             
                            
-                            totalamounttf.setEditable(true);
+                            
     }//GEN-LAST:event_editActionPerformed
 
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
@@ -477,7 +502,7 @@ try {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField paymenttf;
-    private javax.swing.JButton save;
+    private javax.swing.JButton savebtn;
     private javax.swing.JButton search;
     private javax.swing.JTextField searchtf;
     private javax.swing.JTable table;

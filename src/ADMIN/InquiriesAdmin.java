@@ -33,6 +33,8 @@ public class InquiriesAdmin extends javax.swing.JFrame {
     public InquiriesAdmin() {
         initComponents();
         this.setLocationRelativeTo(null);
+        savebtn.setEnabled(false);
+        
 
     String SUrl,Suser, Spass;
     SUrl = "jdbc:MYSQL://localhost:3306/ja consultancy services";
@@ -137,20 +139,19 @@ public class InquiriesAdmin extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        save = new javax.swing.JButton();
-        next = new javax.swing.JButton();
+        savebtn = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        editbtn = new javax.swing.JButton();
         month = new javax.swing.JComboBox<>();
         day = new javax.swing.JComboBox<>();
         year = new javax.swing.JComboBox<>();
-        jButton7 = new javax.swing.JButton();
+        resetbtn = new javax.swing.JButton();
         servicetf = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         rb1 = new javax.swing.JRadioButton();
         rb2 = new javax.swing.JRadioButton();
         rb3 = new javax.swing.JRadioButton();
-        Delete = new javax.swing.JButton();
+        deletebtn = new javax.swing.JButton();
         searchtf = new javax.swing.JTextField();
         search = new javax.swing.JButton();
         rb11 = new javax.swing.JRadioButton();
@@ -232,27 +233,18 @@ public class InquiriesAdmin extends javax.swing.JFrame {
         jPanel1.add(jLabel5);
         jLabel5.setBounds(1210, 400, 110, 18);
 
-        save.setBackground(new java.awt.Color(0, 153, 102));
-        save.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        save.setForeground(new java.awt.Color(255, 255, 255));
-        save.setText("Save");
-        save.setAlignmentX(0.5F);
-        save.addActionListener(new java.awt.event.ActionListener() {
+        savebtn.setBackground(new java.awt.Color(0, 153, 102));
+        savebtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        savebtn.setForeground(new java.awt.Color(255, 255, 255));
+        savebtn.setText("Save");
+        savebtn.setAlignmentX(0.5F);
+        savebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveActionPerformed(evt);
+                savebtnActionPerformed(evt);
             }
         });
-        jPanel1.add(save);
-        save.setBounds(1020, 650, 100, 40);
-
-        next.setText("next");
-        next.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nextActionPerformed(evt);
-            }
-        });
-        jPanel1.add(next);
-        next.setBounds(1390, 760, 75, 23);
+        jPanel1.add(savebtn);
+        savebtn.setBounds(1020, 650, 100, 40);
 
         jButton5.setText("Back");
         jButton5.setAlignmentX(0.5F);
@@ -264,18 +256,18 @@ public class InquiriesAdmin extends javax.swing.JFrame {
         jPanel1.add(jButton5);
         jButton5.setBounds(40, 750, 70, 30);
 
-        jButton6.setBackground(new java.awt.Color(48, 54, 66));
-        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Edit");
-        jButton6.setAlignmentX(0.5F);
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        editbtn.setBackground(new java.awt.Color(48, 54, 66));
+        editbtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        editbtn.setForeground(new java.awt.Color(255, 255, 255));
+        editbtn.setText("Edit");
+        editbtn.setAlignmentX(0.5F);
+        editbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                editbtnActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton6);
-        jButton6.setBounds(890, 650, 100, 40);
+        jPanel1.add(editbtn);
+        editbtn.setBounds(890, 650, 100, 40);
 
         month.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Month", "January", "February", "March ", "April", "May", "June", "July ", "August ", "September", "October", "November", "December" }));
         month.addActionListener(new java.awt.event.ActionListener() {
@@ -304,17 +296,17 @@ public class InquiriesAdmin extends javax.swing.JFrame {
         jPanel1.add(year);
         year.setBounds(1080, 450, 70, 40);
 
-        jButton7.setBackground(new java.awt.Color(204, 204, 204));
-        jButton7.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jButton7.setText("Reset");
-        jButton7.setAlignmentX(0.5F);
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        resetbtn.setBackground(new java.awt.Color(204, 204, 204));
+        resetbtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        resetbtn.setText("Reset");
+        resetbtn.setAlignmentX(0.5F);
+        resetbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                resetbtnActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton7);
-        jButton7.setBounds(1150, 650, 100, 40);
+        jPanel1.add(resetbtn);
+        resetbtn.setBounds(1150, 650, 100, 40);
 
         servicetf.setEditable(false);
         servicetf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -364,17 +356,17 @@ public class InquiriesAdmin extends javax.swing.JFrame {
         jPanel1.add(rb3);
         rb3.setBounds(1210, 285, 80, 30);
 
-        Delete.setBackground(new java.awt.Color(255, 204, 204));
-        Delete.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        Delete.setText("Delete");
-        Delete.setAlignmentX(0.5F);
-        Delete.addActionListener(new java.awt.event.ActionListener() {
+        deletebtn.setBackground(new java.awt.Color(255, 204, 204));
+        deletebtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        deletebtn.setText("Delete");
+        deletebtn.setAlignmentX(0.5F);
+        deletebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DeleteActionPerformed(evt);
+                deletebtnActionPerformed(evt);
             }
         });
-        jPanel1.add(Delete);
-        Delete.setBounds(1280, 650, 100, 40);
+        jPanel1.add(deletebtn);
+        deletebtn.setBounds(1280, 650, 100, 40);
 
         searchtf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         searchtf.addActionListener(new java.awt.event.ActionListener() {
@@ -440,6 +432,7 @@ public class InquiriesAdmin extends javax.swing.JFrame {
         jPanel1.add(jLabel8);
         jLabel8.setBounds(890, 190, 70, 18);
 
+        ipmtf.setEditable(false);
         ipmtf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ipmtf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -469,42 +462,16 @@ public class InquiriesAdmin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-                            companytf.setEditable(true);
-                            ipmtf.setEditable(false);
+    private void editbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editbtnActionPerformed
+         if(table.getSelectedRow() <0){
+        JOptionPane.showMessageDialog(null, "Please select an account!");
         
+        }else{            
+        companytf.setEditable(true);
+        ipmtf.setEditable(false);}
+        savebtn.setEnabled(true);
 
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-        ClientDeets cd = new ClientDeets();
-        
-         if("".equals(ipmtf.getText())){
-             JOptionPane.showMessageDialog(new JFrame(), "IPM ID is required", "Error", JOptionPane.ERROR_MESSAGE);
-         }
-         else if("".equals(companytf.getText())){
-             JOptionPane.showMessageDialog(new JFrame(), "Company Name is required", "Error", JOptionPane.ERROR_MESSAGE);
-         }
-         else if("".equals(stat.getText())){
-             JOptionPane.showMessageDialog(new JFrame(), "Status is required", "Error", JOptionPane.ERROR_MESSAGE);
-         }
-         else if("".equals(inquirytf.getText())){
-             JOptionPane.showMessageDialog(new JFrame(), "Inquiry Date is required", "Error", JOptionPane.ERROR_MESSAGE);
-         }
-         else if("".equals(servicetf.getText())){
-             JOptionPane.showMessageDialog(new JFrame(), "Service Type is required", "Error", JOptionPane.ERROR_MESSAGE);
-         }else{
-        cd.ipmidtf.setText(ipmtf.getText());
-        cd.statustf.setText(stat.getText());
-        cd.datetf.setText(inquirytf.getText());
-        cd.companyytf.setText(companytf.getText());
-        
-        JOptionPane.showConfirmDialog(new JFrame(), "Click YES to proceed", "Successed!", JOptionPane.YES_NO_OPTION);
-        
-        cd.setVisible(true);
-        this.dispose();  
-         }
-    }//GEN-LAST:event_nextActionPerformed
+    }//GEN-LAST:event_editbtnActionPerformed
 
     private void dayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dayActionPerformed
       String a;
@@ -530,7 +497,7 @@ public class InquiriesAdmin extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void resetbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetbtnActionPerformed
        
         
         ipmtf.setText("");
@@ -547,7 +514,7 @@ public class InquiriesAdmin extends javax.swing.JFrame {
         
 
 
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_resetbtnActionPerformed
 
     private void monthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthActionPerformed
       String a;
@@ -610,7 +577,7 @@ public class InquiriesAdmin extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_rb2ActionPerformed
 
-    private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
+    private void savebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savebtnActionPerformed
            if("".equals(ipmtf.getText())){
              JOptionPane.showMessageDialog(new JFrame(), "IPM ID is required", "Error", JOptionPane.ERROR_MESSAGE);
          }
@@ -648,8 +615,16 @@ public class InquiriesAdmin extends javax.swing.JFrame {
         model.setValueAt(servicetf.getText(), selectedRowIndex, 3);
         model.setValueAt(stat.getText(), selectedRowIndex, 4);
         
+        savebtn.setEnabled(false);
        JOptionPane.showMessageDialog(new JFrame(), "Updated Successfully", "Successed!", JOptionPane.OK_CANCEL_OPTION);
        con.close();
+       
+       ipmtf.setText("");
+       companytf.setText("");
+       inquirytf.setText("");
+       servicetf.setText("");
+       stat.setText("");
+       
     } else{
         JOptionPane.showMessageDialog(new JFrame(), "Update Failed", "Warning!", JOptionPane.ERROR_MESSAGE);
        con.close();
@@ -663,7 +638,7 @@ public class InquiriesAdmin extends javax.swing.JFrame {
          }
     
 
-    }//GEN-LAST:event_saveActionPerformed
+    }//GEN-LAST:event_savebtnActionPerformed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
         
@@ -701,7 +676,7 @@ public class InquiriesAdmin extends javax.swing.JFrame {
         
     }//GEN-LAST:event_tableMouseClicked
 
-    private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
+    private void deletebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebtnActionPerformed
     DefaultTableModel model = (DefaultTableModel) table.getModel();
     int selectedRowIndex = table.getSelectedRow();
 //    DELETE FROM `inquiry_and_proposal` WHERE 0
@@ -743,7 +718,7 @@ try {
     Logger.getLogger(InquiriesAdmin.class.getName()).log(Level.SEVERE, null, ex);
     JOptionPane.showMessageDialog(new JFrame(), "Deletion Failed", "Error!", JOptionPane.ERROR_MESSAGE);
 }
-    }//GEN-LAST:event_DeleteActionPerformed
+    }//GEN-LAST:event_deletebtnActionPerformed
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -833,17 +808,16 @@ try {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Delete;
     private javax.swing.ButtonGroup btng;
     private javax.swing.ButtonGroup btng2;
     public static javax.swing.JTextField companytf;
     private javax.swing.JComboBox<String> day;
+    private javax.swing.JButton deletebtn;
+    private javax.swing.JButton editbtn;
     public static javax.swing.JTextField inquirytf;
     public static javax.swing.JTextField ipmtf;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -853,14 +827,14 @@ try {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> month;
-    public static javax.swing.JButton next;
     private javax.swing.JRadioButton rb1;
     private javax.swing.JRadioButton rb11;
     private javax.swing.JRadioButton rb2;
     private javax.swing.JRadioButton rb22;
     private javax.swing.JRadioButton rb3;
     private javax.swing.JRadioButton rb33;
-    private javax.swing.JButton save;
+    private javax.swing.JButton resetbtn;
+    private javax.swing.JButton savebtn;
     private javax.swing.JButton search;
     private javax.swing.JTextField searchtf;
     public static javax.swing.JTextField servicetf;
