@@ -9,6 +9,11 @@ import static ADMIN.InquiriesAdmin.inquirytf;
 import static ADMIN.InquiriesAdmin.ipmtf;
 import static ADMIN.InquiriesAdmin.servicetf;
 import static ADMIN.InquiriesAdmin.stat;
+import static EMPLOYEE.Inquiries.companytf;
+import static EMPLOYEE.Inquiries.inquirytf;
+import static EMPLOYEE.Inquiries.ipmtf;
+import static EMPLOYEE.Inquiries.servicetf;
+import static EMPLOYEE.Inquiries.stat;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -44,7 +49,7 @@ public class Clients extends javax.swing.JFrame {
     String SUrl = "jdbc:MYSQL://localhost:3306/ja consultancy services";
         String Suser = "root";
         String Spass = "";
-        String query = "SELECT * FROM inquiry_and_proposal";
+        String query = "SELECT * FROM client_table";
 
         try (Connection con = DriverManager.getConnection(SUrl, Suser, Spass);
              PreparedStatement pst = con.prepareStatement(query);
@@ -84,7 +89,7 @@ public class Clients extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         clientidtf = new javax.swing.JTextField();
-        comptf = new javax.swing.JTextField();
+        ipmtf = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         searchtf = new javax.swing.JTextField();
@@ -150,10 +155,10 @@ public class Clients extends javax.swing.JFrame {
         jPanel1.add(clientidtf);
         clientidtf.setBounds(1210, 90, 220, 40);
 
-        comptf.setEditable(false);
-        comptf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jPanel1.add(comptf);
-        comptf.setBounds(940, 200, 240, 40);
+        ipmtf.setEditable(false);
+        ipmtf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel1.add(ipmtf);
+        ipmtf.setBounds(940, 200, 240, 40);
 
         jButton1.setBackground(new java.awt.Color(0, 102, 102));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -176,6 +181,11 @@ public class Clients extends javax.swing.JFrame {
         searchtf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchtfActionPerformed(evt);
+            }
+        });
+        searchtf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchtfKeyReleased(evt);
             }
         });
         jPanel1.add(searchtf);
@@ -312,28 +322,58 @@ public class Clients extends javax.swing.JFrame {
     }//GEN-LAST:event_searchtfActionPerformed
 
     private void deletebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebtnActionPerformed
-  DefaultTableModel model = (DefaultTableModel) table.getModel();
-    int selectedRowIndex = table.getSelectedRow();
-    try {
+
+       DefaultTableModel model = (DefaultTableModel) table.getModel();
+        int selectedRowIndex = table.getSelectedRow();
+//    DELETE FROM `inquiry_and_proposal` WHERE 0
+try {
+    
          id = Integer.parseInt(model.getValueAt(selectedRowIndex, 0).toString());
+        
         int delete = JOptionPane.showConfirmDialog(null,"Confirm if you want to delete item","Warning",JOptionPane.YES_NO_OPTION);
+        
         if (delete ==JOptionPane.YES_NO_OPTION) {
             Class.forName("com.mysql.cj.jdbc.Driver");
+           
          String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
          String user = "jaroot";
          String pass = "";
          Connection con = DriverManager.getConnection(url,user,pass);
-         String sql = "DELETE FROM `client_table` WHERE Client_ID=?";
-         pst = con.prepareStatement(sql);
-         pst.setInt(1,id);
-         pst.executeUpdate(); 
+         
+        String sqlPayment = "DELETE FROM `payment_table` WHERE `Client_ID`=?";
+        PreparedStatement pstPayment = con.prepareStatement(sqlPayment);
+        pstPayment.setInt(1, id);
+        pstPayment.executeUpdate();
+        
+        String sqlTransaction = "DELETE FROM `Transaction_table` WHERE `Client_ID`=?";
+        PreparedStatement pstTransaction = con.prepareStatement(sqlTransaction);
+        pstTransaction.setInt(1, id);
+        pstTransaction.executeUpdate();
+        
+        String sqlReport = "DELETE FROM `realreport` WHERE `Client_ID`=?";
+        PreparedStatement pstReport = con.prepareStatement(sqlReport);
+        pstReport.setInt(1, id);
+        pstReport.executeUpdate();
+        
+        String sqlscheduling = "DELETE FROM `scheduling_id` WHERE `Client_ID`=?";
+        PreparedStatement pstsched = con.prepareStatement(sqlscheduling);
+        pstsched.setInt(1, id);
+        pstsched.executeUpdate();
+        
+         String sqlClient = "DELETE FROM `client_table` WHERE `Client_ID`=?";
+        PreparedStatement pstClient = con.prepareStatement(sqlClient);
+        pstClient.setInt(1, id);
+        pstClient.executeUpdate();
+        
         model.removeRow(selectedRowIndex);
         JOptionPane.showMessageDialog(new JFrame(), "Row Deleted Successfully", "Success!", JOptionPane.CANCEL_OPTION);
         clientidtf.setText("");
-        comptf.setText("");
+        ipmtf.setText("");
         contacttf.setText("");
         emailtf.setText("");
-        addresstf.setText("");   
+        addresstf.setText("");  
+        
+
     } else {
         JOptionPane.showMessageDialog(new JFrame(), "No Row Selected", "Warning!", JOptionPane.WARNING_MESSAGE);
     }
@@ -341,9 +381,44 @@ public class Clients extends javax.swing.JFrame {
     Logger.getLogger(InquiriesAdmin.class.getName()).log(Level.SEVERE, null, ex);
     JOptionPane.showMessageDialog(new JFrame(), "Deletion Failed", "Error!", JOptionPane.ERROR_MESSAGE);
 }
-        
-        
-        
+
+
+
+
+
+//  DefaultTableModel model = (DefaultTableModel) table.getModel();
+//    int selectedRowIndex = table.getSelectedRow();
+//    try {
+//         id = Integer.parseInt(model.getValueAt(selectedRowIndex, 0).toString());
+//        int delete = JOptionPane.showConfirmDialog(null,"Confirm if you want to delete item","Warning",JOptionPane.YES_NO_OPTION);
+//        if (delete ==JOptionPane.YES_NO_OPTION) {
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+//            
+//         String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+//         String user = "jaroot";
+//         String pass = "";
+//         Connection con = DriverManager.getConnection(url,user,pass);
+//         String sql = "DELETE FROM `client_table` WHERE Client_ID=?";
+//         pst = con.prepareStatement(sql);
+//         pst.setInt(1,id);
+//         pst.executeUpdate(); 
+//        model.removeRow(selectedRowIndex);
+//        JOptionPane.showMessageDialog(new JFrame(), "Row Deleted Successfully", "Success!", JOptionPane.CANCEL_OPTION);
+//        clientidtf.setText("");
+//        ipmtf.setText("");
+//        contacttf.setText("");
+//        emailtf.setText("");
+//        addresstf.setText("");   
+//    } else {
+//        JOptionPane.showMessageDialog(new JFrame(), "No Row Selected", "Warning!", JOptionPane.WARNING_MESSAGE);
+//    }
+//} catch (Exception ex) {
+//    Logger.getLogger(InquiriesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+//    JOptionPane.showMessageDialog(new JFrame(), "Deletion Failed", "Error!", JOptionPane.ERROR_MESSAGE);
+//}
+//        
+//        
+//        
         
     }//GEN-LAST:event_deletebtnActionPerformed
 
@@ -363,17 +438,17 @@ public class Clients extends javax.swing.JFrame {
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         
-    try{
-    pst = con.prepareStatement("update client_table set IPM_ID =?, Contact_No =?, Email =?, Address =? where Client_ID=?");
-    pst.setString(1,comptf.getText());
-    pst.setString(2,contacttf.getText());
-    pst.setString(3,emailtf.getText());
-    pst.setString(4,addresstf.getText());
-    pst.setString(5,clientidtf.getText());
-   
-    
+//    try{
+//    pst = con.prepareStatement("update client_table set IPM_ID =?, Contact_No =?, Email =?, Address =? where Client_ID=?");
+//    pst.setString(1,ipmtf.getText());
+//    pst.setString(2,contacttf.getText());
+//    pst.setString(3,emailtf.getText());
+//    pst.setString(4,addresstf.getText());
+//    pst.setString(5,clientidtf.getText());
+//   
+//    
         
-    int rowsAffected = pst.executeUpdate(); 
+//    int rowsAffected = pst.executeUpdate(); 
     
      if("".equals(contacttf.getText())){
          JOptionPane.showMessageDialog(new JFrame(), "Contact Number is required", "Error", JOptionPane.ERROR_MESSAGE);
@@ -384,65 +459,137 @@ public class Clients extends javax.swing.JFrame {
      else if("".equals(addresstf.getText())){
          JOptionPane.showMessageDialog(new JFrame(), "Address is required", "Error", JOptionPane.ERROR_MESSAGE);
      }
-     else{
-            if (rowsAffected > 0 ){
-               DefaultTableModel model = (DefaultTableModel) table.getModel();
-               int selectedRowIndex = table.getSelectedRow();
-
-               model.setValueAt(clientidtf.getText(), selectedRowIndex, 0);
-               model.setValueAt(comptf.getText(), selectedRowIndex, 1);
-               model.setValueAt(contacttf.getText(), selectedRowIndex, 2);
-               model.setValueAt(emailtf.getText(), selectedRowIndex, 3);
-               model.setValueAt(addresstf.getText(), selectedRowIndex, 4);
-
-              JOptionPane.showMessageDialog(new JFrame(), "Updated Successfully", "Successed!", JOptionPane.OK_CANCEL_OPTION);
-              con.close();
-           } else{
-               JOptionPane.showMessageDialog(new JFrame(), "Update Failed", "Warning!", JOptionPane.ERROR_MESSAGE);
-              con.close();
-           }
-     }
+     else{  
+         
+         try{
+            String SUrl,Suser, Spass;
+    SUrl = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+    Suser = "root";
+    Spass = "";
+           con = DriverManager.getConnection(SUrl,Suser,Spass);
+   
+    pst = con.prepareStatement("UPDATE client_table SET IPM_ID =?, Contact_No =?, Email =?, Address =? where Client_ID=?");
+    pst.setString(1,ipmtf.getText());
+    pst.setString(2,contacttf.getText());
+    pst.setString(3,emailtf.getText());
+    pst.setString(4,addresstf.getText());
+    pst.setString(5,clientidtf.getText());
     
+    
+    int rowsAffected = pst.executeUpdate(); 
+    
+    if (rowsAffected > 0 ){
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        int selectedRowIndex = table.getSelectedRow();
+        
+        model.setValueAt(clientidtf.getText(), selectedRowIndex, 0);
+        model.setValueAt(ipmtf.getText(), selectedRowIndex, 1);
+        model.setValueAt(contacttf.getText(), selectedRowIndex, 2);
+        model.setValueAt(emailtf.getText(), selectedRowIndex, 3);
+        model.setValueAt(addresstf.getText(), selectedRowIndex, 4);
+        
+        
+       JOptionPane.showMessageDialog(new JFrame(), "Updated Successfully", "Successed!", JOptionPane.OK_CANCEL_OPTION);
+
+    } else{
+        JOptionPane.showMessageDialog(new JFrame(), "Update Failed", "Warning!", JOptionPane.ERROR_MESSAGE);
+    }
 
        
 } catch (SQLException ex) {
-            Logger.getLogger(InquiriesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(adminScheduling.class.getName()).log(Level.SEVERE, null, ex);
        
 }
+        }
+//            if (rowsAffected > 0 ){
+//               DefaultTableModel model = (DefaultTableModel) table.getModel();
+//               int selectedRowIndex = table.getSelectedRow();
+//
+//               model.setValueAt(clientidtf.getText(), selectedRowIndex, 0);
+//               model.setValueAt(ipmtf.getText(), selectedRowIndex, 1);
+//               model.setValueAt(contacttf.getText(), selectedRowIndex, 2);
+//               model.setValueAt(emailtf.getText(), selectedRowIndex, 3);
+//               model.setValueAt(addresstf.getText(), selectedRowIndex, 4);
+//
+//              JOptionPane.showMessageDialog(new JFrame(), "Updated Successfully", "Successed!", JOptionPane.OK_CANCEL_OPTION);
+//              con.close();
+//           } else{
+//               JOptionPane.showMessageDialog(new JFrame(), "Update Failed", "Warning!", JOptionPane.ERROR_MESSAGE);
+//              con.close();
+//           }
+//     }
+//    
+//
+//       
+//} catch (SQLException ex) {
+//            Logger.getLogger(InquiriesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+//       
+//}
     }//GEN-LAST:event_saveActionPerformed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
-
-        int id = Integer.parseInt(table.getValueAt(table.getSelectedRow(),0).toString());
+      int id = Integer.parseInt(table.getValueAt(table.getSelectedRow(),0).toString());
         try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
-            String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
-            String user = "jaroot";
-            String pass = "";
-
-            Connection con = DriverManager.getConnection(url,user,pass);
-            Statement st = con.createStatement();
-            ResultSet res =st.executeQuery("select * from client_table where Client_ID ="+id);
-            while(res.next()){
-                clientidtf.setText(res.getString("Client_ID"));
-                comptf.setText(res.getString("IPM_ID"));
-                contacttf.setText(res.getString("Status"));
-                emailtf.setText(res.getString("Inquiry_Date"));
-                addresstf.setText(res.getString("Service_Type"));
-
-                clientidtf.setEditable(false);
-                comptf.setEditable(false);
-                contacttf.setEditable(false);
-                emailtf.setEditable(false);
-                addresstf.setEditable(false);
-
-            }
-
+               Class.forName("com.mysql.cj.jdbc.Driver");
+           
+         String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+         String user = "jaroot";
+         String pass = "";
+         
+         Connection con = DriverManager.getConnection(url,user,pass);
+         Statement st = con.createStatement();
+         ResultSet res =st.executeQuery("select * from client_table where Client_ID ="+id);
+                        while(res.next()){
+                            clientidtf.setText(res.getString("Client_ID"));
+                            ipmtf.setText(res.getString("IPM_ID"));
+                            contacttf.setText(res.getString("Contact_No"));
+                            emailtf.setText(res.getString("Email"));
+                            addresstf.setText(res.getString("Address"));
+                             
+                             
+                            clientidtf.setEditable(false);
+                            ipmtf.setEditable(false);
+                            contacttf.setEditable(false);
+                            emailtf.setEditable(false);
+                            addresstf.setEditable(false);
+                            
+                        }
+                
         }
         catch(Exception e){
             e.printStackTrace();
         }
+        
+//        int id = Integer.parseInt(table.getValueAt(table.getSelectedRow(),0).toString());
+//        try{
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+//
+//            String url = "jdbc:MYSQL://localhost:3306/ja consultancy services";
+//            String user = "jaroot";
+//            String pass = "";
+//
+//            Connection con = DriverManager.getConnection(url,user,pass);
+//            Statement st = con.createStatement();
+//            ResultSet res =st.executeQuery("select * from client_table where Client_ID ="+id);
+//            while(res.next()){
+//                clientidtf.setText(res.getString("Client_ID"));
+//                comptf.setText(res.getString("IPM_ID"));
+//                contacttf.setText(res.getString("Status"));
+//                emailtf.setText(res.getString("Inquiry_Date"));
+//                addresstf.setText(res.getString("Service_Type"));
+//
+//                clientidtf.setEditable(false);
+//                comptf.setEditable(false);
+//                contacttf.setEditable(false);
+//                emailtf.setEditable(false);
+//                addresstf.setEditable(false);
+//
+//            }
+//
+//        }
+//        catch(Exception e){
+//            e.printStackTrace();
+//        }
 
     }//GEN-LAST:event_tableMouseClicked
 
@@ -452,6 +599,15 @@ public class Clients extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_contacttfKeyTyped
+
+    private void searchtfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchtfKeyReleased
+            if(searchtf.getText().equals("")){
+                 DefaultTableModel model = (DefaultTableModel) table.getModel();
+                TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
+                table.setRowSorter(obj);
+                obj.setRowFilter(RowFilter.regexFilter(""));
+            }
+    }//GEN-LAST:event_searchtfKeyReleased
 
     /**
      * @param args the command line arguments
@@ -491,11 +647,11 @@ public class Clients extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField addresstf;
     private javax.swing.JTextField clientidtf;
-    private javax.swing.JTextField comptf;
     private javax.swing.JTextField contacttf;
     private javax.swing.JButton deletebtn;
     private javax.swing.JButton edit;
     private javax.swing.JTextField emailtf;
+    private javax.swing.JTextField ipmtf;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton7;
