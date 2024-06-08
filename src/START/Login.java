@@ -157,11 +157,12 @@ try{
     Connection con = DriverManager.getConnection(SUrl,Suser,Spass);
     Statement st =con.createStatement();
     if("".equals(logid.getText())){
-        JOptionPane.showMessageDialog(new JFrame(),"ID is Required","Error",JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null,"ID is Required","Error",JOptionPane.ERROR_MESSAGE);
     }
-    else if("".equals(pass.getText())){
-        JOptionPane.showMessageDialog(new JFrame(),"ID is Required","Error",JOptionPane.ERROR_MESSAGE);
-    }
+//    else if("".equals(pass.getText())){
+//        JOptionPane.showMessageDialog(new JFrame(),"Password is Required","Error",JOptionPane.ERROR_MESSAGE);
+//       
+//    }
     else{
         try {
         id = Integer.parseInt(logid.getText());
@@ -172,6 +173,9 @@ try{
         password = pass.getText();
         
     }
+    
+    
+    
        id = Integer.parseInt(logid.getText());
        password = pass.getText();
 
@@ -181,6 +185,7 @@ try{
            passDb = rs.getString("password");
            notFound = 1;
        }
+       
        if(notFound == 1 && password.equals(passDb)){
                   logid.setText("");
        pass.setText("");

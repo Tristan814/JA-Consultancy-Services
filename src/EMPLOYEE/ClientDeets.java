@@ -213,6 +213,7 @@ public class ClientDeets extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
                int n = JOptionPane.showConfirmDialog(new JFrame(), "Click YES to proceed", "Successed!", JOptionPane.YES_NO_OPTION);
                 String ipm, cid, contactno, email, address, query;
+                int length = contactnotf.getText().length();
         if(n == 0){
       
         if("".equals(clienidtf.getText())){
@@ -226,7 +227,13 @@ public class ClientDeets extends javax.swing.JFrame {
          }
          else if("".equals(emailtf.getText())){
              JOptionPane.showMessageDialog(new JFrame(), "Email is required", "Error", JOptionPane.ERROR_MESSAGE);
-         }   
+         } 
+         else if(length <11){
+                 JOptionPane.showMessageDialog(new JFrame(), "Cell No. should contain 11 numbers", "Error!", JOptionPane.ERROR_MESSAGE);
+            }
+         else if(length >11){
+                 JOptionPane.showMessageDialog(new JFrame(), "Cell No. should contain 11 numbers only.", "Error!", JOptionPane.ERROR_MESSAGE);
+            }
         else{
          try{
               Class.forName("com.mysql.cj.jdbc.Driver");
@@ -264,20 +271,6 @@ public class ClientDeets extends javax.swing.JFrame {
         }else{ 
             //do nothing
         }
-        
-        
-       
-
-         
-        
-        
-
-         
-      
-
-         
-       
-
  
     }//GEN-LAST:event_jButton1ActionPerformed
 

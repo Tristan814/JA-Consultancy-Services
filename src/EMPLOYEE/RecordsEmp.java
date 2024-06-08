@@ -35,14 +35,14 @@ public class RecordsEmp extends javax.swing.JFrame {
     Suser = "root";
     Spass = "";
     String query = "";
-//    String query = "SELECT r.*, iap.Company_Name, p.Tota_Amount, s.No_of_Days"
-//            + "FROM r"
-//            +"INNER JOIN inquiry_and_proposal iap ON r.inquiry_and_proposal_id = iap.inquiry_and_proposal_id"
-//            +"INNER JOIN Payment_table p ON r.payment_table_id = p.payment_table_id"
-//            +"INNER JOIN Scheduling_table s ON r.scheduling_id_id = s.scheduling_id_id";
+    String query = "SELECT Inquiries_and_proposal, Company_Name, p.Total_Amount, s.No_of_Days"
+            + "FROM r"
+            +"INNER JOIN inquiry_and_proposal iap ON r.inquiry_and_proposal_id = iap.inquiry_and_proposal_id"
+            +"INNER JOIN Payment_table p ON r.payment_table_id = p.payment_table_id"
+            +"INNER JOIN Scheduling_table s ON r.scheduling_id_id = s.scheduling_id_id";
             
-//            "SELECT Report_ID, Company_Name, Inquiry_Date, Status, Service_Type, Total_Amount, No_of_Days, Duration"
-//            + "FROM report_table JOIN Company_Name";
+            "SELECT Report_ID, Company_Name, Inquiry_Date, Status, Service_Type, Total_Amount, No_of_Days, Duration"
+            + "FROM report_table JOIN Company_Name";
     
     try{
              con = DriverManager.getConnection(SUrl,Suser,Spass);
