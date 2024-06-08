@@ -1,5 +1,7 @@
 package EMPLOYEE;
 
+import static EMPLOYEE.Inquiries.ipm;
+import static EMPLOYEE.Inquiries.ipmtf;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -21,6 +23,8 @@ public class ClientDeets extends javax.swing.JFrame {
         statustf.setEditable(false);
         datetf.setEditable(false);
         companyytf.setEditable(false);
+        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -258,6 +262,8 @@ public class ClientDeets extends javax.swing.JFrame {
                + "VALUES('"+cid+"','"+ipm+"','"+contactno+"','"+email+"','"+address+"')";
          
         st.executeUpdate(query);
+        
+        Scheduling.ipmtf.setText(ipmidtf.getText());
                 cd.setVisible(true);
         this.dispose() ; 
      

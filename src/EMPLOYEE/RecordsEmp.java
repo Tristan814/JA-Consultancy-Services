@@ -34,15 +34,15 @@ public class RecordsEmp extends javax.swing.JFrame {
     SUrl = "jdbc:MYSQL://localhost:3306/ja consultancy services";
     Suser = "root";
     Spass = "";
-    String query = "";
-    String query = "SELECT Inquiries_and_proposal, Company_Name, p.Total_Amount, s.No_of_Days"
-            + "FROM r"
-            +"INNER JOIN inquiry_and_proposal iap ON r.inquiry_and_proposal_id = iap.inquiry_and_proposal_id"
-            +"INNER JOIN Payment_table p ON r.payment_table_id = p.payment_table_id"
-            +"INNER JOIN Scheduling_table s ON r.scheduling_id_id = s.scheduling_id_id";
+    String query = "SELECT records_table.record_id, inquiry_and_proposal.Company_Name, inquiry_and_proposal.Inquiry_Date, inquiry_and_proposal.Status, inquiry_and_proposal.Service_Type, Payment_Table.total_amount, scheduling_id.No_of_Days, scheduling_id.Duration"
+            + " FROM records_table"
+            + "\n"
+            + "LEFT JOIN inquiry_and_proposal ON records_table.record_id = inquiry_and_proposal.IPM_ID "
+            + "\n"
+            + "LEFT JOIN payment_table ON records_table.record_id = payment_table.payment_id "
+            + "\n"
+            + "LEFT JOIN scheduling_id ON records_table.record_id = scheduling_id.Sched_id";
             
-            "SELECT Report_ID, Company_Name, Inquiry_Date, Status, Service_Type, Total_Amount, No_of_Days, Duration"
-            + "FROM report_table JOIN Company_Name";
     
     try{
              con = DriverManager.getConnection(SUrl,Suser,Spass);
@@ -50,7 +50,7 @@ public class RecordsEmp extends javax.swing.JFrame {
              rs = pst.executeQuery();
              DefaultTableModel model = (DefaultTableModel)(table.getModel());    
              while(rs.next()){
-                 model.addRow(new String[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8)});
+                 model.addRow(new String[]{rs.getString("record_id"), rs.getString("company_name"), rs.getString("inquiry_date"), rs.getString("status"), rs.getString("service_type"),rs.getString("total_amount"),rs.getString("No_of_Days"),rs.getString("Duration")});
              }
     }catch (Exception ex){
         System.out.println("Error : " + ex.getMessage());

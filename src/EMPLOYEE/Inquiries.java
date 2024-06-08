@@ -29,7 +29,7 @@ public class Inquiries extends javax.swing.JFrame {
     ResultSet rs;
     int q, i, id, deleteItem;
     
-    public static String sc;
+    public static String sc,ipm;
     
     public Inquiries() {
         initComponents();
