@@ -213,7 +213,7 @@ public class Scheduling extends javax.swing.JFrame {
 
         jLabel14.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel14.setText("FOR REPORT ID:");
+        jLabel14.setText("RECORD ID:");
         jPanel1.add(jLabel14);
         jLabel14.setBounds(700, 210, 160, 18);
 
@@ -287,7 +287,7 @@ public class Scheduling extends javax.swing.JFrame {
 
         jLabel17.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel17.setText("FOR TRANSACTION ID:");
+        jLabel17.setText("TRANSACTION ID:");
         jPanel1.add(jLabel17);
         jLabel17.setBounds(700, 320, 190, 20);
 
@@ -374,7 +374,7 @@ public class Scheduling extends javax.swing.JFrame {
        query2 = "INSERT INTO scheduling_id (Sched_ID, No_of_Days, Duration, Client_ID)"
                + "VALUES(?,?,?,?)";
        //('"+sche+"','"+nod+"','"+dura+"','"+client+"')
-        query3 = "INSERT INTO transaction_table (Trans_ID, Cons_ID, Client_ID, Payment_ID, Schedule_ID)"
+        query3 = "INSERT INTO transaction_table (Trans_ID, Cons_ID, Client_ID, Payment_ID, Sched_ID)"
                + "VALUES(?,?,?,?,?)";
         query4 = "INSERT INTO realreport (Trans_ID, Total_Amount, Service_Type, Client_ID)"
                + "VALUES(?,?,?,?)";
@@ -422,7 +422,7 @@ public class Scheduling extends javax.swing.JFrame {
 //            st.executeUpdate(query1);
 //            st.executeUpdate(query2);
             
-        JOptionPane.showMessageDialog(null, "Company Successfully Inquired", "Successed!", JOptionPane.OK_OPTION);
+               JOptionPane.showMessageDialog(null, "Successfuly Registered", "Successed!", 1 );
         
         new EmployeeDash().setVisible(true);
         this.dispose();
@@ -515,7 +515,7 @@ public class Scheduling extends javax.swing.JFrame {
     }//GEN-LAST:event_durationKeyTyped
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        new Consultants().setVisible(true);
+        new Consultantstrans().setVisible(true);
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void transtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transtfActionPerformed

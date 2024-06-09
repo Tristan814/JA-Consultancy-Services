@@ -29,6 +29,7 @@ public class EmployeeDash extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
 
+        jButton1.setBackground(new java.awt.Color(153, 255, 204));
         jButton1.setFont(new java.awt.Font("STZhongsong", 1, 24)); // NOI18N
         jButton1.setText("Consultants");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -39,6 +40,7 @@ public class EmployeeDash extends javax.swing.JFrame {
         jPanel1.add(jButton1);
         jButton1.setBounds(40, 470, 299, 120);
 
+        jButton2.setBackground(new java.awt.Color(255, 204, 102));
         jButton2.setFont(new java.awt.Font("STZhongsong", 1, 24)); // NOI18N
         jButton2.setText("New Client");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -49,6 +51,7 @@ public class EmployeeDash extends javax.swing.JFrame {
         jPanel1.add(jButton2);
         jButton2.setBounds(40, 130, 299, 120);
 
+        records.setBackground(new java.awt.Color(255, 153, 153));
         records.setFont(new java.awt.Font("STZhongsong", 1, 24)); // NOI18N
         records.setText("Records");
         records.addActionListener(new java.awt.event.ActionListener() {

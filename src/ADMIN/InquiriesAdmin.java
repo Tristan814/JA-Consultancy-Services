@@ -616,7 +616,7 @@ public class InquiriesAdmin extends javax.swing.JFrame {
         model.setValueAt(stat.getText(), selectedRowIndex, 4);
         
         savebtn.setEnabled(false);
-       JOptionPane.showMessageDialog(new JFrame(), "Updated Successfully", "Successed!", JOptionPane.OK_CANCEL_OPTION);
+       JOptionPane.showMessageDialog(new JFrame(), "Updated Successfully", "Successed!", 1);
        con.close();
        
        ipmtf.setText("");

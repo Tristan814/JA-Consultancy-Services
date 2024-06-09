@@ -552,7 +552,7 @@ public class Consultants extends javax.swing.JFrame {
                 contactnotf.setText("");
                 constf.setText("");
                 lastntf.setText("");
-                JOptionPane.showMessageDialog(new JFrame(), "Successfuly Registered", "Successed!", JOptionPane.OK_OPTION);
+                JOptionPane.showMessageDialog(new JFrame(), "Successfuly Registered", "Successed!", 1);
                 con.close();
 
             }

@@ -369,7 +369,7 @@ public class adminScheduling extends javax.swing.JFrame {
         
         savebtn.setEnabled(false);
         
-       JOptionPane.showMessageDialog(new JFrame(), "Updated Successfully", "Successed!", JOptionPane.OK_CANCEL_OPTION);
+       JOptionPane.showMessageDialog(null, "Updated Successfully", "Successed!", 1 );
 
     } else{
         JOptionPane.showMessageDialog(new JFrame(), "Update Failed", "Warning!", JOptionPane.ERROR_MESSAGE);

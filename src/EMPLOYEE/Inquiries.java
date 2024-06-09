@@ -643,9 +643,8 @@ public class Inquiries extends javax.swing.JFrame {
 
        st1.executeUpdate(query1);
 
-       JOptionPane.showMessageDialog(new JFrame(), "Successfuly Registered", "Successed!", JOptionPane.OK_OPTION);
-       con.close();
-       
+       JOptionPane.showMessageDialog(null, "Successfuly Registered", "Successed!", 1 );
+
 
          }
         

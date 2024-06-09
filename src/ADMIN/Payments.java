@@ -320,7 +320,7 @@ PreparedStatement pst;
         model.setValueAt(clienttf.getText(), selectedRowIndex, 2);
 
         
-       JOptionPane.showMessageDialog(new JFrame(), "Updated Successfully", "Successed!", JOptionPane.OK_CANCEL_OPTION);
+       JOptionPane.showMessageDialog(new JFrame(), "Updated Successfully", "Successed!", 1);
        
        paymenttf.setText("");
        totalamounttf.setText("");
